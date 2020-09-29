@@ -43,12 +43,31 @@ usersCommentsGenerator(6);
 let usersPhotosGenerator = (num) => {
   for (let i = 1; i <= num; i++) {
     usersPhotosArray.push({
-      url: `'photos/${i}.jpg'`,
+      url: `photos/${i}.jpg`,
       description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
       likes: fakeNumbersGenerator(15, 200),
-      comments: commentsArray[fakeNumbersGenerator(0, 5)],
+      comments: [commentsArray[fakeNumbersGenerator(0, 5)]],
     });
   }
 };
 
 usersPhotosGenerator(25);
+
+let picturesContainer = document.querySelector(`.pictures`);
+
+let fragment = document.createDocumentFragment();
+
+for (let i = 0; i < usersPhotosArray.length; i++) {
+  let newElement = document.createElement(`a`);
+  newElement.className = `picture`;
+  newElement.innerHTML = `
+    <img class="picture__img" src="${usersPhotosArray[i].url}" width="182" height="182" alt="Случайная фотография">
+    <p class="picture__info">
+      <span class="picture__comments">${usersPhotosArray[i].comments.length}</span>
+      <span class="picture__likes">${usersPhotosArray[i].likes}</span>
+    </p>`;
+
+  fragment.appendChild(newElement);
+}
+
+picturesContainer.appendChild(fragment);
