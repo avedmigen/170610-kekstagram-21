@@ -71,3 +71,30 @@ for (let i = 0; i < usersPhotosArray.length; i++) {
 }
 
 picturesContainer.appendChild(fragment);
+
+let uploadFileInput = document.querySelector(`#upload-file`);
+let uploadOverlay = document.querySelector(`.img-upload__overlay`);
+let documentBody = document.querySelector(`body`);
+let uploadCancelBtn = document.querySelector(`#upload-cancel`);
+
+uploadFileInput.onchange = (e) => {
+  e.preventDefault();
+  uploadOverlay.classList.toggle(`hidden`);
+  documentBody.classList.add(`modal-open`);
+};
+
+uploadCancelBtn.addEventListener(`click`, (e) => {
+  e.preventDefault();
+  uploadOverlay.classList.toggle(`hidden`);
+  documentBody.classList.remove(`modal-open`);
+  uploadFileInput.value = null;
+});
+
+window.addEventListener(`keydown`, (e) => {
+  if (e.keyCode === 27) {
+    e.preventDefault();
+    uploadOverlay.classList.toggle(`hidden`);
+    documentBody.classList.remove(`modal-open`);
+    uploadFileInput.value = null;
+  }
+});
