@@ -98,3 +98,11 @@ window.addEventListener(`keydown`, (e) => {
     uploadFileInput.value = null;
   }
 });
+
+let effectLevelPin = document.querySelector(`.effect-level__pin`);
+let effectLevelValue = document.querySelector(`.effect-level__value`);
+
+effectLevelPin.addEventListener(`mouseup`, (e) => {
+  e.preventDefault();
+  console.log(effectLevelValue);
+});
