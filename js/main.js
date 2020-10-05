@@ -124,7 +124,7 @@ let effectLevelLine = document.querySelector(`.effect-level__line`);
 let effectLevelValue = document.querySelector(`.effect-level__value`);
 let effectLevelPin = document.querySelector(`.effect-level__pin`);
 
-document.addEventListener(`mousedown`, function (e) {
+effectLevelLine.addEventListener(`mousedown`, function (e) {
   e.preventDefault();
 
   // Положение мышки по горизонтали
