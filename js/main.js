@@ -188,11 +188,8 @@ effectLevelLine.addEventListener(`mousedown`, function (e) {
         case `effects__preview--heat`:
           imgUploadPreview.style.filter = `brightness(${1 + effectLevelValue.value * 0.02})`;
           break;
-        case `effects__preview--none`:
-          imgUploadPreview.style.filter = void 0;
-          break;
         default:
-          imgUploadPreview.style.filter = void 0;
+          imgUploadPreview.style.filter = ``;
           break;
       }
     }
@@ -222,6 +219,7 @@ for (let item of effectsItems) {
     let effectClassName = `effects__preview--${item.childNodes[1].value}`;
     imgUploadPreview.classList.remove(imgUploadPreview.classList[1]);
     imgUploadPreview.classList.add(effectClassName);
+    imgUploadPreview.style.filter = ``;
   });
 
   item.addEventListener(`keydown`, (e) => {
@@ -233,6 +231,7 @@ for (let item of effectsItems) {
       let effectClassName = `effects__preview--${item.childNodes[1].value}`;
       imgUploadPreview.classList.remove(imgUploadPreview.classList[1]);
       imgUploadPreview.classList.add(effectClassName);
+      imgUploadPreview.style.filter = ``;
     }
   });
 }
