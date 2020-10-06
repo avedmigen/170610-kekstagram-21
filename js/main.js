@@ -136,11 +136,7 @@ scaleControlBigger.addEventListener(`click`, (e) => {
   if (scaleValue >= TRANSFORM_LEVEL_STEP && scaleValue < DEFAULT_TRANSFORM_LEVEL) {
     scaleValue += 25;
     scaleControlValue.value = `${scaleValue}%`;
-    if (scaleValue !== DEFAULT_TRANSFORM_LEVEL) {
-      imgUploadPreview.style.transform = `scale(0.${scaleValue})`;
-    } else {
-      imgUploadPreview.style.transform = `scale(1)`;
-    }
+    imgUploadPreview.style.transform = `scale(${scaleValue / 100})`;
   }
 });
 
@@ -174,6 +170,13 @@ effectLevelLine.addEventListener(`mousedown`, function (e) {
     if (percCalc >= 0 && percCalc <= 100) {
       effectLevelPin.style.left = `${percCalc}%`;
       effectLevelDepth.style.width = `${percCalc}%`;
+      effectLevelValue.value = `${percCalc}`;
+      console.log(effectLevelValue.value);
+      console.log(imgUploadPreview.classList);
+      if (imgUploadPreview.classList.contains(`effects__preview--chrome`)) {
+        imgUploadPreview.style.filter = `grayscale(${effectLevelValue.value / 100})`;
+      }
+      console.log(imgUploadPreview.classList);
     }
   };
 
