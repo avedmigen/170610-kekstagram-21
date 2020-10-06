@@ -198,6 +198,9 @@ for (let item of effectsItems) {
     effectLevelValue.value = null;
     effectLevelPin.style.left = `${DEFAULT_DEPTH_LEVEL}%`;
     effectLevelDepth.style.width = `${DEFAULT_DEPTH_LEVEL}%`;
+    let effectClassName = `effects__preview--${item.childNodes[1].value}`;
+    imgUploadPreview.classList.remove(imgUploadPreview.classList[1]);
+    imgUploadPreview.classList.add(effectClassName);
   });
 
   item.addEventListener(`keydown`, (e) => {
@@ -206,6 +209,9 @@ for (let item of effectsItems) {
       effectLevelValue.value = null;
       effectLevelPin.style.left = `${DEFAULT_DEPTH_LEVEL}%`;
       effectLevelDepth.style.width = `${DEFAULT_DEPTH_LEVEL}%`;
+      let effectClassName = `effects__preview--${item.childNodes[1].value}`;
+      imgUploadPreview.classList.remove(imgUploadPreview.classList[1]);
+      imgUploadPreview.classList.add(effectClassName);
     }
   });
 }
