@@ -108,14 +108,12 @@ for (let item of effectsItems) {
   item.addEventListener(`click`, (e) => {
     e.preventDefault();
     effectLevelValue.value = null;
-    console.log(effectLevelValue.value);
   });
 
   item.addEventListener(`keydown`, (e) => {
     if (e.code === `Enter`) {
       e.preventDefault();
       effectLevelValue.value = null;
-      console.log(effectLevelValue.value);
     }
   });
 }
@@ -123,16 +121,14 @@ for (let item of effectsItems) {
 const effectLevelLine = document.querySelector(`.effect-level__line`);
 const effectLevelValue = document.querySelector(`.effect-level__value`);
 const effectLevelPin = document.querySelector(`.effect-level__pin`);
+const effectLevelDepth = document.querySelector(`.effect-level__depth`);
 
 effectLevelLine.addEventListener(`mousedown`, function (e) {
   e.preventDefault();
 
-  // Положение мышки по горизонтали
   let startXCoord = {
     x: e.clientX
   };
-
-  console.log(startXCoord.x + ` startXCoord #1`);
 
   let onMouseMove = function (moveEvt) {
     moveEvt.preventDefault();
@@ -141,21 +137,17 @@ effectLevelLine.addEventListener(`mousedown`, function (e) {
       x: startXCoord.x - moveEvt.clientX,
     };
 
-    console.log(shift.x + ` shift - дельта`);
-
     startXCoord = {
       x: moveEvt.clientX,
     };
 
-    console.log(startXCoord.x + ` startXCoord #2`);
-
     let PinOffsetLeft = effectLevelPin.offsetLeft - shift.x;
-    console.log(PinOffsetLeft + ` PinOffsetLeft`);
+    let percCalc = (PinOffsetLeft / effectLevelLine.offsetWidth * 100);
 
-    let percCalc = Math.ceil(PinOffsetLeft / effectLevelLine.offsetWidth * 100);
-    console.log(percCalc + ` percCalc`);
-
-    effectLevelPin.style.left = PinOffsetLeft + `px`;
+    if (percCalc >= 0 && percCalc <= 100) {
+      effectLevelPin.style.left = percCalc + `%`;
+      effectLevelDepth.style.width = percCalc + `%`;
+    }
   };
 
   let onMouseUp = function (upEvt) {
@@ -164,7 +156,6 @@ effectLevelLine.addEventListener(`mousedown`, function (e) {
     document.removeEventListener(`mousemove`, onMouseMove);
     document.removeEventListener(`mouseup`, onMouseUp);
   };
-
 
   document.addEventListener(`mousemove`, onMouseMove);
   document.addEventListener(`mouseup`, onMouseUp);
