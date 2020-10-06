@@ -128,50 +128,34 @@ effectLevelLine.addEventListener(`mousedown`, function (e) {
   e.preventDefault();
 
   // Положение мышки по горизонтали
-  let startCoords = {
+  let startXCoord = {
     x: e.clientX
   };
 
-  console.log(startCoords.x + ` Положение мышки по горизонтали`);
-
-  // Ширина линии
-  let LineOffsetWidht = effectLevelLine.offsetWidth;
-  console.log(LineOffsetWidht + `  Ширина линии`);
-
-  // Расстояние линии относительно левого края
-  let LineOffsetLeft = effectLevelLine.offsetLeft;
-
-  console.log(LineOffsetLeft + ` Расстояние линии относительно левого края`);
-
-  // Положение пина относительно линии
-  let pinXPosition = startCoords.x - LineOffsetLeft;
-
-  console.log(effectLevelPin.offsetLeft + ` Положение пина относительно линии`);
-
-
-  // Калькулятор процентов
-
-  let percCalc = effectLevelPin.offsetLeft / LineOffsetWidht * 100;
-  console.log(percCalc + ` Калькулятор процентов`);
-
-  // Перетаскивание
+  console.log(startXCoord.x + ` startXCoord #1`);
 
   let onMouseMove = function (moveEvt) {
     moveEvt.preventDefault();
 
     let shift = {
-      x: startCoords.x - moveEvt.clientX,
+      x: startXCoord.x - moveEvt.clientX,
     };
 
-    console.log(shift.x + ` shift`);
+    console.log(shift.x + ` shift - дельта`);
 
-    startCoords = {
+    startXCoord = {
       x: moveEvt.clientX,
     };
 
-    console.log(startCoords.x + ` startCoords 2`);
+    console.log(startXCoord.x + ` startXCoord #2`);
 
-    effectLevelPin.style.left = (effectLevelPin.offsetLeft - shift.x) + `px`;
+    let PinOffsetLeft = effectLevelPin.offsetLeft - shift.x;
+    console.log(PinOffsetLeft + ` PinOffsetLeft`);
+
+    let percCalc = Math.ceil(PinOffsetLeft / effectLevelLine.offsetWidth * 100);
+    console.log(percCalc + ` percCalc`);
+
+    effectLevelPin.style.left = PinOffsetLeft + `px`;
   };
 
   let onMouseUp = function (upEvt) {
