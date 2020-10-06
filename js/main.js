@@ -72,10 +72,10 @@ for (let i = 0; i < usersPhotosArray.length; i++) {
 
 picturesContainer.appendChild(fragment);
 
-let uploadFileInput = document.querySelector(`#upload-file`);
-let uploadOverlay = document.querySelector(`.img-upload__overlay`);
-let documentBody = document.querySelector(`body`);
-let uploadCancelBtn = document.querySelector(`#upload-cancel`);
+const uploadFileInput = document.querySelector(`#upload-file`);
+const uploadOverlay = document.querySelector(`.img-upload__overlay`);
+const documentBody = document.querySelector(`body`);
+const uploadCancelBtn = document.querySelector(`#upload-cancel`);
 
 // Использовать для отладки и потом убрать
 uploadOverlay.classList.toggle(`hidden`);
@@ -102,7 +102,7 @@ window.addEventListener(`keydown`, (e) => {
   }
 });
 
-let effectsItems = document.querySelectorAll(`.effects__item`);
+const effectsItems = document.querySelectorAll(`.effects__item`);
 
 for (let item of effectsItems) {
   item.addEventListener(`click`, (e) => {
@@ -120,19 +120,19 @@ for (let item of effectsItems) {
   });
 }
 
-let effectLevelLine = document.querySelector(`.effect-level__line`);
-let effectLevelValue = document.querySelector(`.effect-level__value`);
-let effectLevelPin = document.querySelector(`.effect-level__pin`);
+const effectLevelLine = document.querySelector(`.effect-level__line`);
+const effectLevelValue = document.querySelector(`.effect-level__value`);
+const effectLevelPin = document.querySelector(`.effect-level__pin`);
 
 effectLevelLine.addEventListener(`mousedown`, function (e) {
   e.preventDefault();
 
   // Положение мышки по горизонтали
-  let mouseXPosition = {
-    x: e.offsetX,
+  let startCoords = {
+    x: e.clientX
   };
 
-  console.log(mouseXPosition.x + ` Положение мышки по горизонтали`);
+  console.log(startCoords.x + ` Положение мышки по горизонтали`);
 
   // Ширина линии
   let LineOffsetWidht = effectLevelLine.offsetWidth;
@@ -144,14 +144,45 @@ effectLevelLine.addEventListener(`mousedown`, function (e) {
   console.log(LineOffsetLeft + ` Расстояние линии относительно левого края`);
 
   // Положение пина относительно линии
-  let pinXPosition = mouseXPosition.x - LineOffsetLeft;
+  let pinXPosition = startCoords.x - LineOffsetLeft;
 
   console.log(effectLevelPin.offsetLeft + ` Положение пина относительно линии`);
 
+
   // Калькулятор процентов
 
-  let percCalc = pinXPosition / LineOffsetWidht * 100;
-
+  let percCalc = effectLevelPin.offsetLeft / LineOffsetWidht * 100;
   console.log(percCalc + ` Калькулятор процентов`);
+
+  // Перетаскивание
+
+  let onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+
+    let shift = {
+      x: startCoords.x - moveEvt.clientX,
+    };
+
+    console.log(shift.x + ` shift`);
+
+    startCoords = {
+      x: moveEvt.clientX,
+    };
+
+    console.log(startCoords.x + ` startCoords 2`);
+
+    effectLevelPin.style.left = (effectLevelPin.offsetLeft - shift.x) + `px`;
+  };
+
+  let onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+
+    document.removeEventListener(`mousemove`, onMouseMove);
+    document.removeEventListener(`mouseup`, onMouseUp);
+  };
+
+
+  document.addEventListener(`mousemove`, onMouseMove);
+  document.addEventListener(`mouseup`, onMouseUp);
 
 });
