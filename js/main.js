@@ -171,12 +171,30 @@ effectLevelLine.addEventListener(`mousedown`, function (e) {
       effectLevelPin.style.left = `${percCalc}%`;
       effectLevelDepth.style.width = `${percCalc}%`;
       effectLevelValue.value = `${percCalc}`;
-      console.log(effectLevelValue.value);
-      console.log(imgUploadPreview.classList);
-      if (imgUploadPreview.classList.contains(`effects__preview--chrome`)) {
-        imgUploadPreview.style.filter = `grayscale(${effectLevelValue.value / 100})`;
+
+      switch (imgUploadPreview.classList[1]) {
+        case `effects__preview--chrome`:
+          imgUploadPreview.style.filter = `grayscale(${effectLevelValue.value / 100})`;
+          break;
+        case `effects__preview--sepia`:
+          imgUploadPreview.style.filter = `sepia(${effectLevelValue.value / 100})`;
+          break;
+        case `effects__preview--marvin`:
+          imgUploadPreview.style.filter = `invert(${effectLevelValue.value}%)`;
+          break;
+        case `effects__preview--phobos`:
+          imgUploadPreview.style.filter = `blur(${effectLevelValue.value * 0.03}px)`;
+          break;
+        case `effects__preview--heat`:
+          imgUploadPreview.style.filter = `brightness(${1 + effectLevelValue.value * 0.02})`;
+          break;
+        case `effects__preview--none`:
+          imgUploadPreview.style.filter = void 0;
+          break;
+        default:
+          imgUploadPreview.style.filter = void 0;
+          break;
       }
-      console.log(imgUploadPreview.classList);
     }
   };
 
