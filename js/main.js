@@ -1,6 +1,15 @@
 'use strict';
 
-window.onload = function () {
+window.addEventListener(`DOMContentLoaded`, function () {
+  const FAKE_USERS_PHOTOS = 25;
+  const FAKE_USERS_COMMENTS = 6;
+  const DEFAULT_TRANSFORM_LEVEL = 100;
+  const TRANSFORM_LEVEL_STEP = 25;
+  const DEFAULT_DEPTH_LEVEL = 100;
+  const HASHTAG_MIN_LENGTH = 2;
+  const HASHTAG_MAX_LENGTH = 20;
+  const HASHTAG_MAX_ITEMS = 5;
+  /*  const COMMENT_MAX_LENGTH = 140;*/
 
   let usersPhotosArray = [];
 
@@ -30,30 +39,25 @@ window.onload = function () {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
-  let usersCommentsGenerator = (num) => {
-    for (let i = 1; i <= num; i++) {
-      commentsArray.push({
-        url: `'img/avatar-${i}.svg'`,
-        message: messagesArray[fakeNumbersGenerator(0, 5)],
-        name: namesArray[fakeNumbersGenerator(0, 5)],
-      });
-    }
-  };
 
-  usersCommentsGenerator(6);
+  for (let i = 1; i <= FAKE_USERS_COMMENTS; i++) {
+    commentsArray.push({
+      url: `'img/avatar-${i}.svg'`,
+      message: messagesArray[fakeNumbersGenerator(0, 5)],
+      name: namesArray[fakeNumbersGenerator(0, 5)],
+    });
+  }
 
-  let usersPhotosGenerator = (num) => {
-    for (let i = 1; i <= num; i++) {
-      usersPhotosArray.push({
-        url: `photos/${i}.jpg`,
-        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
-        likes: fakeNumbersGenerator(15, 200),
-        comments: [commentsArray[fakeNumbersGenerator(0, 5)]],
-      });
-    }
-  };
 
-  usersPhotosGenerator(25);
+  for (let i = 1; i <= FAKE_USERS_PHOTOS; i++) {
+    usersPhotosArray.push({
+      url: `photos/${i}.jpg`,
+      description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit.`,
+      likes: fakeNumbersGenerator(15, 200),
+      comments: [commentsArray[fakeNumbersGenerator(0, 5)]],
+    });
+  }
+
 
   let picturesContainer = document.querySelector(`.pictures`);
 
@@ -109,9 +113,6 @@ window.onload = function () {
   // 2. Редактирование изображения и ограничения, накладываемые на поля
 
   // 2.1. Масштаб:
-
-  const DEFAULT_TRANSFORM_LEVEL = 100;
-  const TRANSFORM_LEVEL_STEP = 25;
 
   const scaleControlSmaller = document.querySelector(`.scale__control--smaller`);
   const scaleControlBigger = document.querySelector(`.scale__control--bigger`);
@@ -208,7 +209,6 @@ window.onload = function () {
 
   });
 
-  const DEFAULT_DEPTH_LEVEL = 100;
   const effectsItems = document.querySelectorAll(`.effects__item`);
 
   for (let item of effectsItems) {
@@ -238,17 +238,13 @@ window.onload = function () {
   }
 
   // 2.3. Хэш-теги:
-  const HASHTAG_MIN_LENGTH = 2;
-  const HASHTAG_MAX_LENGTH = 20;
-  const HASHTAG_MAX_ITEMS = 5;
   const imgUploadForm = document.querySelector(`.img-upload__form`);
   const textHashtags = imgUploadForm[17];
 
   textHashtags.addEventListener(`input`, (e) => {
     e.preventDefault();
     let hashtagValues = textHashtags.value;
-    let space = ` `;
-    let hashtags = hashtagValues.split(space);
+    let hashtags = hashtagValues.split(` `);
 
     for (let hashtag of hashtags) {
       let valueLenght = hashtag.length;
@@ -273,6 +269,5 @@ window.onload = function () {
 
 
   // 2.4. Комментарий:
-  /* const COMMENT_MAX_LENGTH = 140;*/
 
-};
+});
