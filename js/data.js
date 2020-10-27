@@ -11,7 +11,7 @@
       newElement.innerHTML = `
     <img class="picture__img" src="${photos[i].url}" width="182" height="182" alt="Случайная фотография">
     <p class="picture__info">
-      <span class="picture__comments">${photos[i].comments}</span>
+      <span class="picture__comments">${photos[i].comments.length}</span>
       <span class="picture__likes">${photos[i].likes}</span>
     </p>`;
 
