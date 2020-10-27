@@ -1,10 +1,14 @@
 'use strict';
 
 (() => {
-  window.load = (url, onSuccess, onError) => {
+  const URL = `https://21.javascript.pages.academy/kekstagram/data`;
+
+  window.load = (onSuccess, onError) => {
     const xhr = new XMLHttpRequest();
 
     xhr.responseType = `json`;
+
+    xhr.open(`GET`, URL);
 
     xhr.addEventListener(`load`, () => {
       let error;
@@ -42,7 +46,6 @@
 
     xhr.timeout = 1000;
 
-    xhr.open(`GET`, url);
     xhr.send();
   };
 

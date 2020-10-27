@@ -5,15 +5,6 @@
 (() => {
 
   // 1. Получи демо-данные с сервера
-  const onError = (message) => {
-    console.error(message);
-  };
-
-  const onSuccess = (message) => {
-    console.log(message);
-  };
-
-  window.load(`https://21.javascript.pages.academy/kekstagram/data`, onSuccess, onError);
 
   // 2. Загрузка нового изображения на сайт и заполнение информации о нём
   const documentBody = document.querySelector(`body`);
