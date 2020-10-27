@@ -1,17 +1,8 @@
 'use strict';
 
 (() => {
-  window.load = (method, url) => {
-
-    let onSuccess = (message) => {
-      return message;
-    };
-
-    let onError = (message) => {
-      return message;
-    };
-
-    let xhr = new XMLHttpRequest();
+  window.load = (url, onSuccess, onError) => {
+    const xhr = new XMLHttpRequest();
 
     xhr.responseType = `json`;
 
@@ -33,7 +24,7 @@
           break;
 
         default:
-          error = `Cтатус ответа: : ` + xhr.status + ` ` + xhr.statusText;
+          error = `Статус ответа: ${xhr.status} ${xhr.statusText}`;
       }
 
       if (error) {
@@ -41,17 +32,18 @@
       }
     });
 
-    xhr.addEventListener(`error`, function () {
+    xhr.addEventListener(`error`, () => {
       onError(`Произошла ошибка соединения`);
     });
 
-    xhr.addEventListener(`timeout`, function () {
-      onError(`Запрос не успел выполниться за ` + xhr.timeout + `мс`);
+    xhr.addEventListener(`timeout`, () => {
+      onError(`Запрос не успел выполниться за ${xhr.timeout} мс.`);
     });
 
-    xhr.timeout = 10000; // 10s
+    xhr.timeout = 1000;
 
-    xhr.open(method, url);
+    xhr.open(`GET`, url);
     xhr.send();
   };
+
 })();
