@@ -1,7 +1,9 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Дмитрий Аверин](https://up.htmlacademy.ru/javascript/21/user/170610).
-* Наставник: [Артем Зрилов](https://htmlacademy.ru/profile/id1045563).
+* Наставник: [
+Евгений
+Лепёшкин](https://htmlacademy.ru/profile/id144641).
 
 ---
 

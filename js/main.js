@@ -4,7 +4,9 @@
 
 (() => {
 
-  // 1. Загрузка нового изображения на сайт и заполнение информации о нём
+  // 1. Получи демо-данные с сервера
+
+  // 2. Загрузка нового изображения на сайт и заполнение информации о нём
   const documentBody = document.querySelector(`body`);
   const uploadFileInput = document.querySelector(`#upload-file`);
   const uploadCancelBtn = document.querySelector(`#upload-cancel`);

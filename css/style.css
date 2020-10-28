@@ -222,11 +222,17 @@ main {
           transform: translateX(-50%);
 }
 
+.picture:hover,
+.picture:focus {
+  cursor: pointer;
+}
+
 .picture:hover .picture__info,
 .picture:focus .picture__info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  cursor: pointer;
 }
 
 .picture__comments,
