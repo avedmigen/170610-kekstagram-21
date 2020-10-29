@@ -42,7 +42,7 @@
     getMinMaxRandomNumber,
     getRenderedPhotos,
     removeRenderedPhotos,
-    setDebounce
+    setDebounce,
   };
 
 })();

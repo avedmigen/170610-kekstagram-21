@@ -5,7 +5,7 @@
     const DEBOUNCE_INTERVAL = 300;
 
     // Если данные пришли успешно
-    // То нарисуй превью фоток на странице
+    // То нарисуй превьюшки фоток на странице
     const cleanDataPhotos = photos.slice();
 
     const photoContainer = document.querySelector(`.pictures`);
@@ -41,19 +41,23 @@
     const filters = document.querySelectorAll(`.img-filters__button`);
     let filterName = 0;
 
+    // Так будешь отрисовывать фотки после клика на кнопке фильтра
+    const drawFilteredPhotos = (arr) => {
+      window.utils.getRenderedPhotos();
+      window.utils.removeRenderedPhotos();
+      window.utils.setDebounce(drawPhotos(arr, photoContainer, setPhotoTemplate, srcTmpl), DEBOUNCE_INTERVAL)
+      ;
+    };
+
     for (let filter of filters) {
       filter.addEventListener(`click`, (e) => {
         e.preventDefault();
         filterName = filter.id;
-
+        // Рисуй превьюшки согласно фильрам
         switch (filterName) {
           case `filter-default`:
-            window.utils.getRenderedPhotos();
-            window.utils.removeRenderedPhotos();
-            window.utils.setDebounce(drawPhotos(cleanDataPhotos, photoContainer, setPhotoTemplate, srcTmpl), DEBOUNCE_INTERVAL)
-            ;
+            drawFilteredPhotos(cleanDataPhotos);
             break;
-
           case `filter-random`:
             // Перемешай массив с фотками
             const shuffled =
@@ -61,22 +65,15 @@
               .map((a) => ({sort: Math.random(), value: a}))
               .sort((a, b) => a.sort - b.sort)
               .map((a) => a.value);
-
             shuffled.length = 10;
-            window.utils.getRenderedPhotos();
-            window.utils.removeRenderedPhotos();
-            window.utils.setDebounce(drawPhotos(shuffled, photoContainer, setPhotoTemplate, srcTmpl), DEBOUNCE_INTERVAL)
-            ;
+            drawFilteredPhotos(shuffled);
             break;
 
           case `filter-discussed`:
             const sorted = cleanDataPhotos.slice();
             // Отсортируй массив по значению поля
             sorted.sort((a, b) => b.comments.length - a.comments.length);
-            window.utils.getRenderedPhotos();
-            window.utils.removeRenderedPhotos();
-            window.utils.setDebounce(drawPhotos(sorted, photoContainer, setPhotoTemplate, srcTmpl), DEBOUNCE_INTERVAL)
-            ;
+            drawFilteredPhotos(sorted);
             break;
           default:
             break;
