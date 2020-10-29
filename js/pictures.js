@@ -53,31 +53,31 @@
       filter.addEventListener(`click`, (e) => {
         e.preventDefault();
         filterName = filter.id;
-        // Рисуй превьюшки согласно фильрам
+
+        // Рисуй превьюшки согласно фильтрам
+        let sorted = cleanDataPhotos.slice();
+
         switch (filterName) {
           case `filter-default`:
-            drawFilteredPhotos(cleanDataPhotos);
             break;
+
           case `filter-random`:
             // Перемешай массив с фотками
-            const shuffled =
-              cleanDataPhotos.slice()
+            sorted = sorted
               .map((a) => ({sort: Math.random(), value: a}))
               .sort((a, b) => a.sort - b.sort)
               .map((a) => a.value);
-            shuffled.length = 10;
-            drawFilteredPhotos(shuffled);
+            sorted.length = 10;
             break;
 
           case `filter-discussed`:
-            const sorted = cleanDataPhotos.slice();
             // Отсортируй массив по значению поля
             sorted.sort((a, b) => b.comments.length - a.comments.length);
-            drawFilteredPhotos(sorted);
             break;
           default:
             break;
         }
+        drawFilteredPhotos(sorted);
       });
     }
   });
