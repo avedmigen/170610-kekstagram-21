@@ -2,22 +2,13 @@
 
 (() => {
 
-  // Сгенерируй рандомное число из диапазона
-  const getMinMaxRandomNumber = (min, max) => {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  };
-
   // Найди все фотки на странице
-
   const getRenderedPhotos = () => {
     const renderedPhotos = document.querySelectorAll(`.picture`);
     return renderedPhotos;
   };
 
   // Удали все фотки на странице
-
   const removeRenderedPhotos = () => {
     const renderedPhotos = document.querySelectorAll(`.picture`);
     for (let photo of renderedPhotos) {
@@ -26,7 +17,6 @@
   };
 
   // Удали дребезг
-
   let lastTimeout;
 
   const setDebounce = (drawphotos, dbinterval) => {
@@ -36,13 +26,28 @@
     lastTimeout = window.setTimeout(drawphotos, dbinterval);
   };
 
-  // Экспортируй утилиты
+  // Перемешай массив с ограничение по кол-ву элементов
+  const shuffleArray = (array) => {
+    let currentIndex = array.length;
+    let temporaryValue;
+    let randomIndex;
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
 
+    return array;
+  };
+
+  // Экспортируй утилиты
   window.utils = {
-    getMinMaxRandomNumber,
     getRenderedPhotos,
     removeRenderedPhotos,
     setDebounce,
+    shuffleArray,
   };
 
 })();

@@ -63,15 +63,11 @@
 
           case `filter-random`:
             // Перемешай массив с фотками
-            sorted = sorted
-              .map((a) => ({sort: Math.random(), value: a}))
-              .sort((a, b) => a.sort - b.sort)
-              .map((a) => a.value);
-            sorted.length = 10;
+            window.utils.shuffleArray(sorted);
             break;
 
           case `filter-discussed`:
-            // Отсортируй массив по значению поля
+            // Отсортируй массив по значению нужного поля
             sorted.sort((a, b) => b.comments.length - a.comments.length);
             break;
           default:
