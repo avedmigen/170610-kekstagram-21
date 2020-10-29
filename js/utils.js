@@ -25,12 +25,24 @@
     }
   };
 
+  // Удали дребезг
+
+  let lastTimeout;
+
+  const setDebounce = (drawphotos, dbinterval) => {
+    if (lastTimeout) {
+      window.clearTimeout(lastTimeout);
+    }
+    lastTimeout = window.setTimeout(drawphotos, dbinterval);
+  };
+
   // Экспортируй утилиты
 
   window.utils = {
     getMinMaxRandomNumber,
     getRenderedPhotos,
     removeRenderedPhotos,
+    setDebounce
   };
 
 })();

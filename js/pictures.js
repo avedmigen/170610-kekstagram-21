@@ -2,6 +2,8 @@
 
 (() => {
   window.load((photos) => {
+    const DEBOUNCE_INTERVAL = 300;
+
     // Если данные пришли успешно
     // То нарисуй превью фоток на странице
     const cleanDataPhotos = photos.slice();
@@ -48,7 +50,8 @@
           case `filter-default`:
             window.utils.getRenderedPhotos();
             window.utils.removeRenderedPhotos();
-            drawPhotos(cleanDataPhotos, photoContainer, setPhotoTemplate, srcTmpl);
+            window.utils.setDebounce(drawPhotos(cleanDataPhotos, photoContainer, setPhotoTemplate, srcTmpl), DEBOUNCE_INTERVAL)
+            ;
             break;
 
           case `filter-random`:
@@ -62,7 +65,8 @@
             shuffled.length = 10;
             window.utils.getRenderedPhotos();
             window.utils.removeRenderedPhotos();
-            drawPhotos(shuffled, photoContainer, setPhotoTemplate, srcTmpl);
+            window.utils.setDebounce(drawPhotos(shuffled, photoContainer, setPhotoTemplate, srcTmpl), DEBOUNCE_INTERVAL)
+            ;
             break;
 
           case `filter-discussed`:
@@ -71,9 +75,9 @@
             sorted.sort((a, b) => b.comments.length - a.comments.length);
             window.utils.getRenderedPhotos();
             window.utils.removeRenderedPhotos();
-            drawPhotos(sorted, photoContainer, setPhotoTemplate, srcTmpl);
+            window.utils.setDebounce(drawPhotos(sorted, photoContainer, setPhotoTemplate, srcTmpl), DEBOUNCE_INTERVAL)
+            ;
             break;
-
           default:
             break;
         }
