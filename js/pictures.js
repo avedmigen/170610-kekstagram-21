@@ -2,6 +2,7 @@
 
 (() => {
   window.load((photos) => {
+    const RANDOM_PHOTOS_LIMIT = 10;
     const DEBOUNCE_INTERVAL = 300;
 
     // Если данные пришли успешно
@@ -64,6 +65,8 @@
           case `filter-random`:
             // Перемешай массив с фотками
             window.utils.shuffleArray(sorted);
+            // Возьми из перемешанного массива первые 10 элементов
+            sorted = sorted.slice(0, RANDOM_PHOTOS_LIMIT);
             break;
 
           case `filter-discussed`:
