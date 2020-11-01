@@ -95,10 +95,8 @@
           // Найди в массиве с фотками объект, соответстующий урлу превьюшки
           const pictureUrl = (picture) => (picture.url === previewUrl ? true : false);
           const pictureObj = cleanDataPhotos.filter((pictureUrl));
-          console.log(pictureObj);
           // Найди контейнер бигпикчи
           const bigPic = bigPicContainer.querySelector(`.big-picture__preview`);
-          console.log(bigPic);
           // Замени путь к файлу и альт бигпикчи
           const bigPicImg = bigPic.querySelector(`.big-picture__img > img`);
           bigPicImg.src = pictureObj[0].url;
@@ -111,34 +109,36 @@
           bigPicСommentsCount.textContent = pictureObj[0].comments.length;
           // Замени контент комментов
           const bigPicСommentsList = bigPic.querySelector(`.social__comments`);
-          console.log(bigPicСommentsList);
-
-          /*          const bigPicСomment = bigPicСommentsList.querySelector(`.social__comment`);
-          console.log(bigPicСomment); */
-          /*        const bigPicСommentImg = bigPicСommentsList.querySelector(`.social__picture`);
-                    console.dir(bigPicСommentImg); */
+          const bigPicСomment = bigPicСommentsList.querySelector(`.social__comment`);
 
           // Шаблон коммента для заполнения данными
           const bigPicСommentTmpl = (num) => {
-            return `<li class="social__comment">
-                    <img
-                        class="social__picture"
-                        src="${pictureObj[0].comments[num].avatar}"
-                        alt="${pictureObj[0].comments[num].name}"
-                        width="35" height="35">
-                    <p class="social__text">${pictureObj[0].comments[num].message}</p>
-                </li>`;
+            let commentElement = bigPicСomment.cloneNode(true);
+            let commentAvatar = pictureObj[0].comments[num].avatar;
+            let commentAlt = pictureObj[0].comments[num].name;
+            let commentSocialText = pictureObj[0].comments[num].message;
+            commentElement.querySelector(`.social__picture`).src = commentAvatar;
+            commentElement.querySelector(`.social__picture`).alt = commentAlt;
+            commentElement.querySelector(`.social__text`).textContent = commentSocialText;
+            return commentElement;
           };
 
+          // Удаляем существующие комменты из разметки
           while (bigPicСommentsList.firstChild) {
             bigPicСommentsList.removeChild(bigPicСommentsList.firstChild);
           }
 
+          // Готовимся добавлять комменты из полученных данных
           const bigPicСomments = () => {
+            let fragment = document.createDocumentFragment();
             for (let i = 0; i < pictureObj[0].comments.length; i++) {
-              bigPicСommentsList.appendChild(bigPicСommentTmpl(i));
+              fragment.appendChild(bigPicСommentTmpl(i));
             }
+            bigPicСommentsList.appendChild(fragment);
           };
+
+          // Рисуем комменты с данными в бигпикче
+          bigPicСomments();
 
           // Покажи бигпикчу
           bigPicContainer.classList.remove(`hidden`);
