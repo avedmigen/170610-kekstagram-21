@@ -77,7 +77,31 @@
             break;
         }
         drawFilteredPhotos(sorted);
+        listenClicksOnThumbnails();
       });
     }
+
+    // Слушай клики на превьюшках
+    const listenClicksOnThumbnails = () => {
+      const previews = document.querySelectorAll(`.picture`);
+      const bigPicContainer = document.querySelector(`.big-picture`);
+
+      for (let preview of previews) {
+        preview.addEventListener(`click`, (e) => {
+          e.preventDefault();
+          bigPicContainer.classList.remove(`hidden`);
+        });
+      }
+
+      // Закрой попап по клику на кнопке с крестом
+      const bigPictureCancel = document.querySelector(`.big-picture__cancel`);
+      bigPictureCancel.addEventListener(`click`, (e) => {
+        e.preventDefault();
+        bigPicContainer.classList.add(`hidden`);
+      });
+    };
+
+    listenClicksOnThumbnails();
+
   });
 })();
