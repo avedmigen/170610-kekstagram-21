@@ -42,7 +42,7 @@
     const filters = document.querySelectorAll(`.img-filters__button`);
     let filterName = 0;
 
-    // Так будешь отрисовывать фотки после клика на кнопке фильтра
+    // Так будешь рисовать фотки после клика на кнопке фильтра
     const drawFilteredPhotos = (arr) => {
       window.utils.getRenderedPhotos();
       window.utils.removeRenderedPhotos();
@@ -89,6 +89,40 @@
       for (let preview of previews) {
         preview.addEventListener(`click`, (e) => {
           e.preventDefault();
+          // Дай урл превьюшки
+          const previewImg = preview.querySelector(`.picture__img`);
+          let previewUrl = previewImg.attributes.src.value;
+          // Найди в массиве с фотками объект, соответстующий урлу превьюшки
+          const pictureUrl = (picture) => (picture.url === previewUrl ? true : false);
+          const pictureObj = cleanDataPhotos.filter((pictureUrl));
+          console.log(pictureObj);
+          //Найди контейнер бигпикчи
+          const bigPic = bigPicContainer.querySelector(`.big-picture__preview`);
+          console.log(bigPic);
+          //Замени путь к файлу и альт бигпикчи
+          const bigPicImg = bigPic.querySelector(`.big-picture__img > img`);
+          bigPicImg.src = pictureObj[0].url;
+          bigPicImg.alt = pictureObj[0].description;
+          //Замени количество лайков
+          const bigPicLikes = bigPic.querySelector(`.likes-count`);
+          bigPicLikes.textContent = pictureObj[0].likes;
+          //Замени количество комментов
+          const bigPicСommentsCount = bigPic.querySelector(`.comments-count`);
+          bigPicСommentsCount.textContent = pictureObj[0].comments.length;
+          //Замени контент комментов
+          const bigPicСommentsList = bigPic.querySelector(`.social__comments`);
+          console.log(bigPicСommentsList);
+          
+          const bigPicСomment = bigPicСommentsList.querySelector(`.social__comment`);
+          console.log(bigPicСomment);
+
+          const bigPicСommentImg = bigPicСommentsList.querySelector(`.social__picture`);
+          console.dir(bigPicСommentImg);
+
+         /* bigPicСommentImg.attributes[1] = pictureObj[0].comments[0].avatar;*/
+
+
+          // Покажи бигпикчу
           bigPicContainer.classList.remove(`hidden`);
         });
       }
