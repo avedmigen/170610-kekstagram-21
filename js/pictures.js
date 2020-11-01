@@ -110,6 +110,9 @@
           // Замени контент комментов
           const bigPicСommentsList = bigPic.querySelector(`.social__comments`);
           const bigPicСomment = bigPicСommentsList.querySelector(`.social__comment`);
+          // Замени контент описания бигпикчи
+          const bigPicDesc = bigPic.querySelector(`.social__caption`);
+          bigPicDesc.textContent = pictureObj[0].description;
 
           // Шаблон коммента для заполнения данными
           const bigPicСommentTmpl = (num) => {
@@ -117,6 +120,7 @@
             let commentAvatar = pictureObj[0].comments[num].avatar;
             let commentAlt = pictureObj[0].comments[num].name;
             let commentSocialText = pictureObj[0].comments[num].message;
+
             commentElement.querySelector(`.social__picture`).src = commentAvatar;
             commentElement.querySelector(`.social__picture`).alt = commentAlt;
             commentElement.querySelector(`.social__text`).textContent = commentSocialText;
