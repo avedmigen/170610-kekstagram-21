@@ -113,14 +113,10 @@
           const bigPicСommentsList = bigPic.querySelector(`.social__comments`);
           console.log(bigPicСommentsList);
 
-          const bigPicСomment = bigPicСommentsList.querySelector(`.social__comment`);
-          console.log(bigPicСomment);
-
-
-          /*
-                    const bigPicСommentImg = bigPicСommentsList.querySelector(`.social__picture`);
-                    console.dir(bigPicСommentImg);
-          */
+          /*          const bigPicСomment = bigPicСommentsList.querySelector(`.social__comment`);
+          console.log(bigPicСomment); */
+          /*        const bigPicСommentImg = bigPicСommentsList.querySelector(`.social__picture`);
+                    console.dir(bigPicСommentImg); */
 
           // Шаблон коммента для заполнения данными
           const bigPicСommentTmpl = (num) => {
@@ -134,9 +130,15 @@
                 </li>`;
           };
 
-          for (let i = 0; i < pictureObj[0].comments.length; i++) {
-            console.log(bigPicСommentTmpl(i));
+          while (bigPicСommentsList.firstChild) {
+            bigPicСommentsList.removeChild(bigPicСommentsList.firstChild);
           }
+
+          const bigPicСomments = () => {
+            for (let i = 0; i < pictureObj[0].comments.length; i++) {
+              bigPicСommentsList.appendChild(bigPicСommentTmpl(i));
+            }
+          };
 
           // Покажи бигпикчу
           bigPicContainer.classList.remove(`hidden`);
