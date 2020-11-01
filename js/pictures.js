@@ -161,6 +161,7 @@
       bigPictureCancel.addEventListener(`click`, (e) => {
         e.preventDefault();
         bigPicContainer.classList.add(`hidden`);
+        document.body.classList.remove(`modal-open`);
       });
     };
 
