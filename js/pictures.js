@@ -96,31 +96,47 @@
           const pictureUrl = (picture) => (picture.url === previewUrl ? true : false);
           const pictureObj = cleanDataPhotos.filter((pictureUrl));
           console.log(pictureObj);
-          //Найди контейнер бигпикчи
+          // Найди контейнер бигпикчи
           const bigPic = bigPicContainer.querySelector(`.big-picture__preview`);
           console.log(bigPic);
-          //Замени путь к файлу и альт бигпикчи
+          // Замени путь к файлу и альт бигпикчи
           const bigPicImg = bigPic.querySelector(`.big-picture__img > img`);
           bigPicImg.src = pictureObj[0].url;
           bigPicImg.alt = pictureObj[0].description;
-          //Замени количество лайков
+          // Замени количество лайков
           const bigPicLikes = bigPic.querySelector(`.likes-count`);
           bigPicLikes.textContent = pictureObj[0].likes;
-          //Замени количество комментов
+          // Замени количество комментов
           const bigPicСommentsCount = bigPic.querySelector(`.comments-count`);
           bigPicСommentsCount.textContent = pictureObj[0].comments.length;
-          //Замени контент комментов
+          // Замени контент комментов
           const bigPicСommentsList = bigPic.querySelector(`.social__comments`);
           console.log(bigPicСommentsList);
-          
+
           const bigPicСomment = bigPicСommentsList.querySelector(`.social__comment`);
           console.log(bigPicСomment);
 
-          const bigPicСommentImg = bigPicСommentsList.querySelector(`.social__picture`);
-          console.dir(bigPicСommentImg);
 
-         /* bigPicСommentImg.attributes[1] = pictureObj[0].comments[0].avatar;*/
+          /*
+                    const bigPicСommentImg = bigPicСommentsList.querySelector(`.social__picture`);
+                    console.dir(bigPicСommentImg);
+          */
 
+          // Шаблон коммента для заполнения данными
+          const bigPicСommentTmpl = (num) => {
+            return `<li class="social__comment">
+                    <img
+                        class="social__picture"
+                        src="${pictureObj[0].comments[num].avatar}"
+                        alt="${pictureObj[0].comments[num].name}"
+                        width="35" height="35">
+                    <p class="social__text">${pictureObj[0].comments[num].message}</p>
+                </li>`;
+          };
+
+          for (let i = 0; i < pictureObj[0].comments.length; i++) {
+            console.log(bigPicСommentTmpl(i));
+          }
 
           // Покажи бигпикчу
           bigPicContainer.classList.remove(`hidden`);
