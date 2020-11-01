@@ -144,6 +144,13 @@
           // Рисуем комменты с данными в бигпикче
           bigPicСomments();
 
+          // Спрячь блоки счётчика комментариев и загрузки новых комментариев
+          bigPic.querySelector(`.social__comment-count`).classList.add(`hidden`);
+          bigPic.querySelector(`.comments-loader`).classList.add(`hidden`);
+
+          // Добавь на <body> класс modal-open, чтобы контейнер с фотографиями позади не прокручивался при скролле.
+          document.body.classList.add(`modal-open`);
+
           // Покажи бигпикчу
           bigPicContainer.classList.remove(`hidden`);
         });
