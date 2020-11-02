@@ -13,7 +13,7 @@
   const uploadOverlay = document.querySelector(`.img-upload__overlay`);
 
   // Использовать для отладки и потом убрать
-  /*  uploadOverlay.classList.toggle(`hidden`);*/
+  // uploadOverlay.classList.toggle(`hidden`);
 
   // Покажи попап превьюшки если в поле пришёл файл с фоткой
   uploadFileInput.onchange = (e) => {
@@ -137,11 +137,41 @@
 
   });
 
+  // Выбери превьюшку с эффектом
   const effectsItems = document.querySelectorAll(`.effects__item`);
+  // Выбери инпут превьюшки с эффектом
+  const effectsRadio = document.querySelectorAll(`.effects__radio`);
+
+  // Подготовься удалять аттрибут чекед у инпутов когда потребуется
+  const unsetCheckedAttr = () => {
+    for (let item of effectsRadio) {
+      item.removeAttribute(`checked`);
+    }
+  };
+
+  // Скрой слайдер на эффекте Оригинал
+  const slider = document.querySelector(`.img-upload__effect-level`);
+  for (let item of effectsRadio) {
+    if (item.id === `effect-none` && item.hasAttribute(`checked`)) {
+      slider.classList.add(`hidden`);
+    }
+  }
+
+  // Приготовься показать слайдер если не выбран эффект Оригинал
+  const showSlider = (item) => {
+    if (item.querySelector(`input`).id !== `effect-none`) {
+      slider.classList.remove(`hidden`);
+    } else {
+      slider.classList.add(`hidden`);
+    }
+  };
 
   for (let item of effectsItems) {
     item.addEventListener(`click`, (e) => {
       e.preventDefault();
+      unsetCheckedAttr(item);
+      item.querySelector(`input`).setAttribute(`checked`, `checked`);
+      showSlider(item);
       effectLevelValue.value = null;
       effectLevelPin.style.left = `${DEFAULT_DEPTH_LEVEL}%`;
       effectLevelDepth.style.width = `${DEFAULT_DEPTH_LEVEL}%`;

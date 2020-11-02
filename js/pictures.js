@@ -42,7 +42,7 @@
     const filters = document.querySelectorAll(`.img-filters__button`);
     let filterName = 0;
 
-    // Так будешь рисовать фотки после клика на кнопке фильтра
+    // Подготовься рисовать фотки после клика на кнопке фильтра
     const drawFilteredPhotos = (arr) => {
       window.utils.getRenderedPhotos();
       window.utils.removeRenderedPhotos();
@@ -127,12 +127,12 @@
             return commentElement;
           };
 
-          // Удаляем существующие комменты из разметки
+          // Удали существующие комменты из разметки
           while (bigPicСommentsList.firstChild) {
             bigPicСommentsList.removeChild(bigPicСommentsList.firstChild);
           }
 
-          // Готовимся добавлять комменты из полученных данных
+          // Приготовься добавлять комменты из полученных данных
           const bigPicСomments = () => {
             let fragment = document.createDocumentFragment();
             for (let i = 0; i < pictureObj[0].comments.length; i++) {
@@ -141,7 +141,7 @@
             bigPicСommentsList.appendChild(fragment);
           };
 
-          // Рисуем комменты с данными в бигпикче
+          // Нарисуй комменты с данными в бигпикче
           bigPicСomments();
 
           // Спрячь блоки счётчика комментариев и загрузки новых комментариев
