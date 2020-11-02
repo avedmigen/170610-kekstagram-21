@@ -3,7 +3,7 @@
 (() => {
   window.load((photos) => {
     const RANDOM_PHOTOS_LIMIT = 10;
-    const DEBOUNCE_INTERVAL = 300;
+    const DEBOUNCE_INTERVAL = 500;
 
     // Если данные пришли успешно
     // То нарисуй превьюшки фоток на странице

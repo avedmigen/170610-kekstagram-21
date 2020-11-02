@@ -32,7 +32,7 @@
 
   // Закрой попап превьюшки по клику на кнопку с крестом
   window.addEventListener(`keydown`, (e) => {
-    if (window.pictures.getIsBigPicOpened === false && e.code === `Escape`) {
+    if (e.code === `Escape`) {
       e.preventDefault();
       uploadOverlay.classList.toggle(`hidden`);
       documentBody.classList.remove(`modal-open`);
@@ -195,4 +195,12 @@
     });
   }
 
+  // Отправка формы на сервер
+  const form = document.querySelector(`.img-upload__form`);
+  form.addEventListener(`submit`, (e) => {
+    window.upload(new FormData(form), () => {
+      uploadOverlay.classList.toggle(`hidden`);
+    });
+    e.preventDefault();
+  });
 })();
