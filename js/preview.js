@@ -6,6 +6,40 @@
   const TRANSFORM_LEVEL_STEP = 25;
   const DEFAULT_DEPTH_LEVEL = 100;
 
+  // 2. Загрузка нового изображения на сайт и заполнение информации о нём
+  const documentBody = document.querySelector(`body`);
+  const uploadFileInput = document.querySelector(`#upload-file`);
+  const uploadCancelBtn = document.querySelector(`#upload-cancel`);
+  const uploadOverlay = document.querySelector(`.img-upload__overlay`);
+
+  // Использовать для отладки и потом убрать
+  /*  uploadOverlay.classList.toggle(`hidden`);*/
+
+  // Покажи попап превьюшки если в поле пришёл файл с фоткой
+  uploadFileInput.onchange = (e) => {
+    e.preventDefault();
+    uploadOverlay.classList.toggle(`hidden`);
+    documentBody.classList.add(`modal-open`);
+  };
+
+  // Закрой попап превьюшки по клику на кнопку с крестом
+  uploadCancelBtn.addEventListener(`click`, (e) => {
+    e.preventDefault();
+    uploadOverlay.classList.toggle(`hidden`);
+    documentBody.classList.remove(`modal-open`);
+    uploadFileInput.value = null;
+  });
+
+  // Закрой попап превьюшки по клику на кнопку с крестом
+  window.addEventListener(`keydown`, (e) => {
+    if (window.pictures.getIsBigPicOpened === false && e.code === `Escape`) {
+      e.preventDefault();
+      uploadOverlay.classList.toggle(`hidden`);
+      documentBody.classList.remove(`modal-open`);
+      uploadFileInput.value = null;
+    }
+  });
+
   // 2.1. Масштаб:
 
   const scaleControlSmaller = document.querySelector(`.scale__control--smaller`);

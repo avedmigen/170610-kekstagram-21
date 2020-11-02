@@ -151,17 +151,41 @@
           // Добавь на <body> класс modal-open, чтобы контейнер с фотографиями позади не прокручивался при скролле.
           document.body.classList.add(`modal-open`);
 
-          // Покажи бигпикчу
-          bigPicContainer.classList.remove(`hidden`);
+          // Покажи бигпикчу и установи флаг, что она открыта
+          let getIsBigPicOpened = (flag = false) => {
+            let isBigPicOpened = flag;
+            return isBigPicOpened;
+          };
+
+          window.pictures = {
+            getIsBigPicOpened,
+          };
+
+          const shoeBigPic = () => {
+            bigPicContainer.classList.remove(`hidden`);
+            window.pictures.isBigPicOpened = true;
+          };
+
+          shoeBigPic();
         });
       }
 
-      // Закрой попап по клику на кнопке с крестом
+      // Закрой попап бигпикчи по клику на кнопке с крестом
       const bigPictureCancel = document.querySelector(`.big-picture__cancel`);
       bigPictureCancel.addEventListener(`click`, (e) => {
         e.preventDefault();
         bigPicContainer.classList.add(`hidden`);
         document.body.classList.remove(`modal-open`);
+      });
+
+      // Закрой попап бигпикчи по нажатию Escape
+      window.addEventListener(`keydown`, (e) => {
+        if (e.code === `Escape`) {
+          e.preventDefault();
+          e.preventDefault();
+          bigPicContainer.classList.add(`hidden`);
+          document.body.classList.remove(`modal-open`);
+        }
       });
     };
 
