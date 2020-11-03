@@ -40,7 +40,7 @@
     }
   });
 
-  // 2.1. Масштаб:
+  // Так настраивай масштаб
 
   const scaleControlSmaller = document.querySelector(`.scale__control--smaller`);
   const scaleControlBigger = document.querySelector(`.scale__control--bigger`);
@@ -70,7 +70,7 @@
     }
   });
 
-  // 2.2. Наложение эффекта на изображение:
+  // Так накладывай эффекты на изображение
 
   const effectLevelLine = document.querySelector(`.effect-level__line`);
   const effectLevelValue = document.querySelector(`.effect-level__value`);
@@ -195,12 +195,54 @@
     });
   }
 
-  // Отправка формы на сервер
+  // Тут покажешь информационное сообщение после отправки формы
+  const mainTarget = document.querySelector(`main`);
+
+  // Подготовь шаблон сообщения с ошибкой загрузки изображения
+  const errorImgLoadedTmpl = document.querySelector(`#error`)
+    .content
+    .querySelector(`.error`)
+    .cloneNode(true);
+
+  const setErrorImgLoadedMsg = () => {
+    let fragment = document.createDocumentFragment();
+    fragment.appendChild(errorImgLoadedTmpl);
+    mainTarget.appendChild(fragment);
+    const errorButton = document.querySelector(`.error__button`);
+    errorButton.addEventListener(`click`, (e) => {
+      e.preventDefault();
+      console.log(`Фигово!`);
+    });
+  };
+
+  // Подготовь шаблон сообщения об успешной загрузке изображения
+  const successImgLoadedTmpl = document.querySelector(`#success`)
+    .content
+    .querySelector(`.success`)
+    .cloneNode(true);
+
+  const setSuccessImgLoadedMsg = () => {
+    let fragment = document.createDocumentFragment();
+    fragment.appendChild(successImgLoadedTmpl);
+    mainTarget.appendChild(fragment);
+    const successButton = document.querySelector(`.success__button`);
+    successButton.addEventListener(`click`, (e) => {
+      e.preventDefault();
+      console.log(`Круто!`);
+    });
+  };
+
+  // Так отправляй форму на сервер
   const form = document.querySelector(`.img-upload__form`);
   form.addEventListener(`submit`, (e) => {
     window.upload(new FormData(form), () => {
       uploadOverlay.classList.toggle(`hidden`);
+      setSuccessImgLoadedMsg();
+    }, () => {
+      uploadOverlay.classList.toggle(`hidden`);
+      setErrorImgLoadedMsg();
     });
     e.preventDefault();
   });
+
 })();
