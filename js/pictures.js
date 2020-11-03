@@ -42,7 +42,14 @@
     const filters = document.querySelectorAll(`.img-filters__button`);
     let filterName = 0;
 
-    // Подготовься рисовать фотки после клика на кнопке фильтра
+    // Приготовься удалять класс эктив когда потребуется
+    const unsetActiveClass = () => {
+      for (let item of filters) {
+        item.classList.remove(`img-filters__button--active`);
+      }
+    };
+
+    // Приготовься рисовать фотки после клика на кнопке фильтра
     const drawFilteredPhotos = (arr) => {
       window.utils.getRenderedPhotos();
       window.utils.removeRenderedPhotos();
@@ -53,6 +60,8 @@
     for (let filter of filters) {
       filter.addEventListener(`click`, (e) => {
         e.preventDefault();
+        unsetActiveClass();
+        filter.classList.add(`img-filters__button--active`);
         filterName = filter.id;
 
         // Рисуй превьюшки согласно фильтрам

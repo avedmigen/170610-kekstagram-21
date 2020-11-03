@@ -142,7 +142,7 @@
   // Выбери инпут превьюшки с эффектом
   const effectsRadio = document.querySelectorAll(`.effects__radio`);
 
-  // Подготовься удалять аттрибут чекед у инпутов когда потребуется
+  // Приготовься удалять аттрибут чекед у инпутов когда потребуется
   const unsetCheckedAttr = () => {
     for (let item of effectsRadio) {
       item.removeAttribute(`checked`);
