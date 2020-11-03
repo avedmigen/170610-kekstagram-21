@@ -17,6 +17,7 @@
 
     let setPhotoTemplate = (photo, template) => {
       let photoElement = template.cloneNode(true);
+      photoElement.querySelector(`.picture__img`).tabIndex = 0;
       photoElement.querySelector(`.picture__img`).src = photo.url;
       photoElement.querySelector(`.picture__img`).alt = photo.description;
       photoElement.querySelector(`.picture__comments`).textContent = photo.comments.length;
