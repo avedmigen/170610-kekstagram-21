@@ -5,7 +5,8 @@
 
   const inputTextDesc = document.querySelector(`.text__description`);
 
-  inputTextDesc.addEventListener(`input`, () => {
+  const onInputTextDesc = (e) => {
+    e.preventDefault();
     const invalidMessage = [];
     const inputText = inputTextDesc.value.toLowerCase().trim();
 
@@ -28,6 +29,9 @@
 
     window.utils.drawErrorRedBorder(invalidMessage, inputTextDesc);
 
-  });
+    document.removeEventListener(`input`, onInputTextDesc);
+  };
+
+  inputTextDesc.addEventListener(`input`, onInputTextDesc);
 
 })();

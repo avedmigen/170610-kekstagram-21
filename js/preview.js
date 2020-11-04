@@ -19,13 +19,16 @@
   // uploadOverlay.classList.toggle(`hidden`);
 
   // Покажи модалку превьюшки если в поле пришёл файл с фоткой
-  uploadFileInput.onchange = (e) => {
+  const onUploadFileInputChange = (e) => {
     e.preventDefault();
     uploadOverlay.classList.toggle(`hidden`);
     documentBody.classList.add(`modal-open`);
+    document.removeEventListener(`change`, onUploadFileInputChange);
 
-    document.addEventListener(`keydown`, onPopupEscKeyDown);
+    document.addEventListener(`keydown`, onModalEscKeyDown);
   };
+
+  uploadFileInput.addEventListener(`change`, onUploadFileInputChange);
 
   // Закрой модалку превьюшки по клику на кнопку с крестом
   uploadCancelBtn.addEventListener(`click`, (e) => {
@@ -35,17 +38,17 @@
     documentBody.classList.remove(`modal-open`);
     uploadFileInput.value = null;
 
-    document.removeEventListener(`keydown`, onPopupEscKeyDown);
+    document.removeEventListener(`keydown`, onModalEscKeyDown);
   });
 
-  const onPopupEscKeyDown = (e) => {
+  const onModalEscKeyDown = (e) => {
     if (e.code === Key.ESC) {
       e.preventDefault();
       uploadOverlay.classList.toggle(`hidden`);
       documentBody.classList.remove(`modal-open`);
       uploadFileInput.value = null;
 
-      document.removeEventListener(`keydown`, onPopupEscKeyDown);
+      document.removeEventListener(`keydown`, onModalEscKeyDown);
     }
   };
 
