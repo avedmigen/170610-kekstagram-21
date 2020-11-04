@@ -15,6 +15,7 @@
     const onErrorBtnClick = (e) => {
       e.preventDefault();
       errorTmpl.remove();
+      document.removeEventListener(`click`, onErrorBtnClick);
     };
 
     const onErrorMsgOverleyClick = (e) => {
@@ -22,6 +23,7 @@
       if (e.target.classList.contains(`error`)) {
         errorTmpl.remove();
       }
+      document.removeEventListener(`click`, onErrorMsgOverleyClick);
     };
 
     const onErrorMsgOverleyKeydown = (e) => {
@@ -29,6 +31,7 @@
       if (e.target.classList.contains(`error`)) {
         errorTmpl.remove();
       }
+      document.removeEventListener(`keydown`, onErrorMsgOverleyKeydown);
     };
 
     const errorMsg = () => {

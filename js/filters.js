@@ -10,7 +10,7 @@
     const effectLevelPin = document.querySelector(`.effect-level__pin`);
     const effectLevelDepth = document.querySelector(`.effect-level__depth`);
 
-    effectLevelLine.addEventListener(`mousedown`, function (e) {
+    const onEffectLevelLineMouseDown = (e) => {
       e.preventDefault();
 
       let startXCoord = {
@@ -68,7 +68,10 @@
       document.addEventListener(`mousemove`, onMouseMove);
       document.addEventListener(`mouseup`, onMouseUp);
 
-    });
+      document.removeEventListener(`mousedown`, onEffectLevelLineMouseDown);
+    };
+
+    effectLevelLine.addEventListener(`mousedown`, onEffectLevelLineMouseDown);
 
   };
 
