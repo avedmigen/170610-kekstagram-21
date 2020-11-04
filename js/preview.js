@@ -212,6 +212,42 @@
   // Тут покажешь информационное сообщение после отправки формы
   const mainTarget = document.querySelector(`main`);
 
+  // Подготовь шаблон сообщения об успешной загрузке изображения
+  const successImgTmpl = document.querySelector(`#success`)
+    .content
+    .querySelector(`.success`)
+    .cloneNode(true);
+
+  const onSuccessBtnClick = (e) => {
+    e.preventDefault();
+    console.log(`onSuccessBtnClick`);
+  };
+
+  const onSuccessMsgOverleyClick = (e) => {
+    e.preventDefault();
+    if (e.target.classList.contains(`success`)) {
+      console.log(`onSuccessMsgOverleyClick`);
+    }
+  };
+
+  const onSuccessMsgOverleyKeydown = (e) => {
+    e.preventDefault();
+    if (e.target.classList.contains(`success`)) {
+      console.log(`onSuccessMsgOverleyClick`);
+    }
+  };
+
+  const successMsg = () => {
+    let fragment = document.createDocumentFragment();
+    fragment.appendChild(successImgTmpl);
+    mainTarget.appendChild(fragment);
+    const successBtn = document.querySelector(`.success__button`);
+    successBtn.addEventListener(`click`, onSuccessBtnClick);
+    const successMsgOverley = document.querySelector(`.success`);
+    successMsgOverley.addEventListener(`click`, onSuccessMsgOverleyClick);
+    successMsgOverley.addEventListener(`keydown`, onSuccessMsgOverleyKeydown);
+  };
+
   // Подготовь шаблон сообщения с ошибкой загрузки изображения
   const errorImgLoadedTmpl = document.querySelector(`#error`)
     .content
@@ -229,29 +265,12 @@
     });
   };
 
-  // Подготовь шаблон сообщения об успешной загрузке изображения
-  const successImgLoadedTmpl = document.querySelector(`#success`)
-    .content
-    .querySelector(`.success`)
-    .cloneNode(true);
-
-  const setSuccessImgLoadedMsg = () => {
-    let fragment = document.createDocumentFragment();
-    fragment.appendChild(successImgLoadedTmpl);
-    mainTarget.appendChild(fragment);
-    const successButton = document.querySelector(`.success__button`);
-    successButton.addEventListener(`click`, (e) => {
-      e.preventDefault();
-      console.log(`Круто!`);
-    });
-  };
-
   // Так отправляй форму на сервер
   const form = document.querySelector(`.img-upload__form`);
   form.addEventListener(`submit`, (e) => {
     window.backend.upload(() => {
       uploadOverlay.classList.toggle(`hidden`);
-      setSuccessImgLoadedMsg();
+      successMsg();
     }, () => {
       uploadOverlay.classList.toggle(`hidden`);
       setErrorImgLoadedMsg();

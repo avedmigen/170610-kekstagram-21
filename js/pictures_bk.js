@@ -140,10 +140,14 @@
             return commentElement;
           };
 
+          // ###################+++########################################
+
           // Удали существующие комменты из разметки
           while (bigPicСommentsList.firstChild) {
             bigPicСommentsList.removeChild(bigPicСommentsList.firstChild);
           }
+
+          // ###########################################################
 
           // Приготовься добавлять комменты из полученных данных
           const bigPicСomments = () => {
@@ -156,6 +160,8 @@
 
           // Нарисуй комменты с данными в бигпикче
           bigPicСomments();
+
+          // ###########################################################
 
           // Спрячь блоки счётчика комментариев и загрузки новых комментариев
           bigPic.querySelector(`.social__comment-count`).classList.add(`hidden`);
