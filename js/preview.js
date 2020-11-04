@@ -47,6 +47,9 @@
     const userImgPreview = document.querySelector(`.img-upload__preview`);
     userImgPreview.className = `img-upload__preview`;
     userImgPreview.classList.toggle(`effects__preview--${filter.value}`);
+    document.querySelector(`.effect-level__value`).value = `100`;
+    document.querySelector(`.effect-level__pin`).style.left = `100%`;
+    document.querySelector(`.effect-level__depth`).style.width = `100%`;
   };
 
   const onFilterClick = (e, filter) => {
