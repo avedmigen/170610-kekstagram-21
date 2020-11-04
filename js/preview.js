@@ -62,38 +62,52 @@
 
 
   // Выбери превьюшку с эффектом
-  const effectsItems = document.querySelectorAll(`.effects__item`);
-  // Выбери инпут превьюшки с эффектом
-  const effectsRadio = document.querySelectorAll(`.effects__radio`);
+  const effectsPreviews = document.querySelectorAll(`.effects__item`);
+  const effectsRadioInputs = document.querySelectorAll(`.effects__radio`);
 
-  // Приготовься удалять аттрибут чекед у инпутов когда потребуется
-  const unsetCheckedAttr = () => {
-    for (let item of effectsRadio) {
-      item.removeAttribute(`checked`);
-    }
+  const setCheckedAttr = (filter) => {
+    effectsRadioInputs.forEach((input) => {
+      if (input) {
+        input.removeAttribute(`checked`);
+      }
+
+      filter.setAttribute(`checked`, ``);
+    });
   };
 
+  const onFilterClick = (e, filter) => {
+    e.preventDefault();
+    setCheckedAttr(filter);
+  };
+
+  effectsRadioInputs.forEach((filter) => {
+    filter.addEventListener(`click`, (e) => {
+      onFilterClick(e, filter);
+    });
+  });
+
+
   // Скрой слайдер на эффекте Оригинал
-  const slider = document.querySelector(`.img-upload__effect-level`);
-  for (let item of effectsRadio) {
+/*  const slider = document.querySelector(`.img-upload__effect-level`);
+  for (let item of effectsRadioInput) {
     if (item.id === `effect-none` && item.hasAttribute(`checked`)) {
       slider.classList.add(`hidden`);
     }
-  }
+  }*/
 
   // Приготовься показать слайдер если не выбран эффект Оригинал
-  const showSlider = (item) => {
+/*  const showSlider = (item) => {
     if (item.querySelector(`input`).id !== `effect-none`) {
       slider.classList.remove(`hidden`);
     } else {
       slider.classList.add(`hidden`);
     }
-  };
+  };*/
 
-  for (let item of effectsItems) {
+  /*for (let item of effectsPreviews ) {
     item.addEventListener(`click`, (e) => {
       e.preventDefault();
-      unsetCheckedAttr(item);
+      /!*unsetCheckedAttr(item);*!/
       item.querySelector(`input`).checked = true;
       showSlider(item);
       effectLevelValue.value = null;
@@ -117,7 +131,7 @@
         imgUploadPreview.style.filter = ``;
       }
     });
-  }
+  }*/
 
   // Так отправляй форму на сервер
   const form = document.querySelector(`.img-upload__form`);
