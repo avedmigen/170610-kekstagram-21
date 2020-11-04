@@ -6,7 +6,8 @@
 
   const inputHashtags = document.querySelector(`.text__hashtags`);
 
-  inputHashtags.addEventListener(`input`, () => {
+  const onInputHashtagsInput = () => {
+
     const invalidMessage = [];
 
     const inputText = inputHashtags.value.toLowerCase().trim();
@@ -71,5 +72,9 @@
     inputHashtags.reportValidity();
 
     window.utils.drawErrorRedBorder(invalidMessage, inputHashtags);
-  });
+
+    document.removeEventListener(`input`, onInputHashtagsInput);
+  };
+
+  inputHashtags.addEventListener(`input`, onInputHashtagsInput);
 })();

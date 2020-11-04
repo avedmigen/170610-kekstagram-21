@@ -15,12 +15,14 @@
     const onSuccessBtnClick = (e) => {
       e.preventDefault();
       successTmpl.remove();
+      document.removeEventListener(`click`, onSuccessBtnClick);
     };
 
     const onSuccessMsgOverleyClick = (e) => {
       e.preventDefault();
       if (e.target.classList.contains(`success`)) {
         successTmpl.remove();
+        document.removeEventListener(`click`, onSuccessMsgOverleyClick);
       }
     };
 
@@ -29,6 +31,7 @@
       if (e.target.classList.contains(`success`)) {
         successTmpl.remove();
       }
+      document.removeEventListener(`keydown`, onSuccessMsgOverleyKeydown);
     };
 
     const successMsg = () => {

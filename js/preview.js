@@ -19,13 +19,13 @@
   // uploadOverlay.classList.toggle(`hidden`);
 
   // Покажи модалку превьюшки если в поле пришёл файл с фоткой
+
   const onUploadFileInputChange = (e) => {
     e.preventDefault();
     uploadOverlay.classList.toggle(`hidden`);
     documentBody.classList.add(`modal-open`);
-    document.removeEventListener(`change`, onUploadFileInputChange);
 
-    document.addEventListener(`keydown`, onModalEscKeyDown);
+    document.addEventListener(`keydown`, onPopupEscKeyDown);
   };
 
   uploadFileInput.addEventListener(`change`, onUploadFileInputChange);
@@ -38,17 +38,17 @@
     documentBody.classList.remove(`modal-open`);
     uploadFileInput.value = null;
 
-    document.removeEventListener(`keydown`, onModalEscKeyDown);
+    document.removeEventListener(`keydown`, onPopupEscKeyDown);
   });
 
-  const onModalEscKeyDown = (e) => {
+  const onPopupEscKeyDown = (e) => {
     if (e.code === Key.ESC) {
       e.preventDefault();
       uploadOverlay.classList.toggle(`hidden`);
       documentBody.classList.remove(`modal-open`);
       uploadFileInput.value = null;
 
-      document.removeEventListener(`keydown`, onModalEscKeyDown);
+      document.removeEventListener(`keydown`, onPopupEscKeyDown);
     }
   };
 

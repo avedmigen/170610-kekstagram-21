@@ -112,6 +112,8 @@
     filtersContainer.classList.toggle(`img-filters--inactive`);
   };
 
+  // Если данные не пришли
+  // То выведи сообщение с ошибкой
   const onError = () => {};
 
   window.backend.load(onSuccess, onError);

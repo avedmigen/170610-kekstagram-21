@@ -24,7 +24,7 @@
       e.preventDefault();
 
       if (scaleValue !== TRANSFORM_LEVEL_STEP && scaleValue <= DEFAULT_TRANSFORM_LEVEL) {
-        scaleValue -= 25;
+        scaleValue -= TRANSFORM_LEVEL_STEP;
       }
       setScaleValue(scaleValue);
     });
@@ -33,7 +33,7 @@
       e.preventDefault();
 
       if (scaleValue >= TRANSFORM_LEVEL_STEP && scaleValue < DEFAULT_TRANSFORM_LEVEL) {
-        scaleValue += 25;
+        scaleValue += TRANSFORM_LEVEL_STEP;
       }
       setScaleValue(scaleValue);
     });
