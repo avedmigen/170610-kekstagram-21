@@ -8,7 +8,7 @@
 
   const Url = {
     LOAD: `https://21.javascript.pages.academy/kekstagram/data`,
-    UPLOAD: `https://21.javascript.pages.academy/kekstagram2`
+    UPLOAD: `https://21.javascript.pages.academy/kekstagram`
   };
 
   const request = (onSuccess, onError, data) => {

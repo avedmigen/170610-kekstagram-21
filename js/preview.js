@@ -2,8 +2,7 @@
 // 2. Редактирование изображения и ограничения, накладываемые на поля
 
 (() => {
-  const DEFAULT_TRANSFORM_LEVEL = 100;
-  const TRANSFORM_LEVEL_STEP = 25;
+
   const DEFAULT_DEPTH_LEVEL = 100;
 
   const Key = {
@@ -11,7 +10,6 @@
     ENTER: `Enter`
   };
 
-  // 2. Загрузка нового изображения на сайт и заполнение информации о нём
   const documentBody = document.querySelector(`body`);
   const uploadFileInput = document.querySelector(`#upload-file`);
   const uploadCancelBtn = document.querySelector(`#upload-cancel`);
@@ -20,7 +18,7 @@
   // Использовать для отладки и потом убрать
   // uploadOverlay.classList.toggle(`hidden`);
 
-  // Покажи попап превьюшки если в поле пришёл файл с фоткой
+  // Покажи модалку превьюшки если в поле пришёл файл с фоткой
   uploadFileInput.onchange = (e) => {
     e.preventDefault();
     uploadOverlay.classList.toggle(`hidden`);
@@ -29,7 +27,7 @@
     document.addEventListener(`keydown`, onPopupEscKeyDown);
   };
 
-  // Закрой попап превьюшки по клику на кнопку с крестом
+  // Закрой модалку превьюшки по клику на кнопку с крестом
   uploadCancelBtn.addEventListener(`click`, (e) => {
     e.preventDefault();
 
@@ -51,105 +49,14 @@
     }
   };
 
-  // Так настраивай масштаб
+  window.zoom.setup();
+  window.filters.setup();
 
-  const scaleControlSmaller = document.querySelector(`.scale__control--smaller`);
-  const scaleControlBigger = document.querySelector(`.scale__control--bigger`);
-  const scaleControlValue = document.querySelector(`.scale__control--value`);
   const imgUploadPreview = document.querySelector(`.img-upload__preview`);
-
-  scaleControlValue.value = `${DEFAULT_TRANSFORM_LEVEL}%`;
-  let scaleValue = parseInt(scaleControlValue.value, 10);
-
-  const setScaleValue = (value) => {
-    scaleControlValue.value = `${value}%`;
-    imgUploadPreview.style.transform = `scale(${value / 100})`;
-  };
-
-  scaleControlSmaller.addEventListener(`click`, (e) => {
-    e.preventDefault();
-
-    if (scaleValue !== TRANSFORM_LEVEL_STEP && scaleValue <= DEFAULT_TRANSFORM_LEVEL) {
-      scaleValue -= 25;
-    }
-    setScaleValue(scaleValue);
-  });
-
-  scaleControlBigger.addEventListener(`click`, (e) => {
-    e.preventDefault();
-
-    if (scaleValue >= TRANSFORM_LEVEL_STEP && scaleValue < DEFAULT_TRANSFORM_LEVEL) {
-      scaleValue += 25;
-    }
-    setScaleValue(scaleValue);
-  });
-
-  // Так накладывай эффекты на изображение
-
-  const effectLevelLine = document.querySelector(`.effect-level__line`);
   const effectLevelValue = document.querySelector(`.effect-level__value`);
   const effectLevelPin = document.querySelector(`.effect-level__pin`);
   const effectLevelDepth = document.querySelector(`.effect-level__depth`);
 
-  effectLevelLine.addEventListener(`mousedown`, function (e) {
-    e.preventDefault();
-
-    let startXCoord = {
-      x: e.clientX
-    };
-
-    let onMouseMove = (moveEvt) => {
-      moveEvt.preventDefault();
-      let shift = {
-        x: startXCoord.x - moveEvt.clientX,
-      };
-
-      startXCoord = {
-        x: moveEvt.clientX,
-      };
-
-      let PinOffsetLeft = effectLevelPin.offsetLeft - shift.x;
-      let percCalc = (PinOffsetLeft / effectLevelLine.offsetWidth * 100);
-
-      if (percCalc >= 0 && percCalc <= 100) {
-        effectLevelPin.style.left = `${percCalc}%`;
-        effectLevelDepth.style.width = `${percCalc}%`;
-        effectLevelValue.value = `${percCalc}`;
-
-        switch (imgUploadPreview.classList[1]) {
-          case `effects__preview--chrome`:
-            imgUploadPreview.style.filter = `grayscale(${effectLevelValue.value / 100})`;
-            break;
-          case `effects__preview--sepia`:
-            imgUploadPreview.style.filter = `sepia(${effectLevelValue.value / 100})`;
-            break;
-          case `effects__preview--marvin`:
-            imgUploadPreview.style.filter = `invert(${effectLevelValue.value}%)`;
-            break;
-          case `effects__preview--phobos`:
-            imgUploadPreview.style.filter = `blur(${effectLevelValue.value * 0.03}px)`;
-            break;
-          case `effects__preview--heat`:
-            imgUploadPreview.style.filter = `brightness(${1 + effectLevelValue.value * 0.02})`;
-            break;
-          default:
-            imgUploadPreview.style.filter = ``;
-            break;
-        }
-      }
-    };
-
-    let onMouseUp = (upEvt) => {
-      upEvt.preventDefault();
-
-      document.removeEventListener(`mousemove`, onMouseMove);
-      document.removeEventListener(`mouseup`, onMouseUp);
-    };
-
-    document.addEventListener(`mousemove`, onMouseMove);
-    document.addEventListener(`mouseup`, onMouseUp);
-
-  });
 
   // Выбери превьюшку с эффектом
   const effectsItems = document.querySelectorAll(`.effects__item`);
