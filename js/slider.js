@@ -3,7 +3,7 @@
 (() => {
 
   const setup = () => {
-    const imgUploadPreview = document.querySelector(`.img-upload__preview`);
+    const userImgPreview = document.querySelector(`.img-upload__preview`);
 
     const effectLevelLine = document.querySelector(`.effect-level__line`);
     const effectLevelValue = document.querySelector(`.effect-level__value`);
@@ -35,24 +35,24 @@
           effectLevelDepth.style.width = `${percCalc}%`;
           effectLevelValue.value = `${percCalc}`;
 
-          switch (imgUploadPreview.classList[1]) {
+          switch (userImgPreview.classList[1]) {
             case `effects__preview--chrome`:
-              imgUploadPreview.style.filter = `grayscale(${effectLevelValue.value / 100})`;
+              userImgPreview.style.filter = `grayscale(${effectLevelValue.value / 100})`;
               break;
             case `effects__preview--sepia`:
-              imgUploadPreview.style.filter = `sepia(${effectLevelValue.value / 100})`;
+              userImgPreview.style.filter = `sepia(${effectLevelValue.value / 100})`;
               break;
             case `effects__preview--marvin`:
-              imgUploadPreview.style.filter = `invert(${effectLevelValue.value}%)`;
+              userImgPreview.style.filter = `invert(${effectLevelValue.value}%)`;
               break;
             case `effects__preview--phobos`:
-              imgUploadPreview.style.filter = `blur(${effectLevelValue.value * 0.03}px)`;
+              userImgPreview.style.filter = `blur(${effectLevelValue.value * 0.03}px)`;
               break;
             case `effects__preview--heat`:
-              imgUploadPreview.style.filter = `brightness(${1 + effectLevelValue.value * 0.02})`;
+              userImgPreview.style.filter = `brightness(${1 + effectLevelValue.value * 0.02})`;
               break;
             default:
-              imgUploadPreview.style.filter = ``;
+              userImgPreview.style.filter = ``;
               break;
           }
         }
@@ -75,7 +75,7 @@
 
   };
 
-  window.filters = {
+  window.slider = {
     setup,
   };
 

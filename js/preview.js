@@ -3,8 +3,6 @@
 
 (() => {
 
-  const DEFAULT_DEPTH_LEVEL = 100;
-
   const Key = {
     ESC: `Escape`,
     ENTER: `Enter`
@@ -16,7 +14,7 @@
   const uploadOverlay = document.querySelector(`.img-upload__overlay`);
 
   // Использовать для отладки и потом убрать
-  // uploadOverlay.classList.toggle(`hidden`);
+  /* uploadOverlay.classList.toggle(`hidden`);*/
 
   // Покажи модалку превьюшки если в поле пришёл файл с фоткой
 
@@ -30,54 +28,40 @@
 
   uploadFileInput.addEventListener(`change`, onUploadFileInputChange);
 
-  // Закрой модалку превьюшки по клику на кнопку с крестом
-  uploadCancelBtn.addEventListener(`click`, (e) => {
-    e.preventDefault();
-
-    uploadOverlay.classList.toggle(`hidden`);
-    documentBody.classList.remove(`modal-open`);
-    uploadFileInput.value = null;
-
-    document.removeEventListener(`keydown`, onPopupEscKeyDown);
-  });
-
-  const onPopupEscKeyDown = (e) => {
-    if (e.code === Key.ESC) {
-      e.preventDefault();
-      uploadOverlay.classList.toggle(`hidden`);
-      documentBody.classList.remove(`modal-open`);
-      uploadFileInput.value = null;
-
-      document.removeEventListener(`keydown`, onPopupEscKeyDown);
-    }
-  };
-
   window.zoom.setup();
-  window.filters.setup();
-
-  const imgUploadPreview = document.querySelector(`.img-upload__preview`);
-  const effectLevelValue = document.querySelector(`.effect-level__value`);
-  const effectLevelPin = document.querySelector(`.effect-level__pin`);
-  const effectLevelDepth = document.querySelector(`.effect-level__depth`);
-
+  window.slider.setup();
 
   // Выбери превьюшку с эффектом
-  const effectsPreviews = document.querySelectorAll(`.effects__item`);
   const effectsRadioInputs = document.querySelectorAll(`.effects__radio`);
 
-  const setCheckedAttr = (filter) => {
-    effectsRadioInputs.forEach((input) => {
-      if (input) {
-        input.removeAttribute(`checked`);
-      }
+  // Скрой слайдер на эффекте Оригинал
+  const slider = document.querySelector(`.img-upload__effect-level`);
+  const original = document.querySelector(`#effect-none`);
 
-      filter.setAttribute(`checked`, ``);
-    });
+  if (original.hasAttribute(`checked`)) {
+    slider.classList.add(`hidden`);
+  }
+
+  // Примени эффект к превьюшке
+  const setPreviewEffect = (filter) => {
+    const userImgPreview = document.querySelector(`.img-upload__preview`);
+    userImgPreview.className = `img-upload__preview`;
+    userImgPreview.classList.toggle(`effects__preview--${filter.value}`);
   };
 
   const onFilterClick = (e, filter) => {
     e.preventDefault();
-    setCheckedAttr(filter);
+
+    if (filter.id !== `effect-none`) {
+      slider.classList.remove(`hidden`);
+    } else {
+      slider.classList.add(`hidden`);
+      filter.setAttribute(`checked`, ``);
+    }
+
+    setPreviewEffect(filter);
+
+    document.removeEventListener(`click`, filter);
   };
 
   effectsRadioInputs.forEach((filter) => {
@@ -86,56 +70,10 @@
     });
   });
 
+  // Отправь форму при сабмите
 
-  // Скрой слайдер на эффекте Оригинал
-/*  const slider = document.querySelector(`.img-upload__effect-level`);
-  for (let item of effectsRadioInput) {
-    if (item.id === `effect-none` && item.hasAttribute(`checked`)) {
-      slider.classList.add(`hidden`);
-    }
-  }*/
-
-  // Приготовься показать слайдер если не выбран эффект Оригинал
-/*  const showSlider = (item) => {
-    if (item.querySelector(`input`).id !== `effect-none`) {
-      slider.classList.remove(`hidden`);
-    } else {
-      slider.classList.add(`hidden`);
-    }
-  };*/
-
-  /*for (let item of effectsPreviews ) {
-    item.addEventListener(`click`, (e) => {
-      e.preventDefault();
-      /!*unsetCheckedAttr(item);*!/
-      item.querySelector(`input`).checked = true;
-      showSlider(item);
-      effectLevelValue.value = null;
-      effectLevelPin.style.left = `${DEFAULT_DEPTH_LEVEL}%`;
-      effectLevelDepth.style.width = `${DEFAULT_DEPTH_LEVEL}%`;
-      let effectClassName = `effects__preview--${item.childNodes[1].value}`;
-      imgUploadPreview.classList.remove(imgUploadPreview.classList[1]);
-      imgUploadPreview.classList.add(effectClassName);
-      imgUploadPreview.style.filter = ``;
-    });
-
-    item.addEventListener(`keydown`, (e) => {
-      if (e.code === `Enter`) {
-        e.preventDefault();
-        effectLevelValue.value = null;
-        effectLevelPin.style.left = `${DEFAULT_DEPTH_LEVEL}%`;
-        effectLevelDepth.style.width = `${DEFAULT_DEPTH_LEVEL}%`;
-        let effectClassName = `effects__preview--${item.childNodes[1].value}`;
-        imgUploadPreview.classList.remove(imgUploadPreview.classList[1]);
-        imgUploadPreview.classList.add(effectClassName);
-        imgUploadPreview.style.filter = ``;
-      }
-    });
-  }*/
-
-  // Так отправляй форму на сервер
-  const form = document.querySelector(`.img-upload__form`);
-  form.addEventListener(`submit`, (e) => {
+  const onFormSubmit = (e) => {
+    e.preventDefault();
     window.backend.upload(() => {
       uploadOverlay.classList.toggle(`hidden`);
       window.successmsg.renderMsg();
@@ -143,7 +81,41 @@
       uploadOverlay.classList.toggle(`hidden`);
       window.errormsg.renderMsg();
     }, new FormData(form));
+    form.reset();
+    document.removeEventListener(`submit`, onFormSubmit);
+  };
+
+  const form = document.querySelector(`.img-upload__form`);
+  form.addEventListener(`submit`, onFormSubmit);
+
+  // Закрой модалку превьюшки по клику на кнопку с крестом
+  const onUploadCancelBtnClick = (e) => {
     e.preventDefault();
-  });
+
+    uploadOverlay.classList.toggle(`hidden`);
+    documentBody.classList.remove(`modal-open`);
+    uploadFileInput.value = null;
+
+    form.reset();
+
+    document.removeEventListener(`keydown`, onPopupEscKeyDown);
+  };
+
+  uploadCancelBtn.addEventListener(`click`, onUploadCancelBtnClick);
+
+  const onPopupEscKeyDown = (e) => {
+    if (e.code === Key.ESC) {
+      e.preventDefault();
+      uploadOverlay.classList.toggle(`hidden`);
+      documentBody.classList.remove(`modal-open`);
+
+      const scaleControlValue = document.querySelector(`.scale__control--value`);
+      scaleControlValue.value = `100%`;
+
+      form.reset();
+
+      document.removeEventListener(`keydown`, onPopupEscKeyDown);
+    }
+  };
 
 })();

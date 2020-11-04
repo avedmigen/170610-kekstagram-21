@@ -11,9 +11,9 @@
   // Удали все фотки на странице
   const removeRenderedPhotos = () => {
     const renderedPhotos = document.querySelectorAll(`.picture`);
-    for (let photo of renderedPhotos) {
+    renderedPhotos.forEach((photo) => {
       photo.remove();
-    }
+    });
   };
 
   // Удали дребезг
