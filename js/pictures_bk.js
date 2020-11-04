@@ -1,7 +1,7 @@
 'use strict';
 
 (() => {
-  window.load((photos) => {
+  window.backend.load((photos) => {
     const RANDOM_PHOTOS_LIMIT = 10;
     const DEBOUNCE_INTERVAL = 500;
 

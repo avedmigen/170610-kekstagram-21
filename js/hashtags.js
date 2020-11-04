@@ -1,41 +1,75 @@
 'use strict';
-// 2.3. Хэш-теги:
 
 (() => {
-  const HASHTAG_MIN_LENGTH = 2;
-  const HASHTAG_MAX_LENGTH = 20;
-  const HASHTAG_MAX_ITEMS = 5;
-  /*  const COMMENT_MAX_LENGTH = 140;*/
+  const MAX_SYMBOLS = 20;
+  const MAX_HASHTAGS = 5;
 
-  const imgUploadForm = document.querySelector(`.img-upload__form`);
-  const textHashtags = imgUploadForm[17];
+  const inputHashtags = document.querySelector(`.text__hashtags`);
 
-  textHashtags.addEventListener(`input`, (e) => {
-    e.preventDefault();
-    let hashtagValues = textHashtags.value;
-    let hashtags = hashtagValues.split(` `);
+  inputHashtags.addEventListener(`input`, () => {
+    const invalidMessage = [];
 
-    for (let hashtag of hashtags) {
-      let valueLenght = hashtag.length;
-      let regexp = /^#[\w\d]*$/;
-      let regexpFlag = regexp.test(hashtag);
+    const inputText = inputHashtags.value.toLowerCase().trim();
+    const regexp = /^#[\w\d]*$/;
+    const regexpFlag = regexp.test(inputText);
 
-      if (hashtag !== ``) {
-        if (!regexpFlag) {
-          textHashtags.setCustomValidity(`Хэш-тег должен начинаться с # (решётки) и может содержать только буквы и числа без пробелов.`);
-        } else if (valueLenght < HASHTAG_MIN_LENGTH) {
-          textHashtags.setCustomValidity(`Хеш-тег не может состоять только из одной решётки. Добавьте буквы и числа без пробелов.`);
-        } else if (hashtags.length > HASHTAG_MAX_ITEMS) {
-          textHashtags.setCustomValidity(`Макс. кол-во хэш-тегов - ${HASHTAG_MAX_ITEMS}. Удалите ${hashtags.length - HASHTAG_MAX_ITEMS} хэш-тег.`);
-        } else if (valueLenght > HASHTAG_MAX_LENGTH) {
-          textHashtags.setCustomValidity(`Макс.длина одного хэш-тега - 20 симв, включая решётку. Удалите ${HASHTAG_MAX_LENGTH - valueLenght} симв.`);
-        } else {
-          textHashtags.setCustomValidity(``);
-        }
-      }
-
-      textHashtags.reportValidity();
+    if (!inputText) {
+      return;
     }
-  });
 
+    const inputArray = inputText.split(/\s+/);
+
+    if (inputArray.length === 0) {
+      return;
+    }
+
+    const isStartNotHashtag = inputArray.some(function (item) {
+      return item[0] !== `#`;
+    });
+
+    if (isStartNotHashtag) {
+      invalidMessage.push(`Хэш-тег должен начинаться с символа #`);
+    }
+
+    const isOnlyLatticeHashtag = inputArray.some(function (item) {
+      return item === `#`;
+    });
+    if (isOnlyLatticeHashtag) {
+      invalidMessage.push(`Хеш-тег не может состоять только из одной решётки`);
+    }
+
+    if (!isStartNotHashtag && !regexpFlag) {
+      invalidMessage.push(`Хэш-тег может содержать только буквы и числа без пробелов`);
+    }
+
+    const isSplitSpaceHashtag = inputArray.some((item) => {
+      return item.indexOf(`#`, 1) >= 1;
+    });
+    if (isSplitSpaceHashtag) {
+      invalidMessage.push(`Хэш-теги разделяются пробелами`);
+    }
+
+    const isRepeatHashtag = inputArray.some(function (item, i, arr) {
+      return arr.indexOf(item, i + 1) >= i + 1;
+    });
+    if (isRepeatHashtag) {
+      invalidMessage.push(`Один и тот же хэш-тег не может быть использован дважды`);
+    }
+
+    const isLongHashtag = inputArray.some((item) => {
+      return item.length > MAX_SYMBOLS;
+    });
+    if (isLongHashtag) {
+      invalidMessage.push(`Максимальная длина одного хэш-тега 20 символов, включая решётку`);
+    }
+
+    if (inputArray.length > MAX_HASHTAGS) {
+      invalidMessage.push(`Нельзя указать больше пяти хэш-тегов`);
+    }
+
+    inputHashtags.setCustomValidity(invalidMessage.join(`. \n`));
+    inputHashtags.reportValidity();
+
+    window.utils.drawErrorRedBorder(invalidMessage, inputHashtags);
+  });
 })();

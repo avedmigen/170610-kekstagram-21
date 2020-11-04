@@ -34,12 +34,22 @@
     }
   };
 
+  // Добавляем красную рамку в случае ошибок ввода
+  const drawErrorRedBorder = (invalidMessageArr, inputField) => {
+    if (invalidMessageArr.length !== 0) {
+      inputField.style.outlineColor = `red`;
+    } else {
+      inputField.style.outlineColor = ``;
+    }
+  };
+
   // Экспортируй утилиты
   window.utils = {
     getRenderedPhotos,
     removeRenderedPhotos,
     setDebounce,
     shuffleArray,
+    drawErrorRedBorder,
   };
 
 })();

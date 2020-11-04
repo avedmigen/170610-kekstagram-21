@@ -6,6 +6,11 @@
   const TRANSFORM_LEVEL_STEP = 25;
   const DEFAULT_DEPTH_LEVEL = 100;
 
+  const Key = {
+    ESC: `Escape`,
+    ENTER: `Enter`
+  };
+
   // 2. Загрузка нового изображения на сайт и заполнение информации о нём
   const documentBody = document.querySelector(`body`);
   const uploadFileInput = document.querySelector(`#upload-file`);
@@ -20,25 +25,31 @@
     e.preventDefault();
     uploadOverlay.classList.toggle(`hidden`);
     documentBody.classList.add(`modal-open`);
+
+    document.addEventListener(`keydown`, onPopupEscKeyDown);
   };
 
   // Закрой попап превьюшки по клику на кнопку с крестом
   uploadCancelBtn.addEventListener(`click`, (e) => {
     e.preventDefault();
+
     uploadOverlay.classList.toggle(`hidden`);
     documentBody.classList.remove(`modal-open`);
     uploadFileInput.value = null;
+
+    document.removeEventListener(`keydown`, onPopupEscKeyDown);
   });
 
-  // Закрой попап превьюшки по клику на кнопку с крестом
-  window.addEventListener(`keydown`, (e) => {
-    if (e.code === `Escape`) {
+  const onPopupEscKeyDown = (e) => {
+    if (e.code === Key.ESC) {
       e.preventDefault();
       uploadOverlay.classList.toggle(`hidden`);
       documentBody.classList.remove(`modal-open`);
       uploadFileInput.value = null;
+
+      document.removeEventListener(`keydown`, onPopupEscKeyDown);
     }
-  });
+  };
 
   // Так настраивай масштаб
 
@@ -50,14 +61,18 @@
   scaleControlValue.value = `${DEFAULT_TRANSFORM_LEVEL}%`;
   let scaleValue = parseInt(scaleControlValue.value, 10);
 
+  const setScaleValue = (value) => {
+    scaleControlValue.value = `${value}%`;
+    imgUploadPreview.style.transform = `scale(${value / 100})`;
+  };
+
   scaleControlSmaller.addEventListener(`click`, (e) => {
     e.preventDefault();
 
     if (scaleValue !== TRANSFORM_LEVEL_STEP && scaleValue <= DEFAULT_TRANSFORM_LEVEL) {
-      scaleValue = scaleValue - 25;
-      scaleControlValue.value = `${scaleValue}%`;
-      imgUploadPreview.style.transform = `scale(0.${scaleValue})`;
+      scaleValue -= 25;
     }
+    setScaleValue(scaleValue);
   });
 
   scaleControlBigger.addEventListener(`click`, (e) => {
@@ -65,9 +80,8 @@
 
     if (scaleValue >= TRANSFORM_LEVEL_STEP && scaleValue < DEFAULT_TRANSFORM_LEVEL) {
       scaleValue += 25;
-      scaleControlValue.value = `${scaleValue}%`;
-      imgUploadPreview.style.transform = `scale(${scaleValue / 100})`;
     }
+    setScaleValue(scaleValue);
   });
 
   // Так накладывай эффекты на изображение
@@ -170,7 +184,7 @@
     item.addEventListener(`click`, (e) => {
       e.preventDefault();
       unsetCheckedAttr(item);
-      item.querySelector(`input`).setAttribute(`checked`, `checked`);
+      item.querySelector(`input`).checked = true;
       showSlider(item);
       effectLevelValue.value = null;
       effectLevelPin.style.left = `${DEFAULT_DEPTH_LEVEL}%`;
@@ -235,13 +249,13 @@
   // Так отправляй форму на сервер
   const form = document.querySelector(`.img-upload__form`);
   form.addEventListener(`submit`, (e) => {
-    window.upload(new FormData(form), () => {
+    window.backend.upload(() => {
       uploadOverlay.classList.toggle(`hidden`);
       setSuccessImgLoadedMsg();
     }, () => {
       uploadOverlay.classList.toggle(`hidden`);
       setErrorImgLoadedMsg();
-    });
+    }, new FormData(form));
     e.preventDefault();
   });
 
