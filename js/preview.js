@@ -42,11 +42,12 @@
     slider.classList.add(`hidden`);
   }
 
-  // Примени эффект к превьюшке
+  // Примени эффект к превью
   const setPreviewEffect = (filter) => {
     const userImgPreview = document.querySelector(`.img-upload__preview`);
     userImgPreview.className = `img-upload__preview`;
     userImgPreview.classList.toggle(`effects__preview--${filter.value}`);
+    window.saturation.reset(filter);
     document.querySelector(`.effect-level__value`).value = `100`;
     document.querySelector(`.effect-level__pin`).style.left = `100%`;
     document.querySelector(`.effect-level__depth`).style.width = `100%`;
