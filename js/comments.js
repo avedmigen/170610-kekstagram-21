@@ -26,6 +26,7 @@
     // Приготовься добавлять комменты из полученных данных
 
     const drawComments = (limit) => {
+      const socialCommentsLoaderBtn = document.querySelector(`.social__comments-loader`);
       let fragment = document.createDocumentFragment();
 
       if (limit <= data.comments.length) {
