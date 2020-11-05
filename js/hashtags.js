@@ -72,7 +72,6 @@
 
     if (invalidMessage.length > 0) {
       inputHashtags.setCustomValidity(invalidMessage.join(`. \n`));
-      inputHashtags.reportValidity();
       window.utils.drawErrorRedBorder(invalidMessage, inputHashtags);
     }
 

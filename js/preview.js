@@ -108,7 +108,6 @@
   };
 
   const form = document.querySelector(`.img-upload__form`);
-  console.log(`form`);
   form.addEventListener(`submit`, onFormSubmit);
 
   const resetForm = () => {

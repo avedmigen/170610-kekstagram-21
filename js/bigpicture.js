@@ -23,7 +23,7 @@
     const bigPicDesc = bigPic.querySelector(`.social__caption`);
     bigPicDesc.textContent = photo.description;
 
-    // Замени комменты
+    // Нарисуй комменты
     window.comments.renderComments(photo.comments);
 
     // Добавь на <body> класс modal-open, чтобы контейнер с фотографиями позади не прокручивался при скролле.
@@ -37,12 +37,11 @@
     const onBigPicCloseBtnClick = (e) => {
       e.preventDefault();
       window.bigpicture.onCloseClearData();
-      document.removeEventListener(`click`, onBigPicCloseBtnClick);
+      bigPicCloseBtn.removeEventListener(`click`, onBigPicCloseBtnClick);
     };
 
     const bigPicCloseBtn = document.querySelector(`.big-picture__cancel`);
-    bigPicCloseBtn
-      .addEventListener(`click`, onBigPicCloseBtnClick);
+    bigPicCloseBtn.addEventListener(`click`, onBigPicCloseBtnClick);
   };
 
   const onCloseClearData = () => {
