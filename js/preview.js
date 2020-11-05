@@ -15,20 +15,18 @@
   const uploadCancelBtn = document.querySelector(`#upload-cancel`);
   window.imgUploadPreview = window.uploadOverlay.querySelector(`.img-upload__preview`);
   window.originalEffect = document.querySelector(`#effect-none`);
+  const effectRadioInputs = document.querySelectorAll(`.effects__radio`);
 
   // Покажи модалку если пришёл файл с фоткой
   const onUploadFileInputChange = (e) => {
     e.preventDefault();
-    window.uploadOverlay.classList.toggle(`hidden`);
-    window.documentBody.classList.add(`modal-open`);
+
+    window.reset.onOpenForm();
 
     document.addEventListener(`keydown`, onPopupEscKeyDown);
   };
 
   uploadFileInput.addEventListener(`change`, onUploadFileInputChange);
-
-  // Выбери превьюшку с эффектом
-  const effectsRadioInputs = document.querySelectorAll(`.effects__radio`);
 
   // Скрой слайдер на эффекте Оригинал
   const slider = document.querySelector(`.img-upload__effect-level`);
@@ -62,7 +60,7 @@
     document.removeEventListener(`click`, filter);
   };
 
-  effectsRadioInputs.forEach((filter) => {
+  effectRadioInputs.forEach((filter) => {
     filter.addEventListener(`click`, (e) => {
       onFilterClick(e, filter);
     });
@@ -94,7 +92,7 @@
     e.preventDefault();
 
     window.backend.upload(() => {
-      window.reset.resetForm();
+      window.reset.onCloseForm();
       window.successmsg.renderMsg();
       document.addEventListener(`keydown`, onSuccessMessageEscKeyDown);
     }, () => {
@@ -107,11 +105,10 @@
 
   window.form.addEventListener(`submit`, onFormSubmit);
 
-
   // Закрой модалку превьюшки по клику на кнопку с крестом
   const onUploadCancelBtnClick = (e) => {
     e.preventDefault();
-    window.reset.resetForm();
+    window.reset.onCloseForm();
   };
 
   uploadCancelBtn.addEventListener(`click`, onUploadCancelBtnClick);
@@ -120,7 +117,7 @@
   const onPopupEscKeyDown = (e) => {
     if (e.code === Key.ESC) {
       e.preventDefault();
-      window.reset.resetForm();
+      window.reset.onCloseForm();
       document.removeEventListener(`keydown`, onPopupEscKeyDown);
     }
   };
