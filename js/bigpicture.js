@@ -17,8 +17,8 @@
     bigPicLikes.textContent = photo.likes;
 
     // Замени количество комментов
-    const bigPicСommentsCount = bigPic.querySelector(`.comments-count`);
-    bigPicСommentsCount.textContent = photo.comments.length;
+    const bigPicCommentCount = bigPic.querySelector(`.comments-count`);
+    bigPicCommentCount.textContent = photo.comments.length;
 
     // Замени контент описания бигпикчи
     const bigPicDesc = bigPic.querySelector(`.social__caption`);

@@ -134,7 +134,9 @@
 
   // Если данные не пришли
   // То выведи сообщение с ошибкой
-  const onError = () => {};
+  const onError = () => {
+    console.log(`тут какая-то ошибка выскочила. вопрос какая?`);
+  };
 
   window.backend.load(onSuccess, onError);
 })();
