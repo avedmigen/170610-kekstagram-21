@@ -16,8 +16,7 @@
   window.imgUploadPreview = window.uploadOverlay.querySelector(`.img-upload__preview`);
   window.originalEffect = document.querySelector(`#effect-none`);
 
-  // Покажи модалку если в поле пришёл файл с фоткой
-
+  // Покажи модалку если пришёл файл с фоткой
   const onUploadFileInputChange = (e) => {
     e.preventDefault();
     window.uploadOverlay.classList.toggle(`hidden`);
@@ -113,13 +112,11 @@
   const onUploadCancelBtnClick = (e) => {
     e.preventDefault();
     window.reset.resetForm();
-    uploadCancelBtn.removeEventListener(`click`, onUploadCancelBtnClick);
   };
 
   uploadCancelBtn.addEventListener(`click`, onUploadCancelBtnClick);
 
   // Закрой модалку по ESC
-
   const onPopupEscKeyDown = (e) => {
     if (e.code === Key.ESC) {
       e.preventDefault();
