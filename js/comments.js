@@ -24,11 +24,19 @@
     };
 
     // Приготовься добавлять комменты из полученных данных
-    const drawComments = () => {
+
+    const drawComments = (limit) => {
       let fragment = document.createDocumentFragment();
 
-      for (let i = 0; i < data.comments.length; i++) {
-        fragment.appendChild(commentTmpl(i));
+      if (limit <= data.comments.length) {
+        for (let i = 0; i < limit; i++) {
+          fragment.appendChild(commentTmpl(i));
+        }
+      } else if (limit > data.comments.length) {
+        for (let i = 0; i < data.comments.length; i++) {
+          fragment.appendChild(commentTmpl(i));
+          socialCommentsLoaderBtn.classList.add(`hidden`);
+        }
       }
 
       while (socialCommentsList.firstChild) {
@@ -38,7 +46,8 @@
       socialCommentsList.appendChild(fragment);
     };
 
-    drawComments();
+    let commentCount = COMMENTS_LIMIT;
+    drawComments(commentCount);
 
     // Загружай по +5 комментов по клику на кнопку Загрузить еще
 
@@ -46,7 +55,8 @@
 
     const onSocialCommentsLoaderBtnClick = (e) => {
       e.preventDefault();
-      console.log(`Загрузи еще 5 комментов`);
+      commentCount += COMMENTS_LIMIT;
+      drawComments(commentCount);
       document.removeEventListener(`click`, onSocialCommentsLoaderBtnClick);
     };
 
