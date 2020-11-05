@@ -51,7 +51,7 @@
     document.querySelector(`.effect-level__value`).value = `100`;
     document.querySelector(`.effect-level__pin`).style.left = `100%`;
     document.querySelector(`.effect-level__depth`).style.width = `100%`;
-    filter.setAttribute(``, `checked`);
+    filter.setAttribute(`checked`, `checked`);
   };
 
   const onFilterClick = (e, filter) => {
