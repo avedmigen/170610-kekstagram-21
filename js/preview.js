@@ -12,7 +12,7 @@
   const documentBody = document.querySelector(`body`);
   const uploadFileInput = document.querySelector(`#upload-file`);
   const uploadCancelBtn = document.querySelector(`#upload-cancel`);
-  const userImgPreview = uploadOverlay.querySelector(`.img-upload__preview`);
+  window.imgUploadPreview = uploadOverlay.querySelector(`.img-upload__preview`);
 
   // Покажи модалку превьюшки если в поле пришёл файл с фоткой
 
@@ -40,8 +40,8 @@
   // Примени эффект к превью
   const setPreviewEffect = (filter) => {
 
-    userImgPreview.className = `img-upload__preview`;
-    userImgPreview.classList.toggle(`effects__preview--${filter.value}`);
+    window.imgUploadPreview.className = `img-upload__preview`;
+    window.imgUploadPreview.classList.toggle(`effects__preview--${filter.value}`);
     window.saturation.reset(filter);
     document.querySelector(`.effect-level__value`).value = `100`;
     document.querySelector(`.effect-level__pin`).style.left = `100%`;
@@ -125,7 +125,7 @@
   // Закрой модалку превьюшки по клику на кнопку с крестом
   const onUploadCancelBtnClick = (e) => {
     e.preventDefault();
-
+    window.zoom.resetScaleControlValue();
     resetForm();
   };
 
@@ -134,6 +134,7 @@
   const onPopupEscKeyDown = (e) => {
     if (e.code === Key.ESC) {
       e.preventDefault();
+      window.zoom.resetScaleControlValue();
       resetForm();
     }
   };
