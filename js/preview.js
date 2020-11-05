@@ -8,18 +8,20 @@
     ENTER: `Enter`
   };
 
-  const uploadOverlay = document.querySelector(`.img-upload__overlay`);
-  const documentBody = document.querySelector(`body`);
+  window.uploadOverlay = document.querySelector(`.img-upload__overlay`);
+  window.documentBody = document.querySelector(`body`);
+  window.form = document.querySelector(`.img-upload__form`);
   const uploadFileInput = document.querySelector(`#upload-file`);
   const uploadCancelBtn = document.querySelector(`#upload-cancel`);
-  window.imgUploadPreview = uploadOverlay.querySelector(`.img-upload__preview`);
+  window.imgUploadPreview = window.uploadOverlay.querySelector(`.img-upload__preview`);
+  window.originalEffect = document.querySelector(`#effect-none`);
 
-  // Покажи модалку превьюшки если в поле пришёл файл с фоткой
+  // Покажи модалку если в поле пришёл файл с фоткой
 
   const onUploadFileInputChange = (e) => {
     e.preventDefault();
-    uploadOverlay.classList.toggle(`hidden`);
-    documentBody.classList.add(`modal-open`);
+    window.uploadOverlay.classList.toggle(`hidden`);
+    window.documentBody.classList.add(`modal-open`);
 
     document.addEventListener(`keydown`, onPopupEscKeyDown);
   };
@@ -31,9 +33,8 @@
 
   // Скрой слайдер на эффекте Оригинал
   const slider = document.querySelector(`.img-upload__effect-level`);
-  const original = document.querySelector(`#effect-none`);
 
-  if (original.checked) {
+  if (window.originalEffect.checked) {
     slider.classList.add(`hidden`);
   }
 
@@ -43,9 +44,7 @@
     window.imgUploadPreview.className = `img-upload__preview`;
     window.imgUploadPreview.classList.toggle(`effects__preview--${filter.value}`);
     window.saturation.reset(filter);
-    document.querySelector(`.effect-level__value`).value = `100`;
-    document.querySelector(`.effect-level__pin`).style.left = `100%`;
-    document.querySelector(`.effect-level__depth`).style.width = `100%`;
+
     // input поставить в 100
     // filter.checked = true;
   };
@@ -93,54 +92,44 @@
   // Отправь форму при сабмите
   const onFormSubmit = (e) => {
     console.log(`onFormSubmit`);
-
     e.preventDefault();
+
     window.backend.upload(() => {
-      resetForm();
+      window.reset.resetForm();
       window.successmsg.renderMsg();
       document.addEventListener(`keydown`, onSuccessMessageEscKeyDown);
     }, () => {
       window.errormsg.renderMsg();
       document.addEventListener(`keydown`, onErrorMessageEscKeyDown);
-    }, new FormData(form));
+    }, new FormData(window.form));
 
-    form.removeEventListener(`submit`, onFormSubmit);
+    window.form.removeEventListener(`submit`, onFormSubmit);
   };
 
-  const form = document.querySelector(`.img-upload__form`);
-  form.addEventListener(`submit`, onFormSubmit);
+  window.form.addEventListener(`submit`, onFormSubmit);
 
-  const resetForm = () => {
-    uploadOverlay.classList.toggle(`hidden`);
-    documentBody.classList.remove(`modal-open`);
-
-    const scaleControlValue = document.querySelector(`.scale__control--value`);
-    scaleControlValue.value = `100%`;
-
-    form.reset();
-
-    document.removeEventListener(`keydown`, onPopupEscKeyDown);
-  };
 
   // Закрой модалку превьюшки по клику на кнопку с крестом
   const onUploadCancelBtnClick = (e) => {
     e.preventDefault();
-    window.zoom.resetScaleControlValue();
-    resetForm();
+    window.reset.resetForm();
+    uploadCancelBtn.removeEventListener(`click`, onUploadCancelBtnClick);
   };
 
   uploadCancelBtn.addEventListener(`click`, onUploadCancelBtnClick);
 
+  // Закрой модалку по ESC
+
   const onPopupEscKeyDown = (e) => {
     if (e.code === Key.ESC) {
       e.preventDefault();
-      window.zoom.resetScaleControlValue();
-      resetForm();
+      window.reset.resetForm();
+      document.removeEventListener(`keydown`, onPopupEscKeyDown);
     }
   };
 
   window.preview = {
-    overlay: uploadOverlay
+    overlay: window.uploadOverlay
   };
 
 })();
