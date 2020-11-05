@@ -2,6 +2,8 @@
 
 (() => {
 
+  const COMMENTS_LIMIT = 5;
+
   const renderComments = (data) => {
 
     const socialCommentsList = document.querySelector(`.social__comments`);
