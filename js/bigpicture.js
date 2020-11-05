@@ -1,9 +1,12 @@
 'use strict';
 
 (() => {
+  const COMMENTS_LIMIT = 5;
+
   const renderBigPicture = (photo) => {
     // Найди контейнер бигпикчи
     const bigPic = document.querySelector(`.big-picture__preview`);
+    const socialCommentsLoaderBtn = document.querySelector(`.social__comments-loader`);
 
     // Замени путь к файлу и альт бигпикчи
     const bigPicImg = bigPic.querySelector(`.big-picture__img > img`);
@@ -28,7 +31,6 @@
     // Спрячь блоки счётчика комментариев и загрузки новых комментариев
     /*
     bigPic.querySelector(`.social__comment-count`).classList.add(`hidden`);
-    bigPic.querySelector(`.comments-loader`).classList.add(`hidden`);
 */
     // Добавь на <body> класс modal-open, чтобы контейнер с фотографиями позади не прокручивался при скролле.
     document.body.classList.add(`modal-open`);
@@ -40,6 +42,12 @@
     // Закрой бигпикчу по клику по кресту
     const onBigPicCloseBtnClick = (e) => {
       e.preventDefault();
+      window.commentCount = COMMENTS_LIMIT;
+
+      if (socialCommentsLoaderBtn.classList.contains(`hidden`)) {
+        socialCommentsLoaderBtn.classList.remove(`hidden`);
+      }
+
       document.querySelector(`.big-picture`).classList.add(`hidden`);
       document.removeEventListener(`click`, onBigPicCloseBtnClick);
     };

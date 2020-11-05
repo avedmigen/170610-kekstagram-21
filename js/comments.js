@@ -46,8 +46,8 @@
       socialCommentsList.appendChild(fragment);
     };
 
-    let commentCount = COMMENTS_LIMIT;
-    drawComments(commentCount);
+    window.commentCount = COMMENTS_LIMIT;
+    drawComments(window.commentCount);
 
     // Загружай по +5 комментов по клику на кнопку Загрузить еще
 
@@ -55,8 +55,8 @@
 
     const onSocialCommentsLoaderBtnClick = (e) => {
       e.preventDefault();
-      commentCount += COMMENTS_LIMIT;
-      drawComments(commentCount);
+      window.commentCount += COMMENTS_LIMIT;
+      drawComments(window.commentCount);
       document.removeEventListener(`click`, onSocialCommentsLoaderBtnClick);
     };
 
