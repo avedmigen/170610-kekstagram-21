@@ -49,6 +49,8 @@
   const onCloseClearData = () => {
     window.commentCount = COMMENTS_LIMIT;
 
+    document.body.classList.remove(`modal-open`);
+
     const socialCommentsLoaderBtn = document.querySelector(`.social__comments-loader`);
     const socialCommentCount = document.querySelector(`.social__comment-count`);
 
