@@ -75,16 +75,38 @@
     });
   });
 
-  // Отправь форму при сабмите
+  const onSuccessMessageEscKeyDown = (e) => {
+    if (e.code === Key.ESC) {
+      e.preventDefault();
+      const successTmpl = document.querySelector(`#success`);
+      successTmpl.remove();
+      console.log(`хочу закрыться`);
+      document.removeEventListener(`keydown`, onSuccessMessageEscKeyDown);
+    }
+  };
 
+  const onErrorMessageEscKeyDown = (e) => {
+    if (e.code === Key.ESC) {
+      e.preventDefault();
+      console.log(`хочу закрыться`);
+      const errorTmpl = document.querySelector(`#error`);
+      errorTmpl.remove();
+
+      document.removeEventListener(`keydown`, onErrorMessageEscKeyDown);
+    }
+  };
+
+  // Отправь форму при сабмите
   const onFormSubmit = (e) => {
     e.preventDefault();
     window.backend.upload(() => {
       uploadOverlay.classList.toggle(`hidden`);
       window.successmsg.renderMsg();
+      document.addEventListener(`keydown`, onSuccessMessageEscKeyDown);
     }, () => {
       uploadOverlay.classList.toggle(`hidden`);
       window.errormsg.renderMsg();
+      document.addEventListener(`keydown`, onErrorMessageEscKeyDown);
     }, new FormData(form));
     form.reset();
     document.removeEventListener(`submit`, onFormSubmit);
