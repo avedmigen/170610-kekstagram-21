@@ -31,10 +31,12 @@
 
       let fragment = document.createDocumentFragment();
 
+      socialCommentCount.firstChild.textContent = `${limit} из `;
+      console.log(limit);
+
       if (limit <= data.comments.length) {
         for (let i = 0; i < limit; i++) {
           fragment.appendChild(commentTmpl(i));
-          socialCommentCount.firstChild.textContent = `${limit} из `;
         }
       } else if (limit > data.comments.length) {
         for (let i = 0; i < data.comments.length; i++) {
