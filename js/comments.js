@@ -38,6 +38,18 @@
 
     drawComments();
 
+    // Загружай по +5 комментов по клику на кнопку Загрузить еще
+
+    const socialCommentsLoaderBtn = document.querySelector(`.social__comments-loader`);
+
+    const onSocialCommentsLoaderBtnClick = (e) => {
+      e.preventDefault();
+      console.log(`Загрузи еще 5 комментов`);
+      document.removeEventListener(`click`, onSocialCommentsLoaderBtnClick);
+    };
+
+    socialCommentsLoaderBtn.addEventListener(`click`, onSocialCommentsLoaderBtnClick);
+
   };
 
   window.comments = {
