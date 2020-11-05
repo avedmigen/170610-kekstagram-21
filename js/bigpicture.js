@@ -6,8 +6,6 @@
   const renderBigPicture = (photo) => {
     // Найди контейнер бигпикчи
     const bigPic = document.querySelector(`.big-picture__preview`);
-    const socialCommentsLoaderBtn = document.querySelector(`.social__comments-loader`);
-    const socialCommentCount = document.querySelector(`.social__comment-count`);
 
     // Замени путь к файлу и альт бигпикчи
     const bigPicImg = bigPic.querySelector(`.big-picture__img > img`);
@@ -39,17 +37,7 @@
     // Закрой бигпикчу по клику по кресту
     const onBigPicCloseBtnClick = (e) => {
       e.preventDefault();
-      window.commentCount = COMMENTS_LIMIT;
-
-      if (socialCommentsLoaderBtn.classList.contains(`hidden`)) {
-        socialCommentsLoaderBtn.classList.remove(`hidden`);
-      }
-
-      if (socialCommentCount.classList.contains(`hidden`)) {
-        socialCommentCount.classList.remove(`hidden`);
-      }
-
-      document.querySelector(`.big-picture`).classList.add(`hidden`);
+      window.bigpicture.onCloseClearData();
       document.removeEventListener(`click`, onBigPicCloseBtnClick);
     };
 
@@ -58,8 +46,26 @@
       .addEventListener(`click`, onBigPicCloseBtnClick);
   };
 
+  const onCloseClearData = () => {
+    window.commentCount = COMMENTS_LIMIT;
+
+    const socialCommentsLoaderBtn = document.querySelector(`.social__comments-loader`);
+    const socialCommentCount = document.querySelector(`.social__comment-count`);
+
+    if (socialCommentsLoaderBtn.classList.contains(`hidden`)) {
+      socialCommentsLoaderBtn.classList.remove(`hidden`);
+    }
+
+    if (socialCommentCount.classList.contains(`hidden`)) {
+      socialCommentCount.classList.remove(`hidden`);
+    }
+
+    document.querySelector(`.big-picture`).classList.add(`hidden`);
+  };
+
   window.bigpicture = {
     renderBigPicture,
+    onCloseClearData,
   };
 
 })();

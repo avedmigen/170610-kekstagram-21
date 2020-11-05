@@ -35,10 +35,10 @@
 
         const bigPicture = document.querySelector(`.big-picture`);
         bigPicture.classList.add(`hidden`);
-
         document.body.classList.remove(`modal-open`);
 
-        console.log(`onBigPictureEscKeyDown`);
+        window.bigpicture.onCloseClearData();
+
         document.removeEventListener(`keydown`, onBigPictureEscKeyDown);
       }
     };
