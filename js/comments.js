@@ -8,6 +8,7 @@
 
     const socialCommentsList = document.querySelector(`.social__comments`);
     const socialComment = document.querySelector(`.social__comment`);
+    const socialCommentCount = document.querySelector(`.social__comment-count`);
 
     // Шаблон коммента для заполнения данными
     const commentTmpl = (num) => {
@@ -27,16 +28,19 @@
 
     const drawComments = (limit) => {
       const socialCommentsLoaderBtn = document.querySelector(`.social__comments-loader`);
+
       let fragment = document.createDocumentFragment();
 
       if (limit <= data.comments.length) {
         for (let i = 0; i < limit; i++) {
           fragment.appendChild(commentTmpl(i));
+          socialCommentCount.firstChild.textContent = `${limit} ---`;
         }
       } else if (limit > data.comments.length) {
         for (let i = 0; i < data.comments.length; i++) {
           fragment.appendChild(commentTmpl(i));
           socialCommentsLoaderBtn.classList.add(`hidden`);
+          socialCommentCount.classList.add(`hidden`);
         }
       }
 

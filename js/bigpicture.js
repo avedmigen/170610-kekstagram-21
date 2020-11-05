@@ -7,6 +7,7 @@
     // Найди контейнер бигпикчи
     const bigPic = document.querySelector(`.big-picture__preview`);
     const socialCommentsLoaderBtn = document.querySelector(`.social__comments-loader`);
+    const socialCommentCount = document.querySelector(`.social__comment-count`);
 
     // Замени путь к файлу и альт бигпикчи
     const bigPicImg = bigPic.querySelector(`.big-picture__img > img`);
@@ -46,6 +47,10 @@
 
       if (socialCommentsLoaderBtn.classList.contains(`hidden`)) {
         socialCommentsLoaderBtn.classList.remove(`hidden`);
+      }
+
+      if (socialCommentCount.classList.contains(`hidden`)) {
+        socialCommentCount.classList.remove(`hidden`);
       }
 
       document.querySelector(`.big-picture`).classList.add(`hidden`);
