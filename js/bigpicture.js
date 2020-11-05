@@ -29,10 +29,6 @@
     // Замени комменты
     window.comments.renderComments(photo);
 
-    // Спрячь блоки счётчика комментариев и загрузки новых комментариев
-    /*
-    bigPic.querySelector(`.social__comment-count`).classList.add(`hidden`);
-*/
     // Добавь на <body> класс modal-open, чтобы контейнер с фотографиями позади не прокручивался при скролле.
     document.body.classList.add(`modal-open`);
 
@@ -60,23 +56,6 @@
     const bigPicCloseBtn = document.querySelector(`.big-picture__cancel`);
     bigPicCloseBtn
       .addEventListener(`click`, onBigPicCloseBtnClick);
-
-    // Закрой бигпикчу по клику по ESC
-    const Key = {
-      ESC: `Escape`,
-      ENTER: `Enter`
-    };
-
-    const onBigPicEscKeyDown = (e) => {
-      if (e.code === Key.ESC) {
-        e.preventDefault();
-        // Отлови эксейп на бигпикче
-        console.log(`onBigPicEscKeyDown`);
-        document.removeEventListener(`keydown`, onBigPicEscKeyDown);
-      }
-    };
-
-    bigPicture.addEventListener(`click`, onBigPicEscKeyDown);
   };
 
   window.bigpicture = {

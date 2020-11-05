@@ -5,6 +5,11 @@
   const RANDOM_PHOTOS_LIMIT = 10;
   const DEBOUNCE_INTERVAL = 500;
 
+  const Key = {
+    ESC: `Escape`,
+    ENTER: `Enter`
+  };
+
   let cleanDataPhotos = [];
 
   const photoContainer = document.querySelector(`.pictures`);
@@ -23,10 +28,25 @@
     photoElement.querySelector(`.picture__comments`).textContent = photo.comments.length;
     photoElement.querySelector(`.picture__likes`).textContent = photo.likes;
 
+    // Закрой бигпикчу по ESC
+    const onBigPictureEscKeyDown = (e) => {
+      if (e.code === Key.ESC) {
+        e.preventDefault();
+
+        const bigPicture = document.querySelector(`.big-picture`);
+        bigPicture.classList.add(`hidden`);
+
+        document.body.classList.remove(`modal-open`);
+
+        console.log(`onBigPictureEscKeyDown`);
+        document.removeEventListener(`keydown`, onBigPictureEscKeyDown);
+      }
+    };
+
     const onPhotoElementClick = (e) => {
       e.preventDefault();
-
       window.bigpicture.renderBigPicture(photo);
+      document.addEventListener(`keydown`, onBigPictureEscKeyDown);
     };
 
     photoElement.addEventListener(`click`, onPhotoElementClick);
