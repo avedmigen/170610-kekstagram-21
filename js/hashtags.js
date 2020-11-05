@@ -10,6 +10,8 @@
 
     const invalidMessage = [];
 
+    inputHashtags.setCustomValidity(``);
+
     const inputText = inputHashtags.value.toLowerCase().trim();
     const regexp = /^#[\w\d]*$/;
     const regexpFlag = regexp.test(inputText);
@@ -68,12 +70,12 @@
       invalidMessage.push(`Нельзя указать больше пяти хэш-тегов`);
     }
 
-    inputHashtags.setCustomValidity(invalidMessage.join(`. \n`));
-    inputHashtags.reportValidity();
+    if (invalidMessage.length > 0) {
+      inputHashtags.setCustomValidity(invalidMessage.join(`. \n`));
+      inputHashtags.reportValidity();
+      window.utils.drawErrorRedBorder(invalidMessage, inputHashtags);
+    }
 
-    window.utils.drawErrorRedBorder(invalidMessage, inputHashtags);
-
-    document.removeEventListener(`input`, onInputHashtagsInput);
   };
 
   inputHashtags.addEventListener(`input`, onInputHashtagsInput);

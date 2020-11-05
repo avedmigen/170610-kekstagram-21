@@ -27,11 +27,13 @@
     };
 
     const onErrorMsgOverleyKeydown = (e) => {
-      e.preventDefault();
-      if (e.target.classList.contains(`error`)) {
-        errorTmpl.remove();
+      if (e.key === `Escape`) {
+        e.preventDefault();
+        if (e.target.classList.contains(`error`)) {
+          errorTmpl.remove();
+        }
+        document.removeEventListener(`keydown`, onErrorMsgOverleyKeydown);
       }
-      document.removeEventListener(`keydown`, onErrorMsgOverleyKeydown);
     };
 
     const errorMsg = () => {

@@ -1,7 +1,6 @@
 'use strict';
 
 (() => {
-  const COMMENTS_LIMIT = 5;
 
   const renderBigPicture = (photo) => {
     // Найди контейнер бигпикчи
@@ -25,7 +24,7 @@
     bigPicDesc.textContent = photo.description;
 
     // Замени комменты
-    window.comments.renderComments(photo);
+    window.comments.renderComments(photo.comments);
 
     // Добавь на <body> класс modal-open, чтобы контейнер с фотографиями позади не прокручивался при скролле.
     document.body.classList.add(`modal-open`);
@@ -47,8 +46,6 @@
   };
 
   const onCloseClearData = () => {
-    window.commentCount = COMMENTS_LIMIT;
-
     document.body.classList.remove(`modal-open`);
 
     const socialCommentsLoaderBtn = document.querySelector(`.social__comments-loader`);
