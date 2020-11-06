@@ -11,7 +11,7 @@
     window.inputHashtags.setCustomValidity(``);
 
     const inputText = window.inputHashtags.value.toLowerCase().trim();
-    const regexp = /^#[\w\d]*$/;
+    const regexp = /^#[a-яА-Яu\w\d]*$/;
     const regexpFlag = regexp.test(inputText);
 
     if (!inputText) {
