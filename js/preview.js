@@ -16,6 +16,8 @@
   window.imgUploadPreview = window.uploadOverlay.querySelector(`.img-upload__preview`);
   window.originalEffect = document.querySelector(`#effect-none`);
   const effectRadioInputs = document.querySelectorAll(`.effects__radio`);
+  window.inputHashtags = document.querySelector(`.text__hashtags`);
+  window.inputText = document.querySelector(`.text__description`);
 
   // Покажи модалку если пришёл файл с фоткой
   const onUploadFileInputChange = (e) => {
@@ -88,7 +90,6 @@
 
   // Отправь форму при сабмите
   const onFormSubmit = (e) => {
-    console.log(`onFormSubmit`);
     e.preventDefault();
 
     window.backend.upload(() => {
@@ -114,6 +115,7 @@
   uploadCancelBtn.addEventListener(`click`, onUploadCancelBtnClick);
 
   // Закрой модалку по ESC
+
   const onPopupEscKeyDown = (e) => {
     if (e.code === Key.ESC) {
       e.preventDefault();
@@ -121,6 +123,24 @@
       document.removeEventListener(`keydown`, onPopupEscKeyDown);
     }
   };
+
+  // Не закрывайся по ESC если комментарий в фокусе
+
+  const onInputFocus = () => {
+    document.removeEventListener(`keydown`, onPopupEscKeyDown);
+  };
+
+  const onInputBlur = () => {
+    document.addEventListener(`keydown`, onPopupEscKeyDown);
+  };
+
+  window.inputHashtags.addEventListener(`focus`, onInputFocus);
+  window.inputHashtags.addEventListener(`blur`, onInputBlur);
+
+  window.inputText.addEventListener(`focus`, onInputFocus);
+  window.inputText.addEventListener(`blur`, onInputBlur);
+
+  // Не закрывайся по ESC если хэштеги в фокусе
 
   window.preview = {
     overlay: window.uploadOverlay

@@ -4,15 +4,13 @@
   const MAX_SYMBOLS = 20;
   const MAX_HASHTAGS = 5;
 
-  const inputHashtags = document.querySelector(`.text__hashtags`);
-
   const onInputHashtagsInput = () => {
 
     const invalidMessage = [];
 
-    inputHashtags.setCustomValidity(``);
+    window.inputHashtags.setCustomValidity(``);
 
-    const inputText = inputHashtags.value.toLowerCase().trim();
+    const inputText = window.inputHashtags.value.toLowerCase().trim();
     const regexp = /^#[\w\d]*$/;
     const regexpFlag = regexp.test(inputText);
 
@@ -71,12 +69,13 @@
     }
 
     if (invalidMessage.length > 0) {
-      inputHashtags.setCustomValidity(invalidMessage.join(`. \n`));
-      inputHashtags.reportValidity();
-      window.utils.drawErrorRedBorder(invalidMessage, inputHashtags);
+      window.inputHashtags.setCustomValidity(invalidMessage.join(`. \n`));
+      window.inputHashtags.reportValidity();
+      window.utils.drawErrorRedBorder(invalidMessage, window.inputHashtags);
     }
 
   };
 
-  inputHashtags.addEventListener(`input`, onInputHashtagsInput);
+  window.inputHashtags.addEventListener(`input`, onInputHashtagsInput);
+
 })();

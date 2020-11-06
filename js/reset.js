@@ -5,9 +5,7 @@
   const effectLevelPin = document.querySelector(`.effect-level__pin`);
   const effectLevelDepth = document.querySelector(`.effect-level__depth`);
 
-  const onOpenForm = () => {
-    window.uploadOverlay.classList.toggle(`hidden`);
-    window.documentBody.classList.add(`modal-open`);
+  const resetSetupSettings = () => {
 
     window.scaleControlValue.value = `100%`;
     window.scaleValue = parseInt(window.scaleControlValue.value, 10);
@@ -24,24 +22,20 @@
 
     window.form.reset();
   };
+
+  const onOpenForm = () => {
+    window.uploadOverlay.classList.toggle(`hidden`);
+    window.documentBody.classList.add(`modal-open`);
+
+    resetSetupSettings();
+  };
+
   const onCloseForm = () => {
     window.uploadOverlay.classList.toggle(`hidden`);
     window.documentBody.classList.remove(`modal-open`);
 
-    window.scaleControlValue.value = `100%`;
-    window.scaleValue = parseInt(window.scaleControlValue.value, 10);
-    window.imgUploadPreview.style.transform = `scale(1)`;
+    resetSetupSettings();
 
-    window.imgUploadPreview.className = `img-upload__preview`;
-    window.imgUploadPreview.style = ``;
-
-    effectLevelValue.value = `100`;
-    effectLevelPin.style.left = `100%`;
-    effectLevelDepth.style.width = `100%`;
-
-    window.originalEffect.checked = true;
-
-    window.form.reset();
   };
 
   window.reset = {

@@ -3,12 +3,10 @@
 (() => {
   const MAX_SYMBOLS = 140;
 
-  const inputTextDesc = document.querySelector(`.text__description`);
-
   const onInputTextDesc = (e) => {
     e.preventDefault();
     const invalidMessage = [];
-    const inputText = inputTextDesc.value.toLowerCase().trim();
+    const inputText = window.inputText.value.toLowerCase().trim();
 
     if (!inputText) {
       return;
@@ -24,14 +22,14 @@
       invalidMessage.push(`Длина комментария не может составлять больше 140 символов. Удалите ${Math.abs(MAX_SYMBOLS - inputText.length)} симв.`);
     }
 
-    inputTextDesc.setCustomValidity(invalidMessage.join(`. \n`));
-    inputTextDesc.reportValidity();
+    window.inputText.setCustomValidity(invalidMessage.join(`. \n`));
+    window.inputText.reportValidity();
 
-    window.utils.drawErrorRedBorder(invalidMessage, inputTextDesc);
+    window.utils.drawErrorRedBorder(invalidMessage, window.inputText);
 
     document.removeEventListener(`input`, onInputTextDesc);
   };
 
-  inputTextDesc.addEventListener(`input`, onInputTextDesc);
+  window.inputText.addEventListener(`input`, onInputTextDesc);
 
 })();
