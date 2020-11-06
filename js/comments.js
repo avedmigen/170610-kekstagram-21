@@ -11,7 +11,7 @@
     const socialCommentCount = document.querySelector(`.social__comment-count`);
     const socialCommentsLoaderBtn = document.querySelector(`.social__comments-loader`);
 
-    // Шаблон коммента для заполнения данными
+
     const commentTmpl = (num) => {
       let commentElement = socialComment.cloneNode(true);
       let commentAvatar = data[num].avatar;
@@ -25,7 +25,6 @@
       return commentElement;
     };
 
-    // Приготовься добавлять комменты из полученных данных
 
     const drawComments = (limit) => {
       let fragment = document.createDocumentFragment();
@@ -61,7 +60,6 @@
 
     drawComments(commentCount);
 
-    // Загружай по +5 комментов по клику на кнопку Загрузить еще
 
     if (data.length > COMMENTS_LIMIT) {
 

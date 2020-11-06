@@ -3,7 +3,7 @@
 (() => {
 
   const renderMsg = () => {
-    // Подготовь шаблон сообщения об успешной загрузке изображения
+
     const successTmpl = document.querySelector(`#success`)
       .content
       .querySelector(`.success`)

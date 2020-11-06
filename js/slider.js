@@ -30,7 +30,7 @@
         window.effectLevelPin.style.left = `${percent}%`;
         window.effectLevelDepth.style.width = `${percent}%`;
         window.effectLevelValue.value = percent;
-        window.effectLevelValue.setAttribute('value', percent);
+        window.effectLevelValue.setAttribute(`value`, percent);
 
         switch (window.imgPreview.classList[1]) {
           case `effects__preview--chrome`:

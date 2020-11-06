@@ -3,7 +3,6 @@
 (() => {
 
   const apply = () => {
-    // Накладывай фильтры
 
     const setPreviewEffect = (filter) => {
 

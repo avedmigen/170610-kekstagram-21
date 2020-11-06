@@ -17,7 +17,6 @@
 
     window.effectNone.checked = true;
 
-    console.log(`настройки формы сброшены`);
   };
 
   window.reset = {

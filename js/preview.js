@@ -1,5 +1,4 @@
 'use strict';
-// 2. Редактирование изображения и ограничения, накладываемые на поля
 
 (() => {
 
@@ -44,10 +43,10 @@
 
   uploadFileInput.addEventListener(`change`, onUploadFileInputChange);
 
-  // Накладывай фильтры
+
   window.filter.apply();
 
-  // Отправь форму
+
   const onFormSubmit = (e) => {
     e.preventDefault();
     window.backend.upload(() => {
@@ -74,10 +73,9 @@
 
   window.form.addEventListener(`submit`, onFormSubmit);
 
-  // Закройся по клику на кнопку с крестом
   const onUploadCancelBtnClick = (e) => {
     e.preventDefault();
-    console.log(`хочу закрыть форму по клику`);
+
     window.previewOverlay.classList.add(`hidden`);
     window.documentBody.classList.add(`modal-open`);
     window.form.reset();
@@ -85,12 +83,10 @@
 
   cancelBtn.addEventListener(`click`, onUploadCancelBtnClick);
 
-
-  // Закройся по ESC
   const onPopupEscKeyDown = (e) => {
     if (e.code === Key.ESC) {
       e.preventDefault();
-      console.log(`хочу закрыть форму по esc`);
+
       window.previewOverlay.classList.add(`hidden`);
       window.documentBody.classList.add(`modal-open`);
       window.form.reset();
@@ -98,7 +94,6 @@
   };
 
 
-  // Не закрывайся по ESC если комментарий в фокусе
   const onInputFocus = () => {
     document.removeEventListener(`keydown`, onPopupEscKeyDown);
   };
@@ -113,7 +108,6 @@
   window.inputText.addEventListener(`focus`, onInputFocus);
   window.inputText.addEventListener(`blur`, onInputBlur);
 
-  // Закорой сообщения после отправки
 
   const closeRequestPopup = (id, handlerName) => {
     const popup = document.querySelector(`.${id}`);

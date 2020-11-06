@@ -28,7 +28,7 @@
     photoElement.querySelector(`.picture__comments`).textContent = photo.comments.length;
     photoElement.querySelector(`.picture__likes`).textContent = photo.likes;
 
-    // Закрой бигпикчу по ESC
+
     const onBigPictureEscKeyDown = (e) => {
       if (e.code === Key.ESC) {
         e.preventDefault();
@@ -64,11 +64,11 @@
     photoContainer.appendChild(fragment);
   };
 
-  // И cлушай клики на фильтрах
+
   const filters = document.querySelectorAll(`.img-filters__button`);
   let filterName = 0;
 
-  // Приготовься рисовать фотки после клика на кнопке фильтра
+
   const drawFilteredPhotos = (arr) => {
     window.utils.getRenderedPhotos();
     window.utils.removeRenderedPhotos();
@@ -91,7 +91,7 @@
     setActiveClass(filter);
     filterName = filter.id;
 
-    // Рисуй превьюшки согласно фильтрам
+
     let sorted = cleanDataPhotos.slice();
 
     switch (filterName) {
@@ -99,14 +99,14 @@
         break;
 
       case `filter-random`:
-        // Перемешай массив с фотками
+
         window.utils.shuffleArray(sorted);
-        // Возьми из перемешанного массива первые 10 элементов
+
         sorted = sorted.slice(0, RANDOM_PHOTOS_LIMIT);
         break;
 
       case `filter-discussed`:
-        // Отсортируй массив по значению нужного поля
+
         sorted.sort((a, b) => b.comments.length - a.comments.length);
         break;
       default:
@@ -122,16 +122,16 @@
   });
 
   const onSuccess = (photos) => {
-    // Если данные пришли успешно то нарисуй превьюшки фоток на странице
+
     cleanDataPhotos = photos.slice();
 
     drawPhotos(cleanDataPhotos);
 
-    // И покажи фильтры
+
     filtersContainer.classList.toggle(`img-filters--inactive`);
   };
 
-  // Если данные не пришли то выведи сообщение с ошибкой
+
   const onError = (handlerName) => {
     const div = document.createElement(`div`);
     div.style.padding = `20px`;

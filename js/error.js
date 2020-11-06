@@ -3,7 +3,7 @@
 (() => {
 
   const renderMsg = () => {
-    // Подготовь шаблон сообщения о неуспешной загрузке изображения
+
     const errorTmpl = document.querySelector(`#error`)
       .content
       .querySelector(`.error`)
