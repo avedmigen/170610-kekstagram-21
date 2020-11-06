@@ -32,24 +32,24 @@
         window.effectLevelValue.value = percent;
         window.effectLevelValue.setAttribute(`value`, percent);
 
-        switch (window.imgPreview.classList[1]) {
+        switch (window.imagePreview.classList[1]) {
           case `effects__preview--chrome`:
-            window.imgPreview.style.filter = `grayscale(${window.effectLevelValue.value / 100})`;
+            window.imagePreview.style.filter = `grayscale(${window.effectLevelValue.value / 100})`;
             break;
           case `effects__preview--sepia`:
-            window.imgPreview.style.filter = `sepia(${window.effectLevelValue.value / 100})`;
+            window.imagePreview.style.filter = `sepia(${window.effectLevelValue.value / 100})`;
             break;
           case `effects__preview--marvin`:
-            window.imgPreview.style.filter = `invert(${window.effectLevelValue.value}%)`;
+            window.imagePreview.style.filter = `invert(${window.effectLevelValue.value}%)`;
             break;
           case `effects__preview--phobos`:
-            window.imgPreview.style.filter = `blur(${window.effectLevelValue.value * 0.03}px)`;
+            window.imagePreview.style.filter = `blur(${window.effectLevelValue.value * 0.03}px)`;
             break;
           case `effects__preview--heat`:
-            window.imgPreview.style.filter = `brightness(${1 + window.effectLevelValue.value * 0.02})`;
+            window.imagePreview.style.filter = `brightness(${1 + window.effectLevelValue.value * 0.02})`;
             break;
           default:
-            window.imgPreview.style.filter = ``;
+            window.imagePreview.style.filter = ``;
             break;
         }
       }

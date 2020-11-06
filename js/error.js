@@ -2,32 +2,32 @@
 
 (() => {
 
-  const renderMsg = () => {
+  const renderMessage = () => {
 
-    const errorTmpl = document.querySelector(`#error`)
+    const errorTemplate = document.querySelector(`#error`)
       .content
       .querySelector(`.error`)
       .cloneNode(true);
 
-    const onErrorBtnClick = (e) => {
+    const onErrorButtonClick = (e) => {
       e.preventDefault();
-      errorTmpl.remove();
-      document.removeEventListener(`click`, onErrorBtnClick);
+      errorTemplate.remove();
+      document.removeEventListener(`click`, onErrorButtonClick);
     };
 
-    const onerrorOverlayClick = (e) => {
+    const onErrorOverlayClick = (e) => {
       e.preventDefault();
       if (e.target.classList.contains(`error`)) {
-        errorTmpl.remove();
+        errorTemplate.remove();
       }
-      document.removeEventListener(`click`, onerrorOverlayClick);
+      document.removeEventListener(`click`, onErrorOverlayClick);
     };
 
     const onerrorOverlayKeydown = (e) => {
       if (e.key === `Escape`) {
         e.preventDefault();
         if (e.target.classList.contains(`error`)) {
-          errorTmpl.remove();
+          errorTemplate.remove();
         }
         document.removeEventListener(`keydown`, onerrorOverlayKeydown);
       }
@@ -35,12 +35,12 @@
 
     const error = () => {
       let fragment = document.createDocumentFragment();
-      fragment.appendChild(errorTmpl);
+      fragment.appendChild(errorTemplate);
       window.mainTag.appendChild(fragment);
-      const errorBtn = document.querySelector(`.error__button`);
-      errorBtn.addEventListener(`click`, onErrorBtnClick);
+      const errorButton = document.querySelector(`.error__button`);
+      errorButton.addEventListener(`click`, onErrorButtonClick);
       const errorOverlay = document.querySelector(`.error`);
-      errorOverlay.addEventListener(`click`, onerrorOverlayClick);
+      errorOverlay.addEventListener(`click`, onErrorOverlayClick);
       errorOverlay.addEventListener(`keydown`, onerrorOverlayKeydown);
     };
 
@@ -48,7 +48,7 @@
   };
 
   window.error = {
-    renderMsg,
+    renderMessage,
   };
 
 })();

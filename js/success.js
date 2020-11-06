@@ -2,7 +2,7 @@
 
 (() => {
 
-  const renderMsg = () => {
+  const renderMessage = () => {
 
     const successTmpl = document.querySelector(`#success`)
       .content
@@ -46,7 +46,7 @@
   };
 
   window.success = {
-    renderMsg,
+    renderMessage,
   };
 
 })();

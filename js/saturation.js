@@ -5,22 +5,22 @@
   const reset = (filter) => {
     switch (filter.value) {
       case `chrome`:
-        window.imgPreview.style.filter = `grayscale(1)`;
+        window.imagePreview.style.filter = `grayscale(1)`;
         break;
       case `sepia`:
-        window.imgPreview.style.filter = `sepia(1)`;
+        window.imagePreview.style.filter = `sepia(1)`;
         break;
       case `marvin`:
-        window.imgPreview.style.filter = `invert(100%)`;
+        window.imagePreview.style.filter = `invert(100%)`;
         break;
       case `phobos`:
-        window.imgPreview.style.filter = `blur(3px)`;
+        window.imagePreview.style.filter = `blur(3px)`;
         break;
       case `heat`:
-        window.imgPreview.style.filter = `brightness(3)`;
+        window.imagePreview.style.filter = `brightness(3)`;
         break;
       default:
-        window.imgPreview.style.filter = ``;
+        window.imagePreview.style.filter = ``;
         break;
     }
   };

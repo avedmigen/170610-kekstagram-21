@@ -6,8 +6,8 @@
 
     const setPreviewEffect = (filter) => {
 
-      window.imgPreview.className = `img-upload__preview`;
-      window.imgPreview.classList.toggle(`effects__preview--${filter.value}`);
+      window.imagePreview.className = `img-upload__preview`;
+      window.imagePreview.classList.toggle(`effects__preview--${filter.value}`);
       window.saturation.reset(filter);
       window.effectLevelValue.setAttribute(`value`, `100`);
       document.querySelector(`.effect-level__pin`).style.left = `100%`;
