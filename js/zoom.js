@@ -13,7 +13,7 @@
 
   const setScaleValue = (value) => {
     window.scaleControlValue.value = `${value}%`;
-    window.imgUploadPreview.style.transform = `scale(${value / 100})`;
+    window.imgPreview.style.transform = `scale(${value / 100})`;
   };
 
   scaleControlSmaller.addEventListener(`click`, (e) => {

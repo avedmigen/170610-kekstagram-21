@@ -3,9 +3,6 @@
 (() => {
 
   const renderMsg = () => {
-    // Тут покажешь информационное сообщение после отправки формы
-    const mainTarget = document.querySelector(`main`);
-
     // Подготовь шаблон сообщения о неуспешной загрузке изображения
     const errorTmpl = document.querySelector(`#error`)
       .content
@@ -18,39 +15,39 @@
       document.removeEventListener(`click`, onErrorBtnClick);
     };
 
-    const onErrorMsgOverleyClick = (e) => {
+    const onerrorOverlayClick = (e) => {
       e.preventDefault();
       if (e.target.classList.contains(`error`)) {
         errorTmpl.remove();
       }
-      document.removeEventListener(`click`, onErrorMsgOverleyClick);
+      document.removeEventListener(`click`, onerrorOverlayClick);
     };
 
-    const onErrorMsgOverleyKeydown = (e) => {
+    const onerrorOverlayKeydown = (e) => {
       if (e.key === `Escape`) {
         e.preventDefault();
         if (e.target.classList.contains(`error`)) {
           errorTmpl.remove();
         }
-        document.removeEventListener(`keydown`, onErrorMsgOverleyKeydown);
+        document.removeEventListener(`keydown`, onerrorOverlayKeydown);
       }
     };
 
-    const errorMsg = () => {
+    const error = () => {
       let fragment = document.createDocumentFragment();
       fragment.appendChild(errorTmpl);
-      mainTarget.appendChild(fragment);
+      window.mainTag.appendChild(fragment);
       const errorBtn = document.querySelector(`.error__button`);
       errorBtn.addEventListener(`click`, onErrorBtnClick);
-      const errorMsgOverley = document.querySelector(`.error`);
-      errorMsgOverley.addEventListener(`click`, onErrorMsgOverleyClick);
-      errorMsgOverley.addEventListener(`keydown`, onErrorMsgOverleyKeydown);
+      const errorOverlay = document.querySelector(`.error`);
+      errorOverlay.addEventListener(`click`, onerrorOverlayClick);
+      errorOverlay.addEventListener(`keydown`, onerrorOverlayKeydown);
     };
 
-    errorMsg();
+    error();
   };
 
-  window.errormsg = {
+  window.error = {
     renderMsg,
   };
 

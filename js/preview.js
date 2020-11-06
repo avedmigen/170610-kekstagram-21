@@ -8,12 +8,13 @@
     ENTER: `Enter`
   };
 
-  window.uploadOverlay = document.querySelector(`.img-upload__overlay`);
+  window.previewContainer = document.querySelector(`.img-upload__overlay`);
   window.documentBody = document.querySelector(`body`);
+  window.mainTag = document.querySelector(`main`);
   window.form = document.querySelector(`.img-upload__form`);
   const uploadFileInput = document.querySelector(`#upload-file`);
   const uploadCancelBtn = document.querySelector(`#upload-cancel`);
-  window.imgUploadPreview = window.uploadOverlay.querySelector(`.img-upload__preview`);
+  window.imgPreview = window.previewContainer.querySelector(`.img-upload__preview`);
   window.originalEffect = document.querySelector(`#effect-none`);
   const effectRadioInputs = document.querySelectorAll(`.effects__radio`);
   window.inputHashtags = document.querySelector(`.text__hashtags`);
@@ -40,8 +41,8 @@
   // Примени эффект к превью
   const setPreviewEffect = (filter) => {
 
-    window.imgUploadPreview.className = `img-upload__preview`;
-    window.imgUploadPreview.classList.toggle(`effects__preview--${filter.value}`);
+    window.imgPreview.className = `img-upload__preview`;
+    window.imgPreview.classList.toggle(`effects__preview--${filter.value}`);
     window.saturation.reset(filter);
 
     // input поставить в 100
@@ -93,11 +94,15 @@
     e.preventDefault();
 
     window.backend.upload(() => {
-      window.reset.onCloseForm();
-      window.successmsg.renderMsg();
+      console.log(`Форма отправлена`);
+      window.success.renderMsg();
+
       document.addEventListener(`keydown`, onSuccessMessageEscKeyDown);
     }, () => {
-      window.errormsg.renderMsg();
+
+      window.error.renderMsg();
+
+      window.previewContainer.classList.add(`hidden`);
       document.addEventListener(`keydown`, onErrorMessageEscKeyDown);
     }, new FormData(window.form));
 
@@ -139,11 +144,5 @@
 
   window.inputText.addEventListener(`focus`, onInputFocus);
   window.inputText.addEventListener(`blur`, onInputBlur);
-
-  // Не закрывайся по ESC если хэштеги в фокусе
-
-  window.preview = {
-    overlay: window.uploadOverlay
-  };
 
 })();

@@ -3,9 +3,6 @@
 (() => {
 
   const renderMsg = () => {
-    // Тут покажешь информационное сообщение после отправки формы
-    const mainTarget = document.querySelector(`main`);
-
     // Подготовь шаблон сообщения об успешной загрузке изображения
     const successTmpl = document.querySelector(`#success`)
       .content
@@ -18,37 +15,37 @@
       document.removeEventListener(`click`, onSuccessBtnClick);
     };
 
-    const onSuccessMsgOverleyClick = (e) => {
+    const onsuccessOverlayClick = (e) => {
       e.preventDefault();
       if (e.target.classList.contains(`success`)) {
         successTmpl.remove();
-        document.removeEventListener(`click`, onSuccessMsgOverleyClick);
+        document.removeEventListener(`click`, onsuccessOverlayClick);
       }
     };
 
-    const onSuccessMsgOverleyKeydown = (e) => {
+    const onsuccessOverlayKeydown = (e) => {
       e.preventDefault();
       if (e.target.classList.contains(`success`)) {
         successTmpl.remove();
       }
-      document.removeEventListener(`keydown`, onSuccessMsgOverleyKeydown);
+      document.removeEventListener(`keydown`, onsuccessOverlayKeydown);
     };
 
-    const successMsg = () => {
+    const success = () => {
       let fragment = document.createDocumentFragment();
       fragment.appendChild(successTmpl);
-      mainTarget.appendChild(fragment);
+      window.mainTag.appendChild(fragment);
       const successBtn = document.querySelector(`.success__button`);
       successBtn.addEventListener(`click`, onSuccessBtnClick);
-      const successMsgOverley = document.querySelector(`.success`);
-      successMsgOverley.addEventListener(`click`, onSuccessMsgOverleyClick);
-      successMsgOverley.addEventListener(`keydown`, onSuccessMsgOverleyKeydown);
+      const successOverlay = document.querySelector(`.success`);
+      successOverlay.addEventListener(`click`, onsuccessOverlayClick);
+      successOverlay.addEventListener(`keydown`, onsuccessOverlayKeydown);
     };
 
-    successMsg();
+    success();
   };
 
-  window.successmsg = {
+  window.success = {
     renderMsg,
   };
 

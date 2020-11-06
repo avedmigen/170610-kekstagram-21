@@ -122,8 +122,7 @@
   });
 
   const onSuccess = (photos) => {
-    // Если данные пришли успешно
-    // То нарисуй превьюшки фоток на странице
+    // Если данные пришли успешно то нарисуй превьюшки фоток на странице
     cleanDataPhotos = photos.slice();
 
     drawPhotos(cleanDataPhotos);
@@ -132,10 +131,16 @@
     filtersContainer.classList.toggle(`img-filters--inactive`);
   };
 
-  // Если данные не пришли
-  // То выведи сообщение с ошибкой
-  const onError = () => {
-    console.log(`тут какая-то ошибка выскочила. вопрос какая?`);
+  // Если данные не пришли то выведи сообщение с ошибкой
+  const onError = (handlerName) => {
+    const div = document.createElement(`div`);
+    div.style.padding = `20px`;
+    div.style.backgroundColor = `tomato`;
+    div.style.color = `yellow`;
+    div.style.textAlign = `center`;
+    div.prepend(`Не удалось загрузить изображения. ${handlerName}`);
+    window.mainTag.prepend(div);
+
   };
 
   window.backend.load(onSuccess, onError);

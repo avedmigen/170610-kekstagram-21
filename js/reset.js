@@ -9,10 +9,10 @@
 
     window.scaleControlValue.value = `100%`;
     window.scaleValue = parseInt(window.scaleControlValue.value, 10);
-    window.imgUploadPreview.style.transform = `scale(1)`;
+    window.imgPreview.style.transform = `scale(1)`;
 
-    window.imgUploadPreview.className = `img-upload__preview`;
-    window.imgUploadPreview.style = ``;
+    window.imgPreview.className = `img-upload__preview`;
+    window.imgPreview.style = ``;
 
     effectLevelValue.value = `100`;
     effectLevelPin.style.left = `100%`;
@@ -24,14 +24,14 @@
   };
 
   const onOpenForm = () => {
-    window.uploadOverlay.classList.toggle(`hidden`);
+    window.previewContainer.classList.toggle(`hidden`);
     window.documentBody.classList.add(`modal-open`);
 
     resetSetupSettings();
   };
 
   const onCloseForm = () => {
-    window.uploadOverlay.classList.toggle(`hidden`);
+    window.previewContainer.classList.toggle(`hidden`);
     window.documentBody.classList.remove(`modal-open`);
 
     resetSetupSettings();

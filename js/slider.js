@@ -3,35 +3,35 @@
 (() => {
   const userImgPreview = document.querySelector(`.img-upload__preview`);
 
-  const effectLevelLine = window.preview.overlay.querySelector(`.effect-level__line`);
-  const effectLevelValue = window.preview.overlay.querySelector(`.effect-level__value`);
-  const effectLevelPin = window.preview.overlay.querySelector(`.effect-level__pin`);
-  const effectLevelDepth = window.preview.overlay.querySelector(`.effect-level__depth`);
+  const effectLevelLine = window.previewContainer.querySelector(`.effect-level__line`);
+  const effectLevelValue = window.previewContainer.querySelector(`input[name=effect-level]`);
+  const effectLevelPin = window.previewContainer.querySelector(`.effect-level__pin`);
+  const effectLevelDepth = window.previewContainer.querySelector(`.effect-level__depth`);
 
   const onEffectLevelLineMouseDown = (e) => {
     e.preventDefault();
 
-    let startXCoord = {
+    let startXCord = {
       x: e.clientX
     };
 
     let onMouseMove = (moveEvt) => {
       moveEvt.preventDefault();
       let shift = {
-        x: startXCoord.x - moveEvt.clientX,
+        x: startXCord.x - moveEvt.clientX,
       };
 
-      startXCoord = {
+      startXCord = {
         x: moveEvt.clientX,
       };
 
       let PinOffsetLeft = effectLevelPin.offsetLeft - shift.x;
-      let percCalc = (PinOffsetLeft / effectLevelLine.offsetWidth * 100);
+      let percent = (PinOffsetLeft / effectLevelLine.offsetWidth * 100);
 
-      if (percCalc >= 0 && percCalc <= 100) {
-        effectLevelPin.style.left = `${percCalc}%`;
-        effectLevelDepth.style.width = `${percCalc}%`;
-        effectLevelValue.value = percCalc;
+      if (percent >= 0 && percent <= 100) {
+        effectLevelPin.style.left = `${percent}%`;
+        effectLevelDepth.style.width = `${percent}%`;
+        effectLevelValue.value = percent;
 
         switch (userImgPreview.classList[1]) {
           case `effects__preview--chrome`:
