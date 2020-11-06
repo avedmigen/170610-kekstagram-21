@@ -1,12 +1,10 @@
 'use strict';
 
 (() => {
-  const userImgPreview = document.querySelector(`.img-upload__preview`);
-
-  const effectLevelLine = window.previewContainer.querySelector(`.effect-level__line`);
-  const effectLevelValue = window.previewContainer.querySelector(`input[name=effect-level]`);
-  const effectLevelPin = window.previewContainer.querySelector(`.effect-level__pin`);
-  const effectLevelDepth = window.previewContainer.querySelector(`.effect-level__depth`);
+  const effectLevelLine = window.previewOverlay.querySelector(`.effect-level__line`);
+  window.effectLevelValue = window.previewOverlay.querySelector(`input[name=effect-level]`);
+  window.effectLevelPin = window.previewOverlay.querySelector(`.effect-level__pin`);
+  window.effectLevelDepth = window.previewOverlay.querySelector(`.effect-level__depth`);
 
   const onEffectLevelLineMouseDown = (e) => {
     e.preventDefault();
@@ -25,32 +23,33 @@
         x: moveEvt.clientX,
       };
 
-      let PinOffsetLeft = effectLevelPin.offsetLeft - shift.x;
+      let PinOffsetLeft = window.effectLevelPin.offsetLeft - shift.x;
       let percent = (PinOffsetLeft / effectLevelLine.offsetWidth * 100);
 
       if (percent >= 0 && percent <= 100) {
-        effectLevelPin.style.left = `${percent}%`;
-        effectLevelDepth.style.width = `${percent}%`;
-        effectLevelValue.value = percent;
+        window.effectLevelPin.style.left = `${percent}%`;
+        window.effectLevelDepth.style.width = `${percent}%`;
+        window.effectLevelValue.value = percent;
+        window.effectLevelValue.setAttribute('value', percent);
 
-        switch (userImgPreview.classList[1]) {
+        switch (window.imgPreview.classList[1]) {
           case `effects__preview--chrome`:
-            userImgPreview.style.filter = `grayscale(${effectLevelValue.value / 100})`;
+            window.imgPreview.style.filter = `grayscale(${window.effectLevelValue.value / 100})`;
             break;
           case `effects__preview--sepia`:
-            userImgPreview.style.filter = `sepia(${effectLevelValue.value / 100})`;
+            window.imgPreview.style.filter = `sepia(${window.effectLevelValue.value / 100})`;
             break;
           case `effects__preview--marvin`:
-            userImgPreview.style.filter = `invert(${effectLevelValue.value}%)`;
+            window.imgPreview.style.filter = `invert(${window.effectLevelValue.value}%)`;
             break;
           case `effects__preview--phobos`:
-            userImgPreview.style.filter = `blur(${effectLevelValue.value * 0.03}px)`;
+            window.imgPreview.style.filter = `blur(${window.effectLevelValue.value * 0.03}px)`;
             break;
           case `effects__preview--heat`:
-            userImgPreview.style.filter = `brightness(${1 + effectLevelValue.value * 0.02})`;
+            window.imgPreview.style.filter = `brightness(${1 + window.effectLevelValue.value * 0.02})`;
             break;
           default:
-            userImgPreview.style.filter = ``;
+            window.imgPreview.style.filter = ``;
             break;
         }
       }
@@ -65,10 +64,8 @@
 
     document.addEventListener(`mousemove`, onMouseMove);
     document.addEventListener(`mouseup`, onMouseUp);
-
-    // effectLevelPin.removeEventListener(`mousedown`, onEffectLevelLineMouseDown);
   };
 
-  effectLevelPin.addEventListener(`mousedown`, onEffectLevelLineMouseDown);
+  window.effectLevelPin.addEventListener(`mousedown`, onEffectLevelLineMouseDown);
 
 })();
