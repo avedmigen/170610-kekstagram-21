@@ -38,7 +38,7 @@
 
             <!-- Изначальное состояние поля для загрузки изображения -->
             <fieldset class="img-upload__start">
-              <input type="file" id="upload-file" class="img-upload__input  visually-hidden" name="filename" accept="image/jpeg, image/png" required>
+              <input type="file" id="upload-file" class="img-upload__input  visually-hidden" name="filename" accept="image/jpeg, image/png">
               <label for="upload-file" class="img-upload__label  img-upload__control">Загрузить</label>
             </fieldset>
 
@@ -50,7 +50,7 @@
                   <!-- Изменение размера изображения -->
                   <fieldset class="img-upload__scale  scale">
                     <button type="button" class="scale__control  scale__control--smaller">Уменьшить</button>
-                    <input type="text" class="scale__control  scale__control--value" value="55%" title="Image Scale" name="scale" readonly>
+                    <input type="text" class="scale__control  scale__control--value" value="100%" title="Image Scale" name="scale" readonly>
                     <button type="button" class="scale__control  scale__control--bigger">Увеличить</button>
                   </fieldset>
 
@@ -61,7 +61,7 @@
 
                   <!-- Изменение глубины эффекта, накладываемого на изображение -->
                   <fieldset class="img-upload__effect-level  effect-level">
-                    <input class="effect-level__value" type="number" name="effect-level" value="20">
+                    <input class="effect-level__value" type="number" name="effect-level" value="100">
                     <div class="effect-level__line">
                       <div class="effect-level__pin" tabindex="0">Кнопка изменения глубины эффекта фотографии</div>
                       <div class="effect-level__depth">Глубина эффекта фотографии</div>
@@ -145,7 +145,7 @@
 
         <!-- Просмотр изображения -->
         <div class="big-picture__img">
-          <img src="img/logo-background-3.jpg" alt="Девушка в купальнике" width="600" height="600">
+          <img src="img/logo-background-1.jpg" alt="Девушка в купальнике" width="600" height="600">
         </div>
 
         <!-- Информация об изображении. Подпись, комментарии, количество лайков -->
@@ -237,12 +237,22 @@
     <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
   </template>
 
+  <script src="js/backend.js"></script>
   <script src="js/utils.js"></script>
-  <script src="js/load.js"></script>
   <script src="js/pictures.js"></script>
-  <script src="js/form.js"></script>
+  <script src="js/bigpicture.js"></script>
+  <script src="js/comments.js"></script>
+  <script src="js/reset.js"></script>
+  <script src="js/filter.js"></script>
+  <script src="js/preview.js"></script>
+  <script src="js/userimage.js"></script>
+  <script src="js/zoom.js"></script>
+  <script src="js/slider.js"></script>
+  <script src="js/saturation.js"></script>
   <script src="js/hashtags.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/description.js"></script>
+  <script src="js/success.js"></script>
+  <script src="js/error.js"></script>
 
 </body>
 </html>
