@@ -24,7 +24,7 @@
       return;
     }
 
-    const isStartNotHashtag = inputArray.some(function (item) {
+    const isStartNotHashtag = inputArray.some((item) => {
       return item[0] !== `#`;
     });
 
@@ -32,7 +32,7 @@
       invalidMessages.push(`Хэш-тег должен начинаться с символа #`);
     }
 
-    const isOnlyLatticeHashtag = inputArray.some(function (item) {
+    const isOnlyLatticeHashtag = inputArray.some((item) => {
       return item === `#`;
     });
     if (isOnlyLatticeHashtag) {
@@ -50,7 +50,7 @@
       invalidMessages.push(`Хэш-теги разделяются пробелами`);
     }
 
-    const isRepeatHashtag = inputArray.some(function (item, i, arr) {
+    const isRepeatHashtag = inputArray.some((item, i, arr) => {
       return arr.indexOf(item, i + 1) >= i + 1;
     });
     if (isRepeatHashtag) {
