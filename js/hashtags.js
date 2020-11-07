@@ -6,11 +6,11 @@
 
   const onInputHashtagsInput = () => {
 
-    const invalidMessage = [];
+    const invalidMessages = [];
 
-    window.inputHashtags.setCustomValidity(``);
+    window.hashtagsInput.setCustomValidity(``);
 
-    const inputText = window.inputHashtags.value.toLowerCase().trim();
+    const inputText = window.hashtagsInput.value.toLowerCase().trim();
     const regexp = /^#[a-яА-Яu\w\d]*$/;
     const regexpFlag = regexp.test(inputText);
 
@@ -29,53 +29,53 @@
     });
 
     if (isStartNotHashtag) {
-      invalidMessage.push(`Хэш-тег должен начинаться с символа #`);
+      invalidMessages.push(`Хэш-тег должен начинаться с символа #`);
     }
 
     const isOnlyLatticeHashtag = inputArray.some(function (item) {
       return item === `#`;
     });
     if (isOnlyLatticeHashtag) {
-      invalidMessage.push(`Хеш-тег не может состоять только из одной решётки`);
+      invalidMessages.push(`Хеш-тег не может состоять только из одной решётки`);
     }
 
     if (!isStartNotHashtag && !regexpFlag) {
-      invalidMessage.push(`Хэш-тег может содержать только буквы и числа без пробелов`);
+      invalidMessages.push(`Хэш-тег может содержать только буквы и числа без пробелов`);
     }
 
     const isSplitSpaceHashtag = inputArray.some((item) => {
       return item.indexOf(`#`, 1) >= 1;
     });
     if (isSplitSpaceHashtag) {
-      invalidMessage.push(`Хэш-теги разделяются пробелами`);
+      invalidMessages.push(`Хэш-теги разделяются пробелами`);
     }
 
     const isRepeatHashtag = inputArray.some(function (item, i, arr) {
       return arr.indexOf(item, i + 1) >= i + 1;
     });
     if (isRepeatHashtag) {
-      invalidMessage.push(`Один и тот же хэш-тег не может быть использован дважды`);
+      invalidMessages.push(`Один и тот же хэш-тег не может быть использован дважды`);
     }
 
     const isLongHashtag = inputArray.some((item) => {
       return item.length > MAX_SYMBOLS;
     });
     if (isLongHashtag) {
-      invalidMessage.push(`Максимальная длина одного хэш-тега 20 символов, включая решётку`);
+      invalidMessages.push(`Максимальная длина одного хэш-тега 20 символов, включая решётку`);
     }
 
     if (inputArray.length > MAX_HASHTAGS) {
-      invalidMessage.push(`Нельзя указать больше пяти хэш-тегов`);
+      invalidMessages.push(`Нельзя указать больше пяти хэш-тегов`);
     }
 
-    if (invalidMessage.length > 0) {
-      window.inputHashtags.setCustomValidity(invalidMessage.join(`. \n`));
-      window.inputHashtags.reportValidity();
-      window.utils.drawErrorRedBorder(invalidMessage, window.inputHashtags);
+    if (invalidMessages.length > 0) {
+      window.hashtagsInput.setCustomValidity(invalidMessages.join(`. \n`));
+      window.hashtagsInput.reportValidity();
+      window.utils.drawErrorRedBorder(invalidMessages, window.hashtagsInput);
     }
 
   };
 
-  window.inputHashtags.addEventListener(`input`, onInputHashtagsInput);
+  window.hashtagsInput.addEventListener(`input`, onInputHashtagsInput);
 
 })();

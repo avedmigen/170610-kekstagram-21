@@ -15,15 +15,15 @@
 
   window.previewOverlay = document.querySelector(`.img-upload__overlay`);
   window.imagePreview = window.previewOverlay.querySelector(`.img-upload__preview`);
-  const cancelBtn = window.previewOverlay.querySelector(`#upload-cancel`);
+  const cancelButton = window.previewOverlay.querySelector(`#upload-cancel`);
 
   window.slider = window.previewOverlay.querySelector(`.img-upload__effect-level`);
   window.effectRadioInputs = window.previewOverlay.querySelectorAll(`.effects__radio`);
   window.effectNone = window.previewOverlay.querySelector(`#effect-none`);
 
 
-  window.inputHashtags = window.form.querySelector(`.text__hashtags`);
-  window.inputText = window.form.querySelector(`.text__description`);
+  window.hashtagsInput = window.form.querySelector(`.text__hashtags`);
+  window.textInput = window.form.querySelector(`.text__description`);
 
 
   // Покажи модалку если пришёл файл с фоткой
@@ -81,7 +81,7 @@
     window.form.reset();
   };
 
-  cancelBtn.addEventListener(`click`, onUploadCancelBtnClick);
+  cancelButton.addEventListener(`click`, onUploadCancelBtnClick);
 
   const onPopupEscKeyDown = (e) => {
     if (e.code === Key.ESC) {
@@ -102,11 +102,11 @@
     document.addEventListener(`keydown`, onPopupEscKeyDown);
   };
 
-  window.inputHashtags.addEventListener(`focus`, onInputFocus);
-  window.inputHashtags.addEventListener(`blur`, onInputBlur);
+  window.hashtagsInput.addEventListener(`focus`, onInputFocus);
+  window.hashtagsInput.addEventListener(`blur`, onInputBlur);
 
-  window.inputText.addEventListener(`focus`, onInputFocus);
-  window.inputText.addEventListener(`blur`, onInputBlur);
+  window.textInput.addEventListener(`focus`, onInputFocus);
+  window.textInput.addEventListener(`blur`, onInputBlur);
 
 
   const closeRequestPopup = (id, handlerName) => {

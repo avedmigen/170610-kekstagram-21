@@ -3,10 +3,10 @@
 (() => {
   const MAX_SYMBOLS = 140;
 
-  const onInputTextDesc = (e) => {
+  const onInputTextInput = (e) => {
     e.preventDefault();
-    const invalidMessage = [];
-    const inputText = window.inputText.value.toLowerCase().trim();
+    const invalidMessages = [];
+    const inputText = window.textInput.value.toLowerCase().trim();
 
     if (!inputText) {
       return;
@@ -19,17 +19,17 @@
     }
 
     if (inputText.length > MAX_SYMBOLS) {
-      invalidMessage.push(`Длина комментария не может составлять больше 140 символов. Удалите ${Math.abs(MAX_SYMBOLS - inputText.length)} симв.`);
+      invalidMessages.push(`Длина комментария не может составлять больше 140 символов. Удалите ${Math.abs(MAX_SYMBOLS - inputText.length)} симв.`);
     }
 
-    window.inputText.setCustomValidity(invalidMessage.join(`. \n`));
-    window.inputText.reportValidity();
+    window.textInput.setCustomValidity(invalidMessages.join(`. \n`));
+    window.textInput.reportValidity();
 
-    window.utils.drawErrorRedBorder(invalidMessage, window.inputText);
+    window.utils.drawErrorRedBorder(invalidMessages, window.textInput);
 
-    document.removeEventListener(`input`, onInputTextDesc);
+    document.removeEventListener(`input`, onInputTextInput);
   };
 
-  window.inputText.addEventListener(`input`, onInputTextDesc);
+  window.textInput.addEventListener(`input`, onInputTextInput);
 
 })();

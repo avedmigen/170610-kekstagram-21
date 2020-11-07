@@ -2,44 +2,50 @@
 
 (() => {
 
+  const Key = {
+    ESC: `Escape`,
+  };
+
   const renderMessage = () => {
 
-    const successTmpl = document.querySelector(`#success`)
+    const successTemplate = document.querySelector(`#success`)
       .content
       .querySelector(`.success`)
       .cloneNode(true);
 
-    const onSuccessBtnClick = (e) => {
+    const onSuccessButtonClick = (e) => {
       e.preventDefault();
-      successTmpl.remove();
-      document.removeEventListener(`click`, onSuccessBtnClick);
+      successTemplate.remove();
+      document.removeEventListener(`click`, onSuccessButtonClick);
     };
 
-    const onsuccessOverlayClick = (e) => {
+    const onSuccessOverlayClick = (e) => {
       e.preventDefault();
       if (e.target.classList.contains(`success`)) {
-        successTmpl.remove();
-        document.removeEventListener(`click`, onsuccessOverlayClick);
+        successTemplate.remove();
+        document.removeEventListener(`click`, onSuccessOverlayClick);
       }
     };
 
-    const onsuccessOverlayKeydown = (e) => {
-      e.preventDefault();
-      if (e.target.classList.contains(`success`)) {
-        successTmpl.remove();
+    const onSuccessOverlayKeydown = (e) => {
+      if (e.code === Key.ESC) {
+        e.preventDefault();
+        if (e.target.classList.contains(`success`)) {
+          successTemplate.remove();
+        }
+        document.removeEventListener(`keydown`, onSuccessOverlayKeydown);
       }
-      document.removeEventListener(`keydown`, onsuccessOverlayKeydown);
     };
 
     const success = () => {
       let fragment = document.createDocumentFragment();
-      fragment.appendChild(successTmpl);
+      fragment.appendChild(successTemplate);
       window.mainTag.appendChild(fragment);
       const successBtn = document.querySelector(`.success__button`);
-      successBtn.addEventListener(`click`, onSuccessBtnClick);
+      successBtn.addEventListener(`click`, onSuccessButtonClick);
       const successOverlay = document.querySelector(`.success`);
-      successOverlay.addEventListener(`click`, onsuccessOverlayClick);
-      successOverlay.addEventListener(`keydown`, onsuccessOverlayKeydown);
+      successOverlay.addEventListener(`click`, onSuccessOverlayClick);
+      successOverlay.addEventListener(`keydown`, onSuccessOverlayKeydown);
     };
 
     success();

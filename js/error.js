@@ -2,6 +2,10 @@
 
 (() => {
 
+  const Key = {
+    ESC: `Escape`,
+  };
+
   const renderMessage = () => {
 
     const errorTemplate = document.querySelector(`#error`)
@@ -24,7 +28,7 @@
     };
 
     const onerrorOverlayKeydown = (e) => {
-      if (e.key === `Escape`) {
+      if (e.code === Key.ESC) {
         e.preventDefault();
         if (e.target.classList.contains(`error`)) {
           errorTemplate.remove();
