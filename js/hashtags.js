@@ -39,7 +39,7 @@
       invalidMessages.push(`Хеш-тег не может состоять только из одной решётки`);
     }
 
-    if (!isStartNotHashtag && !regexpFlag) {
+    if (!isStartNotHashtag && !regexpFlag && invalidMessages.length > 0) {
       invalidMessages.push(`Хэш-тег может содержать только буквы и числа без пробелов`);
     }
 
