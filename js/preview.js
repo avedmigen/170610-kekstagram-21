@@ -54,7 +54,8 @@
       window.previewOverlay.classList.add(`hidden`);
       window.documentBody.classList.add(`modal-open`);
 
-      window.success.renderMessage();
+      window.message.renderMessage(`success`);
+
       document.addEventListener(`keydown`, onSuccessMessageEscKeyDown);
       window.form.reset();
 
@@ -63,7 +64,8 @@
       window.previewOverlay.classList.add(`hidden`);
       window.documentBody.classList.add(`modal-open`);
 
-      window.error.renderMessage();
+      window.message.renderMessage(`error`);
+
       document.addEventListener(`keydown`, onErrorMessageEscKeyDown);
 
     }, new FormData(window.form));
