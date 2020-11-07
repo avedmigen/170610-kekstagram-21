@@ -14,7 +14,7 @@
   const uploadFileInput = window.form.querySelector(`#upload-file`);
 
   window.previewOverlay = document.querySelector(`.img-upload__overlay`);
-  window.imgPreview = window.previewOverlay.querySelector(`.img-upload__preview`);
+  window.imagePreview = window.previewOverlay.querySelector(`.img-upload__preview`);
   const cancelBtn = window.previewOverlay.querySelector(`#upload-cancel`);
 
   window.slider = window.previewOverlay.querySelector(`.img-upload__effect-level`);
@@ -36,7 +36,7 @@
       window.slider.classList.add(`hidden`);
     }
 
-    window.reset.formSettings();
+    window.reset.resetFormSetupSettings();
 
     document.addEventListener(`keydown`, onPopupEscKeyDown);
   };
@@ -54,7 +54,7 @@
       window.previewOverlay.classList.add(`hidden`);
       window.documentBody.classList.add(`modal-open`);
 
-      window.success.renderMsg();
+      window.success.renderMessage();
       document.addEventListener(`keydown`, onSuccessMessageEscKeyDown);
       window.form.reset();
 
@@ -63,7 +63,7 @@
       window.previewOverlay.classList.add(`hidden`);
       window.documentBody.classList.add(`modal-open`);
 
-      window.error.renderMsg();
+      window.error.renderMessage();
       document.addEventListener(`keydown`, onErrorMessageEscKeyDown);
 
     }, new FormData(window.form));

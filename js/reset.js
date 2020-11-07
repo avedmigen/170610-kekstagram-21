@@ -6,10 +6,10 @@
 
     window.scaleControlValue.value = `100%`;
     window.scaleValue = parseInt(window.scaleControlValue.value, 10);
-    window.imgPreview.style.transform = `scale(1)`;
+    window.imagePreview.style.transform = `scale(1)`;
 
-    window.imgPreview.className = `img-upload__preview`;
-    window.imgPreview.style = ``;
+    window.imagePreview.className = `img-upload__preview`;
+    window.imagePreview.style = ``;
 
     window.effectLevelValue.setAttribute(`value`, `100`);
     window.effectLevelPin.style.left = `100%`;
@@ -20,7 +20,7 @@
   };
 
   window.reset = {
-    formSettings: resetFormSetupSettings,
+    resetFormSetupSettings,
   };
 
 })();

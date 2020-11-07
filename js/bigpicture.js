@@ -4,27 +4,27 @@
 
   const renderBigPicture = (photo) => {
 
-    const bigPic = document.querySelector(`.big-picture__preview`);
+    const bigPicturePreview = document.querySelector(`.big-picture__preview`);
 
 
-    const bigPicImg = bigPic.querySelector(`.big-picture__img > img`);
-    bigPicImg.src = photo.url;
-    bigPicImg.alt = photo.description;
+    const bigPictureImage = bigPicturePreview.querySelector(`.big-picture__img > img`);
+    bigPictureImage.src = photo.url;
+    bigPictureImage.alt = photo.description;
 
 
-    const bigPicLikes = bigPic.querySelector(`.likes-count`);
-    bigPicLikes.textContent = photo.likes;
+    const bigPictureLikesCount = bigPicturePreview.querySelector(`.likes-count`);
+    bigPictureLikesCount.textContent = photo.likes;
 
 
-    const bigPicCommentCount = bigPic.querySelector(`.comments-count`);
-    bigPicCommentCount.textContent = photo.comments.length;
+    const bigPictureCommentCount = bigPicturePreview.querySelector(`.comments-count`);
+    bigPictureCommentCount.textContent = photo.comments.length;
 
 
-    const bigPicDesc = bigPic.querySelector(`.social__caption`);
-    bigPicDesc.textContent = photo.description;
+    const bigPictureDescription = bigPicturePreview.querySelector(`.social__caption`);
+    bigPictureDescription.textContent = photo.description;
 
 
-    window.comments.renderComments(photo.comments);
+    window.comment.renderComments(photo.comments);
 
 
     document.body.classList.add(`modal-open`);
@@ -47,11 +47,11 @@
   const onCloseClearData = () => {
     document.body.classList.remove(`modal-open`);
 
-    const socialCommentsLoaderBtn = document.querySelector(`.social__comments-loader`);
+    const socialCommentsLoaderButton = document.querySelector(`.social__comments-loader`);
     const socialCommentCount = document.querySelector(`.social__comment-count`);
 
-    if (socialCommentsLoaderBtn.classList.contains(`hidden`)) {
-      socialCommentsLoaderBtn.classList.remove(`hidden`);
+    if (socialCommentsLoaderButton.classList.contains(`hidden`)) {
+      socialCommentsLoaderButton.classList.remove(`hidden`);
     }
 
     if (socialCommentCount.classList.contains(`hidden`)) {
