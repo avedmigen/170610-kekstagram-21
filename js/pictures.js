@@ -68,10 +68,20 @@
   const filters = document.querySelectorAll(`.img-filters__button`);
   let filterName = 0;
 
+  const getRenderedPhotos = () => {
+    document.querySelectorAll(`.picture`);
+  };
+
+  const removeRenderedPhotos = () => {
+    const renderedPhotos = document.querySelectorAll(`.picture`);
+    renderedPhotos.forEach((photo) => {
+      photo.remove();
+    });
+  };
 
   const drawFilteredPhotos = (arr) => {
-    window.utils.getRenderedPhotos();
-    window.utils.removeRenderedPhotos();
+    getRenderedPhotos();
+    removeRenderedPhotos();
     window.utils.setDebounce(drawPhotos(arr), DEBOUNCE_INTERVAL)
     ;
   };

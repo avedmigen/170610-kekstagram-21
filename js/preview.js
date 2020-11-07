@@ -22,7 +22,7 @@
   window.effectNone = window.previewOverlay.querySelector(`#effect-none`);
 
 
-  window.hashtagsInput = window.form.querySelector(`.text__hashtags`);
+  window.hashtagInput = window.form.querySelector(`.text__hashtags`);
   window.textInput = window.form.querySelector(`.text__description`);
 
 
@@ -104,8 +104,8 @@
     document.addEventListener(`keydown`, onPopupEscKeyDown);
   };
 
-  window.hashtagsInput.addEventListener(`focus`, onInputFocus);
-  window.hashtagsInput.addEventListener(`blur`, onInputBlur);
+  window.hashtagInput.addEventListener(`focus`, onInputFocus);
+  window.hashtagInput.addEventListener(`blur`, onInputBlur);
 
   window.textInput.addEventListener(`focus`, onInputFocus);
   window.textInput.addEventListener(`blur`, onInputBlur);

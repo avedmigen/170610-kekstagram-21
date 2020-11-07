@@ -25,7 +25,13 @@
     window.textInput.setCustomValidity(invalidMessages.join(`. \n`));
     window.textInput.reportValidity();
 
-    window.utils.drawErrorRedBorder(invalidMessages, window.textInput);
+    if (invalidMessages.length > 0) {
+      window.textInput.setCustomValidity(invalidMessages.join(`. \n`));
+      window.textInput.reportValidity();
+      window.textInput.style.outlineColor = `red`;
+    } else {
+      window.textInput.style.outlineColor = ``;
+    }
 
     document.removeEventListener(`input`, onInputTextInput);
   };

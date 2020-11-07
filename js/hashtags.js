@@ -4,13 +4,13 @@
   const MAX_SYMBOLS = 20;
   const MAX_HASHTAGS = 5;
 
-  const onInputHashtagsInput = () => {
+  const onHashtagInputInput = () => {
 
     const invalidMessages = [];
 
-    window.hashtagsInput.setCustomValidity(``);
+    window.hashtagInput.setCustomValidity(``);
 
-    const inputText = window.hashtagsInput.value.toLowerCase().trim();
+    const inputText = window.hashtagInput.value.toLowerCase().trim();
     const regexp = /^#[a-яА-Яu\w\d]*$/;
     const regexpFlag = regexp.test(inputText);
 
@@ -69,13 +69,15 @@
     }
 
     if (invalidMessages.length > 0) {
-      window.hashtagsInput.setCustomValidity(invalidMessages.join(`. \n`));
-      window.hashtagsInput.reportValidity();
-      window.utils.drawErrorRedBorder(invalidMessages, window.hashtagsInput);
+      window.hashtagInput.setCustomValidity(invalidMessages.join(`. \n`));
+      window.hashtagInput.reportValidity();
+      window.hashtagInput.style.outlineColor = `red`;
+    } else {
+      window.hashtagInput.style.outlineColor = ``;
     }
 
   };
 
-  window.hashtagsInput.addEventListener(`input`, onInputHashtagsInput);
+  window.hashtagInput.addEventListener(`input`, onHashtagInputInput);
 
 })();
