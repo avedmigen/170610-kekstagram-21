@@ -31,13 +31,10 @@
 
       socialCommentCount.firstChild.textContent = `${limit} из `;
 
-      if (limit <= data.length) {
-        for (let i = 0; i < limit; i++) {
-          fragment.appendChild(commentTemplate(i));
-        }
-      } else if (limit > data.length) {
-        for (let i = 0; i < data.length; i++) {
-          fragment.appendChild(commentTemplate(i));
+      let count = (limit <= data.length) ? limit : data.length;
+      for (let i = 0; i < count; i++) {
+        fragment.appendChild(commentTemplate(i));
+        if (limit > data.length) {
           socialCommentsLoaderButton.classList.add(`hidden`);
         }
       }
