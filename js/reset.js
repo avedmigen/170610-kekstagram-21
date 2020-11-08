@@ -4,7 +4,7 @@
 
   const DEFAULT_VALUE = 100;
 
-  const resetFormSetupSettings = () => {
+  const setup = () => {
 
     window.scaleControlValue.value = `100%`;
     window.scaleValue = parseInt(window.scaleControlValue.value, 10);
@@ -23,7 +23,7 @@
   };
 
   window.reset = {
-    resetFormSetupSettings,
+    setup,
   };
 
 })();

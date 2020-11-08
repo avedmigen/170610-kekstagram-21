@@ -4,7 +4,7 @@
 
   const COMMENTS_LIMIT = 5;
 
-  const renderComments = (data) => {
+  const render = (data) => {
 
     const socialCommentsList = document.querySelector(`.social__comments`);
     const socialComment = document.querySelector(`.social__comment`);
@@ -79,7 +79,7 @@
   };
 
   window.comment = {
-    renderComments,
+    render,
   };
 
 })();

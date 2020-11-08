@@ -36,7 +36,7 @@
       window.slider.classList.add(`hidden`);
     }
 
-    window.reset.resetFormSetupSettings();
+    window.reset.setup();
 
     document.addEventListener(`keydown`, onPopupEscKeyDown);
   };
@@ -54,7 +54,7 @@
       window.previewOverlay.classList.add(`hidden`);
       window.documentBody.classList.add(`modal-open`);
 
-      window.message.renderMessage(`success`);
+      window.message.render(`success`);
 
       document.addEventListener(`keydown`, onSuccessMessageEscKeyDown);
       window.form.reset();
@@ -64,7 +64,7 @@
       window.previewOverlay.classList.add(`hidden`);
       window.documentBody.classList.add(`modal-open`);
 
-      window.message.renderMessage(`error`);
+      window.message.render(`error`);
 
       document.addEventListener(`keydown`, onErrorMessageEscKeyDown);
 

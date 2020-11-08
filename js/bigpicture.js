@@ -2,7 +2,7 @@
 
 (() => {
 
-  const renderBigPicture = (photo) => {
+  const render = (photo) => {
 
     const bigPicturePreview = document.querySelector(`.big-picture__preview`);
 
@@ -24,7 +24,7 @@
     bigPictureDescription.textContent = photo.description;
 
 
-    window.comment.renderComments(photo.comments);
+    window.comment.render(photo.comments);
 
 
     document.body.classList.add(`modal-open`);
@@ -36,7 +36,7 @@
 
     const onBigPicCloseBtnClick = (e) => {
       e.preventDefault();
-      window.bigpicture.onCloseClearData();
+      window.bigpicture.clear();
       bigPictureCloseButton.removeEventListener(`click`, onBigPicCloseBtnClick);
     };
 
@@ -44,7 +44,7 @@
     bigPictureCloseButton.addEventListener(`click`, onBigPicCloseBtnClick);
   };
 
-  const onCloseClearData = () => {
+  const clear = () => {
     document.body.classList.remove(`modal-open`);
 
     const socialCommentsLoaderButton = document.querySelector(`.social__comments-loader`);
@@ -62,8 +62,8 @@
   };
 
   window.bigpicture = {
-    renderBigPicture,
-    onCloseClearData,
+    render,
+    clear,
   };
 
 })();

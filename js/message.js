@@ -6,7 +6,7 @@
     ESC: `Escape`,
   };
 
-  const renderMessage = (result) => {
+  const render = (result) => {
 
     if (result === `success`) {
 
@@ -100,7 +100,7 @@
   };
 
   window.message = {
-    renderMessage,
+    render,
   };
 
 })();

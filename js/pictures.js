@@ -37,7 +37,7 @@
         bigPicture.classList.add(`hidden`);
         document.body.classList.remove(`modal-open`);
 
-        window.bigpicture.onCloseClearData();
+        window.bigpicture.clear();
 
         document.removeEventListener(`keydown`, onBigPictureEscKeyDown);
       }
@@ -45,7 +45,7 @@
 
     const onPhotoElementClick = (e) => {
       e.preventDefault();
-      window.bigpicture.renderBigPicture(photo);
+      window.bigpicture.render(photo);
       document.addEventListener(`keydown`, onBigPictureEscKeyDown);
     };
 
