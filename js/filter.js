@@ -14,7 +14,6 @@
 
       window.effectLevelValue.value = DEFAULT_VALUE;
       window.effectLevelValue.setAttribute(`value`, `${DEFAULT_VALUE}`);
-
       document.querySelector(`.effect-level__pin`).style.left = `100%`;
       document.querySelector(`.effect-level__depth`).style.width = `100%`;
 
