@@ -1,6 +1,8 @@
 'use strict';
 
 (() => {
+  const DEFAULT_VALUE = 100;
+
   const effectLevelLine = window.previewOverlay.querySelector(`.effect-level__line`);
   window.effectLevelValue = window.previewOverlay.querySelector(`input[name=effect-level]`);
   window.effectLevelPin = window.previewOverlay.querySelector(`.effect-level__pin`);
@@ -24,20 +26,22 @@
       };
 
       let PinOffsetLeft = window.effectLevelPin.offsetLeft - shift.x;
-      let percent = (PinOffsetLeft / effectLevelLine.offsetWidth * 100);
+      let percent = (PinOffsetLeft / effectLevelLine.offsetWidth * DEFAULT_VALUE);
 
-      if (percent >= 0 && percent <= 100) {
-        window.effectLevelPin.style.left = `${percent}%`;
-        window.effectLevelDepth.style.width = `${percent}%`;
-        window.effectLevelValue.value = percent;
-        window.effectLevelValue.setAttribute(`value`, percent);
+      if (percent >= 0 && percent <= DEFAULT_VALUE) {
+
+        window.effectLevelValue.value = parseInt(percent, 10);
+        window.effectLevelValue.setAttribute(`value`, parseInt(percent, 10));
+
+        window.effectLevelPin.style.left = `${parseInt(percent, 10)}%`;
+        window.effectLevelDepth.style.width = `${parseInt(percent, 10)}%`;
 
         switch (window.imagePreview.classList[1]) {
           case `effects__preview--chrome`:
-            window.imagePreview.style.filter = `grayscale(${window.effectLevelValue.value / 100})`;
+            window.imagePreview.style.filter = `grayscale(${window.effectLevelValue.value / DEFAULT_VALUE})`;
             break;
           case `effects__preview--sepia`:
-            window.imagePreview.style.filter = `sepia(${window.effectLevelValue.value / 100})`;
+            window.imagePreview.style.filter = `sepia(${window.effectLevelValue.value / DEFAULT_VALUE})`;
             break;
           case `effects__preview--marvin`:
             window.imagePreview.style.filter = `invert(${window.effectLevelValue.value}%)`;

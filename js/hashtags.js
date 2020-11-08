@@ -1,6 +1,6 @@
 'use strict';
 
-(() => {
+(function () {
   const MAX_SYMBOLS = 20;
   const MAX_HASHTAGS = 5;
 
@@ -8,11 +8,7 @@
 
     const invalidMessages = [];
 
-    window.hashtagInput.setCustomValidity(``);
-
     const inputText = window.hashtagInput.value.toLowerCase().trim();
-    const regexp = /^#[a-яА-Яu\w\d]*$/;
-    const regexpFlag = regexp.test(inputText);
 
     if (!inputText) {
       return;
@@ -29,7 +25,7 @@
     });
 
     if (isStartNotHashtag) {
-      invalidMessages.push(`Хэш-тег должен начинаться с символа #`);
+      invalidMessages.push(`Хэш-тег должен начинаеться с символа #`);
     }
 
     const isOnlyLatticeHashtag = inputArray.some((item) => {
@@ -39,9 +35,12 @@
       invalidMessages.push(`Хеш-тег не может состоять только из одной решётки`);
     }
 
-    if (!isStartNotHashtag && !regexpFlag && invalidMessages.length > 0) {
-      invalidMessages.push(`Хэш-тег может содержать только буквы и числа без пробелов`);
-    }
+    const regexp = new RegExp(`[^#а-яёa-z0-9]`, `i`);
+    inputArray.forEach((hashtag) => {
+      if (regexp.test(hashtag)) {
+        invalidMessages.push(`Хэш-тег может содержать только буквы и числа без пробелов`);
+      }
+    });
 
     const isSplitSpaceHashtag = inputArray.some((item) => {
       return item.indexOf(`#`, 1) >= 1;
@@ -68,6 +67,8 @@
       invalidMessages.push(`Нельзя указать больше пяти хэш-тегов`);
     }
 
+    window.hashtagInput.setCustomValidity(invalidMessages.join(`. \n`));
+
     if (invalidMessages.length > 0) {
       window.hashtagInput.setCustomValidity(invalidMessages.join(`. \n`));
       window.hashtagInput.reportValidity();
@@ -75,9 +76,9 @@
     } else {
       window.hashtagInput.style.outlineColor = ``;
     }
-
   };
 
   window.hashtagInput.addEventListener(`input`, onHashtagInputInput);
 
 })();
+

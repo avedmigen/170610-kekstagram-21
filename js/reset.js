@@ -2,6 +2,8 @@
 
 (() => {
 
+  const DEFAULT_VALUE = 100;
+
   const resetFormSetupSettings = () => {
 
     window.scaleControlValue.value = `100%`;
@@ -11,7 +13,8 @@
     window.imagePreview.className = `img-upload__preview`;
     window.imagePreview.style = ``;
 
-    window.effectLevelValue.setAttribute(`value`, `100`);
+    window.effectLevelValue.value = DEFAULT_VALUE;
+    window.effectLevelValue.setAttribute(`value`, `${DEFAULT_VALUE}`);
     window.effectLevelPin.style.left = `100%`;
     window.effectLevelDepth.style.width = `100%`;
 
