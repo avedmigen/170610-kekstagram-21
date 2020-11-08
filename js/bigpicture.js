@@ -37,11 +37,11 @@
     const onBigPicCloseBtnClick = (e) => {
       e.preventDefault();
       window.bigpicture.onCloseClearData();
-      bigPicCloseBtn.removeEventListener(`click`, onBigPicCloseBtnClick);
+      bigPictureCloseButton.removeEventListener(`click`, onBigPicCloseBtnClick);
     };
 
-    const bigPicCloseBtn = document.querySelector(`.big-picture__cancel`);
-    bigPicCloseBtn.addEventListener(`click`, onBigPicCloseBtnClick);
+    const bigPictureCloseButton = document.querySelector(`.big-picture__cancel`);
+    bigPictureCloseButton.addEventListener(`click`, onBigPicCloseBtnClick);
   };
 
   const onCloseClearData = () => {

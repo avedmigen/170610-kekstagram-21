@@ -2,21 +2,6 @@
 
 (() => {
 
-
-  const getRenderedPhotos = () => {
-    const renderedPhotos = document.querySelectorAll(`.picture`);
-    return renderedPhotos;
-  };
-
-
-  const removeRenderedPhotos = () => {
-    const renderedPhotos = document.querySelectorAll(`.picture`);
-    renderedPhotos.forEach((photo) => {
-      photo.remove();
-    });
-  };
-
-
   let lastTimeout;
 
   const setDebounce = (drawphotos, dbinterval) => {
@@ -34,22 +19,9 @@
     }
   };
 
-
-  const drawErrorRedBorder = (invalidMessageArr, inputField) => {
-    if (invalidMessageArr.length !== 0) {
-      inputField.style.outlineColor = `red`;
-    } else {
-      inputField.style.outlineColor = ``;
-    }
-  };
-
-
   window.utils = {
-    getRenderedPhotos,
-    removeRenderedPhotos,
     setDebounce,
     shuffleArray,
-    drawErrorRedBorder,
   };
 
 })();
