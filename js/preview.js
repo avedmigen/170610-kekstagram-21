@@ -26,7 +26,6 @@
   window.textInput = window.form.querySelector(`.text__description`);
 
 
-  // Покажи модалку если пришёл файл с фоткой
   const onUploadFileInputChange = () => {
 
     window.previewOverlay.classList.remove(`hidden`);
@@ -52,7 +51,7 @@
     window.backend.upload(() => {
 
       window.previewOverlay.classList.add(`hidden`);
-      window.documentBody.classList.add(`modal-open`);
+      window.documentBody.classList.remove(`modal-open`);
 
       window.message.render(`success`);
 
@@ -62,7 +61,7 @@
     }, () => {
 
       window.previewOverlay.classList.add(`hidden`);
-      window.documentBody.classList.add(`modal-open`);
+      window.documentBody.classList.remove(`modal-open`);
 
       window.message.render(`error`);
 
@@ -79,7 +78,7 @@
     e.preventDefault();
 
     window.previewOverlay.classList.add(`hidden`);
-    window.documentBody.classList.add(`modal-open`);
+    window.documentBody.classList.remove(`modal-open`);
     window.form.reset();
   };
 
@@ -90,7 +89,7 @@
       e.preventDefault();
 
       window.previewOverlay.classList.add(`hidden`);
-      window.documentBody.classList.add(`modal-open`);
+      window.documentBody.classList.remove(`modal-open`);
       window.form.reset();
     }
   };
