@@ -57,9 +57,9 @@
   const drawPhotos = (photos) => {
     let fragment = document.createDocumentFragment();
 
-    for (let i = 0; i < photos.length; i++) {
-      fragment.appendChild(drawPhoto(photos[i]));
-    }
+    photos.forEach((photo) => {
+      fragment.appendChild(drawPhoto(photo));
+    });
 
     photoContainer.appendChild(fragment);
   };

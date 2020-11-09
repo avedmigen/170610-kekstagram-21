@@ -39,7 +39,7 @@
         }
       };
 
-      const success = () => {
+      const showSuccess = () => {
         let fragment = document.createDocumentFragment();
         fragment.appendChild(successTemplate);
         window.mainTag.appendChild(fragment);
@@ -50,7 +50,7 @@
         successOverlay.addEventListener(`keydown`, onSuccessOverlayKeydown);
       };
 
-      success();
+      showSuccess();
 
     } else {
 
@@ -83,7 +83,7 @@
         }
       };
 
-      const error = () => {
+      const showError = () => {
         let fragment = document.createDocumentFragment();
         fragment.appendChild(errorTemplate);
         window.mainTag.appendChild(fragment);
@@ -94,7 +94,7 @@
         errorOverlay.addEventListener(`keydown`, onerrorOverlayKeydown);
       };
 
-      error();
+      showError();
     }
 
   };

@@ -8,7 +8,7 @@
 
     const setPreviewEffect = (filter) => {
 
-      window.imagePreview.className = `img-upload__preview`;
+      window.imagePreview.classList.add(`img-upload__preview`);
       window.imagePreview.classList.toggle(`effects__preview--${filter.value}`);
       window.saturation.reset(filter);
 

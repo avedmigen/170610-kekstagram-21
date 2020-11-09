@@ -10,7 +10,7 @@
     window.scaleValue = parseInt(window.scaleControlValue.value, 10);
     window.imagePreview.style.transform = `scale(1)`;
 
-    window.imagePreview.className = `img-upload__preview`;
+    window.imagePreview.classList.add(`img-upload__preview`);
     window.imagePreview.style = ``;
 
     window.effectLevelValue.value = DEFAULT_VALUE;

@@ -1,6 +1,6 @@
 'use strict';
 
-(function () {
+(() => {
   const MAX_SYMBOLS = 20;
   const MAX_HASHTAGS = 5;
 
