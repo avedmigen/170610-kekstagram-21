@@ -33,8 +33,8 @@
         window.effectLevelValue.value = parseInt(percent, 10);
         window.effectLevelValue.setAttribute(`value`, parseInt(percent, 10));
 
-        window.effectLevelPin.style.left = `${parseInt(percent, 10)}%`;
-        window.effectLevelDepth.style.width = `${parseInt(percent, 10)}%`;
+        window.effectLevelPin.style.left = `${percent}%`;
+        window.effectLevelDepth.style.width = `${percent}%`;
 
         switch (window.imagePreview.classList[1]) {
           case `effects__preview--chrome`:
