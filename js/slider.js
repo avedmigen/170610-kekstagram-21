@@ -11,52 +11,51 @@
   const onEffectLevelLineMouseDown = (e) => {
     e.preventDefault();
 
-    let startXCord = {
-      x: e.clientX
+    let startX = {
+      x: e.clientX,
     };
 
     let onMouseMove = (moveEvt) => {
       moveEvt.preventDefault();
-      let shift = {
-        x: startXCord.x - moveEvt.clientX,
+
+      const shift = {
+        x: startX.x - moveEvt.clientX,
       };
 
-      startXCord = {
+      startX = {
         x: moveEvt.clientX,
       };
 
-      let PinOffsetLeft = window.effectLevelPin.offsetLeft - shift.x;
-      let percent = (PinOffsetLeft / effectLevelLine.offsetWidth * DEFAULT_VALUE);
+      let percent = ((startX.x - effectLevelLine.offsetLeft) / effectLevelLine.offsetWidth * DEFAULT_VALUE);
+      console.log(percent);
 
-      if (percent >= 0 && percent <= DEFAULT_VALUE) {
+      window.effectLevelValue.value = parseInt(percent, 10);
+      window.effectLevelValue.setAttribute(`value`, parseInt(percent, 10));
 
-        window.effectLevelValue.value = parseInt(percent, 10);
-        window.effectLevelValue.setAttribute(`value`, parseInt(percent, 10));
+      window.effectLevelPin.style.left = `${window.effectLevelPin.offsetLeft - shift.x}px`;
+/*      window.effectLevelDepth.style.width = `${window.effectLevelPin.offsetLeft - shift.x}%`;*/
 
-        window.effectLevelPin.style.left = `${percent}%`;
-        window.effectLevelDepth.style.width = `${percent}%`;
-
-        switch (window.imagePreview.classList[1]) {
-          case `effects__preview--chrome`:
-            window.imagePreview.style.filter = `grayscale(${window.effectLevelValue.value / DEFAULT_VALUE})`;
-            break;
-          case `effects__preview--sepia`:
-            window.imagePreview.style.filter = `sepia(${window.effectLevelValue.value / DEFAULT_VALUE})`;
-            break;
-          case `effects__preview--marvin`:
-            window.imagePreview.style.filter = `invert(${window.effectLevelValue.value}%)`;
-            break;
-          case `effects__preview--phobos`:
-            window.imagePreview.style.filter = `blur(${window.effectLevelValue.value * 0.03}px)`;
-            break;
-          case `effects__preview--heat`:
-            window.imagePreview.style.filter = `brightness(${1 + window.effectLevelValue.value * 0.02})`;
-            break;
-          default:
-            window.imagePreview.style.filter = ``;
-            break;
-        }
+      switch (window.imagePreview.classList[1]) {
+        case `effects__preview--chrome`:
+          window.imagePreview.style.filter = `grayscale(${window.effectLevelValue.value / DEFAULT_VALUE})`;
+          break;
+        case `effects__preview--sepia`:
+          window.imagePreview.style.filter = `sepia(${window.effectLevelValue.value / DEFAULT_VALUE})`;
+          break;
+        case `effects__preview--marvin`:
+          window.imagePreview.style.filter = `invert(${window.effectLevelValue.value}%)`;
+          break;
+        case `effects__preview--phobos`:
+          window.imagePreview.style.filter = `blur(${window.effectLevelValue.value * 0.03}px)`;
+          break;
+        case `effects__preview--heat`:
+          window.imagePreview.style.filter = `brightness(${1 + window.effectLevelValue.value * 0.02})`;
+          break;
+        default:
+          window.imagePreview.style.filter = ``;
+          break;
       }
+
     };
 
     let onMouseUp = (upEvt) => {
