@@ -26,14 +26,16 @@
         x: moveEvt.clientX,
       };
 
-      let percent = ((startX.x - effectLevelLine.offsetLeft) / effectLevelLine.offsetWidth * DEFAULT_VALUE);
-      console.log(percent);
+      const lineRange = effectLevelLine.getBoundingClientRect();
+      const delta = startX.x - lineRange.left;
 
-      window.effectLevelValue.value = parseInt(percent, 10);
-      window.effectLevelValue.setAttribute(`value`, parseInt(percent, 10));
+      const percent = ((delta / effectLevelLine.offsetWidth) * 100);
+
+      window.effectLevelValue.value = percent;
+      window.effectLevelValue.setAttribute(`value`, percent);
 
       window.effectLevelPin.style.left = `${window.effectLevelPin.offsetLeft - shift.x}px`;
-/*      window.effectLevelDepth.style.width = `${window.effectLevelPin.offsetLeft - shift.x}%`;*/
+      window.effectLevelDepth.style.width = `${percent}%`;
 
       switch (window.imagePreview.classList[1]) {
         case `effects__preview--chrome`:
