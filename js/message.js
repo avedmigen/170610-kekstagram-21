@@ -18,6 +18,7 @@
       const onSuccessButtonClick = (e) => {
         e.preventDefault();
         successTemplate.remove();
+        window.documentBody.classList.remove(`modal-open`);
         document.removeEventListener(`click`, onSuccessButtonClick);
       };
 
@@ -25,6 +26,7 @@
         e.preventDefault();
         if (e.target.classList.contains(`success`)) {
           successTemplate.remove();
+          window.documentBody.classList.remove(`modal-open`);
           document.removeEventListener(`click`, onSuccessOverlayClick);
         }
       };
@@ -34,6 +36,7 @@
           e.preventDefault();
           if (e.target.classList.contains(`success`)) {
             successTemplate.remove();
+            window.documentBody.classList.remove(`modal-open`);
           }
           document.removeEventListener(`keydown`, onSuccessOverlayKeydown);
         }
@@ -62,6 +65,7 @@
       const onErrorButtonClick = (e) => {
         e.preventDefault();
         errorTemplate.remove();
+        window.documentBody.classList.remove(`modal-open`);
         document.removeEventListener(`click`, onErrorButtonClick);
       };
 

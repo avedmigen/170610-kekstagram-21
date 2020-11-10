@@ -51,7 +51,6 @@
     window.backend.upload(() => {
 
       window.previewOverlay.classList.add(`hidden`);
-      window.documentBody.classList.remove(`modal-open`);
 
       window.message.render(`success`);
 
@@ -61,7 +60,6 @@
     }, () => {
 
       window.previewOverlay.classList.add(`hidden`);
-      window.documentBody.classList.remove(`modal-open`);
 
       window.message.render(`error`);
 
