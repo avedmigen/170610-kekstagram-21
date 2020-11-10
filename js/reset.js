@@ -14,7 +14,6 @@
     window.imagePreview.classList.remove(window.imagePreview.classList[1]);
     window.imagePreview.style = ``;
 
-    window.effectLevelValue.value = DEFAULT_VALUE;
     window.effectLevelValue.setAttribute(`value`, `${DEFAULT_VALUE}`);
     window.effectLevelPin.style.left = `100%`;
     window.effectLevelDepth.style.width = `100%`;

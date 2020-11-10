@@ -35,9 +35,7 @@
 
       const attributeValue = ((delta / lineWidth) * DEFAULT_VALUE);
 
-      window.effectLevelValue.value = parseInt(attributeValue, 10);
       window.effectLevelValue.setAttribute(`value`, `${parseInt(attributeValue, 10)}`);
-
       window.effectLevelPin.style.left = `${delta}px`;
       window.effectLevelDepth.style.width = `${attributeValue}%`;
 
