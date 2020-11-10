@@ -3,42 +3,41 @@
 (() => {
   const MAX_SYMBOLS = 140;
 
-  const onInputTextInput = (e) => {
+  const onTextAreaInput = (e) => {
     e.preventDefault();
     const invalidMessages = [];
-    const inputText = window.textInput.value.toLowerCase().trim();
+    const textAreaInputText = window.textArea.value.toLowerCase().trim();
 
-    if (!inputText) {
+    if (!textAreaInputText) {
       invalidMessages.splice(0, invalidMessages.length);
-      window.hashtagInput.setCustomValidity(``);
+      window.textArea.setCustomValidity(``);
 
       return;
     }
 
-    const inputArray = inputText.split(/\s+/);
+    const inputArray = textAreaInputText.split(/\s+/);
 
     if (inputArray.length === 0) {
       return;
     }
 
-    if (inputText.length > MAX_SYMBOLS) {
-      invalidMessages.push(`Длина комментария не может составлять больше 140 символов. Удалите ${Math.abs(MAX_SYMBOLS - inputText.length)} симв.`);
+    if (textAreaInputText.length > MAX_SYMBOLS) {
+      invalidMessages.push(`Длина комментария не может составлять больше 140 символов. Удалите ${Math.abs(MAX_SYMBOLS - textAreaInputText.length)} симв.`);
     }
 
-    window.textInput.setCustomValidity(invalidMessages.join(`. \n`));
-    window.textInput.reportValidity();
+    window.textArea.setCustomValidity(invalidMessages.join(`. \n`));
 
     if (invalidMessages.length > 0) {
-      window.textInput.setCustomValidity(invalidMessages.join(`. \n`));
-      window.textInput.reportValidity();
-      window.textInput.style.outlineColor = `red`;
+      window.textArea.setCustomValidity(invalidMessages.join(`. \n`));
+      window.textArea.reportValidity();
+      window.textArea.style.outlineColor = `red`;
     } else {
-      window.textInput.style.outlineColor = ``;
+      window.textArea.style.outlineColor = ``;
     }
 
-    document.removeEventListener(`input`, onInputTextInput);
+    document.removeEventListener(`input`, onTextAreaInput);
   };
 
-  window.textInput.addEventListener(`input`, onInputTextInput);
+  window.textArea.addEventListener(`input`, onTextAreaInput);
 
 })();

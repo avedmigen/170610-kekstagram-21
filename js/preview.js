@@ -23,7 +23,7 @@
 
 
   window.hashtagInput = window.form.querySelector(`.text__hashtags`);
-  window.textInput = window.form.querySelector(`.text__description`);
+  window.textArea = window.form.querySelector(`.text__description`);
 
 
   const onUploadFileInputChange = () => {
@@ -106,8 +106,8 @@
   window.hashtagInput.addEventListener(`focus`, onInputFocus);
   window.hashtagInput.addEventListener(`blur`, onInputBlur);
 
-  window.textInput.addEventListener(`focus`, onInputFocus);
-  window.textInput.addEventListener(`blur`, onInputBlur);
+  window.textArea.addEventListener(`focus`, onInputFocus);
+  window.textArea.addEventListener(`blur`, onInputBlur);
 
 
   const closeRequestPopup = (id, handlerName) => {

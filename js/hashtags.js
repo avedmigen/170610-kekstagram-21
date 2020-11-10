@@ -11,7 +11,6 @@
     const inputText = window.hashtagInput.value.toLowerCase().trim();
 
     if (!inputText) {
-      invalidMessages.splice(0, invalidMessages.length);
       window.hashtagInput.setCustomValidity(``);
 
       return;
@@ -77,9 +76,7 @@
       window.hashtagInput.reportValidity();
       window.hashtagInput.style.outlineColor = `red`;
 
-
     } else {
-      invalidMessages.splice(0, invalidMessages.length);
       window.hashtagInput.style.outlineColor = ``;
     }
 
