@@ -27,15 +27,21 @@
       };
 
       const lineRange = effectLevelLine.getBoundingClientRect();
+      const lineWidth = effectLevelLine.offsetWidth;
       const delta = startX.x - lineRange.left;
 
-      const percent = ((delta / effectLevelLine.offsetWidth) * 100);
+      const attributeValue = ((delta / lineWidth) * DEFAULT_VALUE);
 
-      window.effectLevelValue.value = percent;
-      window.effectLevelValue.setAttribute(`value`, percent);
+      console.log(attributeValue);
 
-      window.effectLevelPin.style.left = `${window.effectLevelPin.offsetLeft - shift.x}px`;
-      window.effectLevelDepth.style.width = `${percent}%`;
+      if (attributeValue >= 0 && attributeValue <= 100) {
+
+        window.effectLevelValue.value = attributeValue;
+        window.effectLevelValue.setAttribute(`value`, attributeValue);
+
+        window.effectLevelPin.style.left = `${window.effectLevelPin.offsetLeft - shift.x}px`;
+        window.effectLevelDepth.style.width = `${attributeValue}%`;
+      }
 
       switch (window.imagePreview.classList[1]) {
         case `effects__preview--chrome`:
