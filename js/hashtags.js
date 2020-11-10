@@ -73,7 +73,6 @@
 
     if (invalidMessages.length > 0) {
       window.hashtagInput.setCustomValidity(invalidMessages.join(`. \n`));
-      window.hashtagInput.reportValidity();
       window.hashtagInput.style.outlineColor = `red`;
 
     } else {

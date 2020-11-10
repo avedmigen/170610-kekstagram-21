@@ -29,7 +29,6 @@
 
     if (invalidMessages.length > 0) {
       window.textArea.setCustomValidity(invalidMessages.join(`. \n`));
-      window.textArea.reportValidity();
       window.textArea.style.outlineColor = `red`;
     } else {
       window.textArea.style.outlineColor = ``;
