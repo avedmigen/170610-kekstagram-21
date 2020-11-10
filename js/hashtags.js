@@ -27,7 +27,7 @@
     });
 
     if (isStartNotHashtag) {
-      invalidMessages.push(`Хэш-тег должен начинаеться с символа #`);
+      invalidMessages.push(`Хэш-тег должен начинаться с символа #`);
     }
 
     const isOnlyLatticeHashtag = inputArray.some((item) => {
