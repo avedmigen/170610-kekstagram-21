@@ -53,8 +53,10 @@
       window.previewOverlay.classList.add(`hidden`);
 
       window.message.render(`success`);
+      window.reset.setup();
 
       document.addEventListener(`keydown`, onSuccessMessageEscKeyDown);
+
       window.form.reset();
 
     }, () => {
@@ -62,12 +64,14 @@
       window.previewOverlay.classList.add(`hidden`);
 
       window.message.render(`error`);
+      window.reset.setup();
 
       document.addEventListener(`keydown`, onErrorMessageEscKeyDown);
 
     }, new FormData(window.form));
 
     window.form.reset();
+
   };
 
   window.form.addEventListener(`submit`, onFormSubmit);
