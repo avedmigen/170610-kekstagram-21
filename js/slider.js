@@ -18,28 +18,22 @@
     let onMouseMove = (moveEvt) => {
       moveEvt.preventDefault();
 
-      const shift = {
-        x: startX.x - moveEvt.clientX,
-      };
-
       startX = {
         x: moveEvt.clientX,
       };
 
       const lineRange = effectLevelLine.getBoundingClientRect();
       const lineWidth = effectLevelLine.offsetWidth;
-      const delta = startX.x - lineRange.left;
 
+      const delta = parseInt(startX.x - lineRange.left, 10);
       const attributeValue = ((delta / lineWidth) * DEFAULT_VALUE);
 
-      console.log(attributeValue);
+      if (delta >= 0 && delta <= lineWidth) {
 
-      if (attributeValue >= 0 && attributeValue <= 100) {
+        window.effectLevelValue.value = parseInt(attributeValue, 10);
+        window.effectLevelValue.setAttribute(`value`, `${parseInt(attributeValue, 10)}`);
 
-        window.effectLevelValue.value = attributeValue;
-        window.effectLevelValue.setAttribute(`value`, attributeValue);
-
-        window.effectLevelPin.style.left = `${window.effectLevelPin.offsetLeft - shift.x}px`;
+        window.effectLevelPin.style.left = `${delta}px`;
         window.effectLevelDepth.style.width = `${attributeValue}%`;
       }
 
