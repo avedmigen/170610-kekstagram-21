@@ -6,7 +6,7 @@
   const onTextAreaInput = (e) => {
     e.preventDefault();
     const invalidMessages = [];
-    const textAreaInputText = window.textArea.value.toLowerCase().trim();
+    const textAreaInputText = window.textArea.value.toLowerCase();
 
     if (!textAreaInputText) {
       invalidMessages.splice(0, invalidMessages.length);
