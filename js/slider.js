@@ -15,6 +15,9 @@
       x: e.clientX,
     };
 
+    const lineRange = effectLevelLine.getBoundingClientRect();
+    const lineWidth = effectLevelLine.offsetWidth;
+
     let onMouseMove = (moveEvt) => {
       moveEvt.preventDefault();
 
@@ -22,20 +25,21 @@
         x: moveEvt.clientX,
       };
 
-      const lineRange = effectLevelLine.getBoundingClientRect();
-      const lineWidth = effectLevelLine.offsetWidth;
+      let delta = startX.x - lineRange.left;
 
-      const delta = parseInt(startX.x - lineRange.left, 10);
+      if (delta < 0) {
+        delta = 0;
+      } else if (delta > lineWidth) {
+        delta = lineWidth;
+      }
+
       const attributeValue = ((delta / lineWidth) * DEFAULT_VALUE);
 
-      if (delta >= 0 && delta <= lineWidth) {
+      window.effectLevelValue.value = parseInt(attributeValue, 10);
+      window.effectLevelValue.setAttribute(`value`, `${parseInt(attributeValue, 10)}`);
 
-        window.effectLevelValue.value = parseInt(attributeValue, 10);
-        window.effectLevelValue.setAttribute(`value`, `${parseInt(attributeValue, 10)}`);
-
-        window.effectLevelPin.style.left = `${delta}px`;
-        window.effectLevelDepth.style.width = `${attributeValue}%`;
-      }
+      window.effectLevelPin.style.left = `${delta}px`;
+      window.effectLevelDepth.style.width = `${attributeValue}%`;
 
       switch (window.imagePreview.classList[1]) {
         case `effects__preview--chrome`:
