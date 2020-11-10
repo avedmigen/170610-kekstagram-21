@@ -9,6 +9,9 @@
     const inputText = window.textInput.value.toLowerCase().trim();
 
     if (!inputText) {
+      invalidMessages.splice(0, invalidMessages.length);
+      window.hashtagInput.setCustomValidity(``);
+
       return;
     }
 
