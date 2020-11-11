@@ -82,6 +82,7 @@
     window.previewOverlay.classList.add(`hidden`);
     window.documentBody.classList.remove(`modal-open`);
     window.form.reset();
+    window.reset.setup();
   };
 
   cancelButton.addEventListener(`click`, onUploadCancelBtnClick);
@@ -93,6 +94,7 @@
       window.previewOverlay.classList.add(`hidden`);
       window.documentBody.classList.remove(`modal-open`);
       window.form.reset();
+      window.reset.setup();
     }
   };
 

@@ -5,7 +5,7 @@
   const apply = () => {
 
     const setPreviewEffect = (filter) => {
-
+      window.imagePreview.classList.remove(window.imagePreview.classList[1]);
       window.imagePreview.classList.add(`effects__preview--${filter.value}`);
       window.saturation.reset(filter);
       window.effectLevelValue.setAttribute(`value`, `100`);
