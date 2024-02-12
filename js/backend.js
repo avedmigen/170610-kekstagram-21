@@ -6,8 +6,8 @@ const STATUS_CODE = {
 const TIMEOUT_IN_MS = 10000;
 
 const Url = {
-  LOAD: `https://21.javascript.pages.academy/kekstagram/data`,
-  UPLOAD: `https://21.javascript.pages.academy/kekstagram`,
+  LOAD: `https://31.javascript.htmlacademy.pro/kekstagram/data`,
+  UPLOAD: `https://31.javascript.htmlacademy.pro/kekstagram`,
 };
 
 const request = (onSuccess, onError, data) => {

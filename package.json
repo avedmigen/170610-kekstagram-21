@@ -16,14 +16,13 @@
     "url": "https://github.com/htmlacademy-javascript/170610-kekstagram-21/issues"
   },
   "devDependencies": {
-    "eslint": "7.1.0",
-    "eslint-config-htmlacademy": "0.6.0",
-    "webpack": "5.4.0",
-    "webpack-cli": "4.2.0"
+    "eslint": "8.56.0",
+    "eslint-config-htmlacademy": "10.0.1",
+    "webpack": "5.90.1",
+    "webpack-cli": "5.1.4"
   },
   "license": "MIT",
-  "dependencies": {},
   "engines": {
-    "node": "8.11"
+    "node": "20"
   }
 }
