@@ -23,14 +23,12 @@ const onFileChooserChange = () => {
       effectPreviews.forEach((item) => {
         item.style.backgroundImage = `url(${reader.result})`;
       });
-
     };
 
     reader.addEventListener(`load`, onReaderLoad);
 
     reader.readAsDataURL(file);
   }
-
 };
 
 fileChooser.addEventListener(`change`, onFileChooserChange);

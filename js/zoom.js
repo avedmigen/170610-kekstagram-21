@@ -3,7 +3,9 @@
 const DEFAULT_TRANSFORM_LEVEL = 100;
 const TRANSFORM_LEVEL_STEP = 25;
 
-const scaleControlSmaller = window.form.querySelector(`.scale__control--smaller`);
+const scaleControlSmaller = window.form.querySelector(
+  `.scale__control--smaller`
+);
 const scaleControlBigger = window.form.querySelector(`.scale__control--bigger`);
 window.scaleControlValue = window.form.querySelector(`.scale__control--value`);
 
@@ -18,7 +20,10 @@ const setScaleValue = (value) => {
 scaleControlSmaller.addEventListener(`click`, (e) => {
   e.preventDefault();
 
-  if (window.scaleValue !== TRANSFORM_LEVEL_STEP && window.scaleValue <= DEFAULT_TRANSFORM_LEVEL) {
+  if (
+    window.scaleValue !== TRANSFORM_LEVEL_STEP &&
+    window.scaleValue <= DEFAULT_TRANSFORM_LEVEL
+  ) {
     window.scaleValue -= TRANSFORM_LEVEL_STEP;
   }
   setScaleValue(window.scaleValue);
@@ -27,7 +32,10 @@ scaleControlSmaller.addEventListener(`click`, (e) => {
 scaleControlBigger.addEventListener(`click`, (e) => {
   e.preventDefault();
 
-  if (window.scaleValue >= TRANSFORM_LEVEL_STEP && window.scaleValue < DEFAULT_TRANSFORM_LEVEL) {
+  if (
+    window.scaleValue >= TRANSFORM_LEVEL_STEP &&
+    window.scaleValue < DEFAULT_TRANSFORM_LEVEL
+  ) {
     window.scaleValue += TRANSFORM_LEVEL_STEP;
   }
   setScaleValue(window.scaleValue);

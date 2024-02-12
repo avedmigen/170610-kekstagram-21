@@ -4,7 +4,6 @@ const MAX_SYMBOLS = 20;
 const MAX_HASHTAGS = 5;
 
 const onHashtagInputInput = () => {
-
   const invalidMessages = [];
 
   const inputText = window.hashtagInput.value.toLowerCase().trim();
@@ -39,7 +38,9 @@ const onHashtagInputInput = () => {
   const regexp = new RegExp(`[^#а-яёa-z0-9]`, `i`);
   inputArray.forEach((hashtag) => {
     if (regexp.test(hashtag)) {
-      invalidMessages.push(`Хэш-тег может содержать только буквы и числа без пробелов`);
+      invalidMessages.push(
+        `Хэш-тег может содержать только буквы и числа без пробелов`
+      );
     }
   });
 
@@ -54,14 +55,18 @@ const onHashtagInputInput = () => {
     return arr.indexOf(item, i + 1) >= i + 1;
   });
   if (isRepeatHashtag) {
-    invalidMessages.push(`Один и тот же хэш-тег не может быть использован дважды`);
+    invalidMessages.push(
+      `Один и тот же хэш-тег не может быть использован дважды`
+    );
   }
 
   const isLongHashtag = inputArray.some((item) => {
     return item.length > MAX_SYMBOLS;
   });
   if (isLongHashtag) {
-    invalidMessages.push(`Максимальная длина одного хэш-тега 20 символов, включая решётку`);
+    invalidMessages.push(
+      `Максимальная длина одного хэш-тега 20 символов, включая решётку`
+    );
   }
 
   if (inputArray.length > MAX_HASHTAGS) {
@@ -73,11 +78,9 @@ const onHashtagInputInput = () => {
   if (invalidMessages.length > 0) {
     window.hashtagInput.setCustomValidity(invalidMessages.join(`. \n`));
     window.hashtagInput.style.outlineColor = `red`;
-
   } else {
     window.hashtagInput.style.outlineColor = ``;
   }
-
 };
 
 window.hashtagInput.addEventListener(`input`, onHashtagInputInput);

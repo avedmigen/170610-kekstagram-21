@@ -2,7 +2,7 @@
 
 const Key = {
   ESC: `Escape`,
-  ENTER: `Enter`
+  ENTER: `Enter`,
 };
 
 window.documentBody = document.querySelector(`body`);
@@ -12,20 +12,21 @@ window.form = document.querySelector(`.img-upload__form`);
 const uploadFileInput = window.form.querySelector(`#upload-file`);
 
 window.previewOverlay = document.querySelector(`.img-upload__overlay`);
-window.imagePreview = window.previewOverlay.querySelector(`.img-upload__preview`);
+window.imagePreview =
+  window.previewOverlay.querySelector(`.img-upload__preview`);
 const cancelButton = window.previewOverlay.querySelector(`#upload-cancel`);
 
-window.slider = window.previewOverlay.querySelector(`.img-upload__effect-level`);
-window.effectRadioInputs = window.previewOverlay.querySelectorAll(`.effects__radio`);
+window.slider = window.previewOverlay.querySelector(
+  `.img-upload__effect-level`
+);
+window.effectRadioInputs =
+  window.previewOverlay.querySelectorAll(`.effects__radio`);
 window.effectNone = window.previewOverlay.querySelector(`#effect-none`);
-
 
 window.hashtagInput = window.form.querySelector(`.text__hashtags`);
 window.textArea = window.form.querySelector(`.text__description`);
 
-
 const onUploadFileInputChange = () => {
-
   window.previewOverlay.classList.remove(`hidden`);
   window.documentBody.classList.add(`modal-open`);
 
@@ -40,36 +41,33 @@ const onUploadFileInputChange = () => {
 
 uploadFileInput.addEventListener(`change`, onUploadFileInputChange);
 
-
 window.filter.apply();
-
 
 const onFormSubmit = (e) => {
   e.preventDefault();
-  window.backend.upload(() => {
+  window.backend.upload(
+    () => {
+      window.previewOverlay.classList.add(`hidden`);
 
-    window.previewOverlay.classList.add(`hidden`);
+      window.message.render(`success`);
+      window.reset.setup();
 
-    window.message.render(`success`);
-    window.reset.setup();
+      document.addEventListener(`keydown`, onSuccessMessageEscKeyDown);
 
-    document.addEventListener(`keydown`, onSuccessMessageEscKeyDown);
+      window.form.reset();
+    },
+    () => {
+      window.previewOverlay.classList.add(`hidden`);
 
-    window.form.reset();
+      window.message.render(`error`);
+      window.reset.setup();
 
-  }, () => {
-
-    window.previewOverlay.classList.add(`hidden`);
-
-    window.message.render(`error`);
-    window.reset.setup();
-
-    document.addEventListener(`keydown`, onErrorMessageEscKeyDown);
-
-  }, new FormData(window.form));
+      document.addEventListener(`keydown`, onErrorMessageEscKeyDown);
+    },
+    new FormData(window.form)
+  );
 
   window.form.reset();
-
 };
 
 window.form.addEventListener(`submit`, onFormSubmit);
@@ -96,7 +94,6 @@ const onPopupEscKeyDown = (e) => {
   }
 };
 
-
 const onInputFocus = () => {
   document.removeEventListener(`keydown`, onPopupEscKeyDown);
 };
@@ -110,7 +107,6 @@ window.hashtagInput.addEventListener(`blur`, onInputBlur);
 
 window.textArea.addEventListener(`focus`, onInputFocus);
 window.textArea.addEventListener(`blur`, onInputBlur);
-
 
 const closeRequestPopup = (id, handlerName) => {
   const popup = document.querySelector(`.${id}`);

@@ -21,7 +21,11 @@ const onTextAreaInput = (e) => {
   }
 
   if (textAreaInputText.length > MAX_SYMBOLS) {
-    invalidMessages.push(`Длина комментария не может составлять больше 140 символов. Удалите ${Math.abs(MAX_SYMBOLS - textAreaInputText.length)} симв.`);
+    invalidMessages.push(
+      `Длина комментария не может составлять больше 140 символов. Удалите ${Math.abs(
+        MAX_SYMBOLS - textAreaInputText.length
+      )} симв.`
+    );
   }
 
   window.textArea.setCustomValidity(invalidMessages.join(`. \n`));

@@ -1,13 +1,13 @@
 'use strict';
 
 const STATUS_CODE = {
-  OK: 200
+  OK: 200,
 };
 const TIMEOUT_IN_MS = 10000;
 
 const Url = {
   LOAD: `https://21.javascript.pages.academy/kekstagram/data`,
-  UPLOAD: `https://21.javascript.pages.academy/kekstagram`
+  UPLOAD: `https://21.javascript.pages.academy/kekstagram`,
 };
 
 const request = (onSuccess, onError, data) => {
@@ -43,5 +43,5 @@ const request = (onSuccess, onError, data) => {
 
 window.backend = {
   load: request,
-  upload: request
+  upload: request,
 };

@@ -3,7 +3,6 @@
 const DEFAULT_VALUE = 100;
 
 const setup = () => {
-
   window.scaleControlValue.value = `100%`;
   window.scaleValue = parseInt(window.scaleControlValue.value, 10);
   window.imagePreview.style.transform = `scale(1)`;
@@ -17,7 +16,6 @@ const setup = () => {
   window.effectLevelDepth.style.width = `100%`;
 
   window.effectNone.checked = true;
-
 };
 
 window.reset = {

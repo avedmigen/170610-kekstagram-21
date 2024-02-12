@@ -5,13 +5,11 @@ const Key = {
 };
 
 const render = (result) => {
-
   if (result === `success`) {
-
-    const successTemplate = document.querySelector(`#success`)
-        .content
-        .querySelector(`.success`)
-        .cloneNode(true);
+    const successTemplate = document
+      .querySelector(`#success`)
+      .content.querySelector(`.success`)
+      .cloneNode(true);
 
     const onSuccessButtonClick = (e) => {
       e.preventDefault();
@@ -52,13 +50,11 @@ const render = (result) => {
     };
 
     showSuccess();
-
   } else {
-
-    const errorTemplate = document.querySelector(`#error`)
-        .content
-        .querySelector(`.error`)
-        .cloneNode(true);
+    const errorTemplate = document
+      .querySelector(`#error`)
+      .content.querySelector(`.error`)
+      .cloneNode(true);
 
     const onErrorButtonClick = (e) => {
       e.preventDefault();
@@ -98,7 +94,6 @@ const render = (result) => {
 
     showError();
   }
-
 };
 
 window.message = {

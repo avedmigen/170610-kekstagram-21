@@ -1,7 +1,6 @@
 'use strict';
 
 const apply = () => {
-
   const setPreviewEffect = (filter) => {
     window.imagePreview.classList.remove(window.imagePreview.classList[1]);
     window.imagePreview.classList.add(`effects__preview--${filter.value}`);
@@ -9,11 +8,9 @@ const apply = () => {
     window.effectLevelValue.setAttribute(`value`, `100`);
     document.querySelector(`.effect-level__pin`).style.left = `100%`;
     document.querySelector(`.effect-level__depth`).style.width = `100%`;
-
   };
 
   const onFilterClick = (e, filter) => {
-
     if (filter.id !== `effect-none`) {
       window.slider.classList.remove(`hidden`);
     } else {

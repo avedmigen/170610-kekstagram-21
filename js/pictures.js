@@ -5,7 +5,7 @@ const DEBOUNCE_INTERVAL = 500;
 
 const Key = {
   ESC: `Escape`,
-  ENTER: `Enter`
+  ENTER: `Enter`,
 };
 
 let cleanDataPhotos = [];
@@ -13,9 +13,9 @@ let cleanDataPhotos = [];
 const photoContainer = document.querySelector(`.pictures`);
 const filtersContainer = document.querySelector(`.img-filters`);
 
-const template = document.querySelector(`#picture`)
-    .content
-    .querySelector(`.picture`);
+const template = document
+  .querySelector(`#picture`)
+  .content.querySelector(`.picture`);
 
 const drawPhoto = (photo) => {
   let photoElement = template.cloneNode(true);
@@ -23,9 +23,9 @@ const drawPhoto = (photo) => {
   photoElement.querySelector(`.picture__img`).tabIndex = 0;
   photoElement.querySelector(`.picture__img`).src = photo.url;
   photoElement.querySelector(`.picture__img`).alt = photo.description;
-  photoElement.querySelector(`.picture__comments`).textContent = photo.comments.length;
+  photoElement.querySelector(`.picture__comments`).textContent =
+    photo.comments.length;
   photoElement.querySelector(`.picture__likes`).textContent = photo.likes;
-
 
   const onBigPictureEscKeyDown = (e) => {
     if (e.code === Key.ESC) {
@@ -62,7 +62,6 @@ const drawPhotos = (photos) => {
   photoContainer.appendChild(fragment);
 };
 
-
 const filters = document.querySelectorAll(`.img-filters__button`);
 let filterName = 0;
 
@@ -80,8 +79,7 @@ const removeRenderedPhotos = () => {
 const drawFilteredPhotos = (arr) => {
   getRenderedPhotos();
   removeRenderedPhotos();
-  window.utils.setDebounce(drawPhotos(arr), DEBOUNCE_INTERVAL)
-  ;
+  window.utils.setDebounce(drawPhotos(arr), DEBOUNCE_INTERVAL);
 };
 
 const setActiveClass = (filter) => {
@@ -99,7 +97,6 @@ const onFilterClick = (e, filter) => {
   setActiveClass(filter);
   filterName = filter.id;
 
-
   let sorted = cleanDataPhotos.slice();
 
   switch (filterName) {
@@ -107,14 +104,12 @@ const onFilterClick = (e, filter) => {
       break;
 
     case `filter-random`:
-
       window.utils.shuffleArray(sorted);
 
       sorted = sorted.slice(0, RANDOM_PHOTOS_LIMIT);
       break;
 
     case `filter-discussed`:
-
       sorted.sort((a, b) => b.comments.length - a.comments.length);
       break;
     default:
@@ -130,15 +125,12 @@ filters.forEach((filter) => {
 });
 
 const onSuccess = (photos) => {
-
   cleanDataPhotos = photos.slice();
 
   drawPhotos(cleanDataPhotos);
 
-
   filtersContainer.classList.toggle(`img-filters--inactive`);
 };
-
 
 const onError = (handlerName) => {
   const div = document.createElement(`div`);
@@ -148,7 +140,6 @@ const onError = (handlerName) => {
   div.style.textAlign = `center`;
   div.prepend(`Не удалось загрузить изображения. ${handlerName}`);
   window.mainTag.prepend(div);
-
 };
 
 window.backend.load(onSuccess, onError);
